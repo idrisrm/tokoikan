@@ -12,14 +12,15 @@
                         <div class="col-lg-5">
                             <div class="card shadow-lg border-0 rounded-lg mt-15">
                                 <div class="card-header justify-content-center">
-                                    <img class="img-fluid login-logo mx-auto" src="<?php echo base_url('assets/img/logo_kominfo.png') ?>" alt="Logo Kota Pasuruan">
+                                    <img class="img-fluid login-logo mx-auto" style="width: 80px;" src="<?php echo base_url('assets/img/logo_aqila.png') ?>" alt="Logo Kota Pasuruan">
                                 </div>
                                 <div class="card-body">
                                     <div class="col">
+                                    <?php echo $this->session->flashdata('pesan') ?>
                                     </div>
                                     <form action="" method="post" autocomplete="off">
-                                        <div class="form-group"><label class="small mb-1" for="email">Email</label>
-                                            <input class="form-control py-4" id="email" name="email" type="text" placeholder="Masukkan Email" />
+                                        <div class="form-group"><label class="small mb-1" for="username">Username</label>
+                                            <input class="form-control py-4" id="username" name="username" type="text" placeholder="Masukkan Username" />
                                         </div>
                                         <div class="form-group"><label class="small mb-1" for="password">Password</label>
                                             <input class="form-control py-4" id="password" name="password" type="password" placeholder="Masukkan Password" />
