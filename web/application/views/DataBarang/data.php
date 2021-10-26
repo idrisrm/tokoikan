@@ -15,10 +15,10 @@
                     <div class="container-fluid">
                         <div class="page-header-content">
                             <h1 class="page-header-title">
-                                <div class="page-header-icon"><i data-feather="grid"></i></div>
-                                <span>Data Kategori Pengaduan</span>
+                                <div class="page-header-icon"><i data-feather="box"></i></div>
+                                <span>Data Barang</span>
                             </h1>
-                            <div class="page-header-subtitle">Master Data Kategori Pengaduan</div>
+                            <div class="page-header-subtitle">Master Data Barang</div>
                         </div>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                     <div class="card mb-4">
                         <div class="card-header">
                             <a class="btn btn-primary btn-sm shadow-sm" href="onclick=" confirm_modal() data-toggle="modal" data-target="#modalTambah">
-                                Tambah Kategori
+                                Tambah Barang
                             </a>
                         </div>
                         <div class="card-body">
@@ -51,14 +51,14 @@
                                                 <td><?= $i;?></td>
                                                 <td><?= $data['nama_barang']?></td>
                                                 <td><?= $data['nama_kategori']?></td>
-                                                <td><?= $data['stok']?></td>
-                                                <td><?= $data['harga']?></td>
+                                                <td><?= $data['stok']?> Kg</td>
+                                                <td>Rp. <?= number_format($data['harga'], 0, ",", ".")?></td>
                                                 <td>
-                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="<?= base_url('DataKategori/edit/')?>" >
+                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="<?= base_url('DataBarang/edit/' . $data['id_barang'])?>" >
                                                         <i data-feather="edit-2"></i>
                                                     </a>
                                                     
-                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="" onclick="confirm_modal('<?php echo base_url('DataKategori/hapus/')  ?>')" data-toggle="modal" data-target="#modalDelete">
+                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="" onclick="confirm_modal('<?php echo base_url('DataBarang/hapus/' . $data['id_barang'])  ?>')" data-toggle="modal" data-target="#modalDelete">
                                                         <i data-feather="trash-2"></i>
                                                     </a>
                                                 </td>
