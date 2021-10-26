@@ -1,8 +1,8 @@
 <nav class="topnav navbar navbar-expand shadow navbar-light bg-white" id="sidenavAccordion">
     <div class="logo d-none d-sm-block">
-        <img class="img-logo mr-4" src="<?php echo base_url('assets/img/logo_kominfo.png') ?>" alt="Logo Kota Pasuruan">
+        <img class="img-logo mr-4" src="<?php echo base_url('assets/img/logo_aqila.png') ?>" style="width: 40px;" alt="Logo Kota Pasuruan">
         <!-- <a class="navbar-brand my-auto" href="#">
-            Aplikasi Pengaduan
+            Aqila Store
         </a> -->
     </div>
     <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 mr-lg-2" id="sidebarToggle" href="#">
@@ -81,11 +81,11 @@
         </li> -->
         <li class="nav-item dropdown no-caret mr-2 dropdown-user">
             <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img class="img-fluid" src="" />
+                <img class="img-fluid" src="<?php echo base_url('assets/img/logo_aqila.png') ?>" style="width: 40px;" />
             </a>
             <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
                 <h6 class="dropdown-header d-flex align-items-center">
-                    <img class="dropdown-user-img" src="" />
+                    <img class="dropdown-user-img" src="<?php echo base_url('assets/img/logo_aqila.png') ?>" style="width: 40px;" />
                     <div class="dropdown-user-details">
                         <div class="dropdown-user-details-name">Admin, Idris</div>
                         <div class="dropdown-user-details-email">Idristifa@gmail.com</div>
@@ -113,7 +113,7 @@
             <div class="modal-body">Apakah Anda yakin untuk logout?</div>
             <div class="modal-footer">
                 <button class="btn btn-primary" type="button" data-dismiss="modal">Batal</button>
-                <a class="btn btn-danger" type="button" href="<?= base_url('Login/logout') ?>">Ya</a>
+                <a class="btn btn-danger" type="button" href="<?= base_url('Auth/logout') ?>">Ya</a>
             </div>
         </div>
     </div>

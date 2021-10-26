@@ -35,7 +35,7 @@
                             </div>
                             <div class="datatable table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
+                                <thead>
                                         <tr>
                                             <th style="width: 20px;">No</th>
                                             <th>Nama Barang</th>
@@ -46,22 +46,24 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $i=1; foreach($barang as $data){?>
                                             <tr>
-                                                <td>1</td>
-                                                <td>Pakan Ikan</td>
-                                                <td>Sentrat</td>
-                                                <td>15 Kg</td>
-                                                <td>Rp. 10.000</td>
+                                                <td><?= $i;?></td>
+                                                <td><?= $data['nama_barang']?></td>
+                                                <td><?= $data['nama_kategori']?></td>
+                                                <td><?= $data['stok']?></td>
+                                                <td><?= $data['harga']?></td>
                                                 <td>
-                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="<?= base_url('DataKategori/edit/'.$d['id_kategori'])?>" >
+                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="<?= base_url('DataKategori/edit/')?>" >
                                                         <i data-feather="edit-2"></i>
                                                     </a>
                                                     
-                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="" onclick="confirm_modal('<?php echo base_url('DataKategori/hapus/' . $d['id_kategori'])  ?>')" data-toggle="modal" data-target="#modalDelete">
+                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="" onclick="confirm_modal('<?php echo base_url('DataKategori/hapus/')  ?>')" data-toggle="modal" data-target="#modalDelete">
                                                         <i data-feather="trash-2"></i>
                                                     </a>
                                                 </td>
                                             </tr>
+                                            <?php $i++; }?>
                                     </tbody>
                                 </table>
                                 <div class="modal fade" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel" aria-hidden="true">
