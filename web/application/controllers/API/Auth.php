@@ -17,8 +17,8 @@ class Auth extends RestController
         $password = $this->input->post('password');
 
         $data = $this->db->get_where('user', ['username' => $user, 'status' => 'on'])->row_array();
-        if($data){
-            if($data['password'] == $password){
+        if ($data) {
+            if ($data['password'] == md5($password)) {
                 $this->response(
                     [
                         'status' => 'true',
@@ -27,7 +27,7 @@ class Auth extends RestController
                     ],
                     RestController::HTTP_OK
                 );
-            }else{
+            } else {
                 $this->response(
                     [
                         'status' => 'false',
@@ -37,8 +37,7 @@ class Auth extends RestController
                     RestController::HTTP_FORBIDDEN
                 );
             }
-            
-        }else{
+        } else {
             $this->response(
                 [
                     'status' => 'false',
