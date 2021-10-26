@@ -4,7 +4,7 @@ use chriskacerguis\RestServer\RestController;
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Riwayat extends RestController
+class Detail_Notif extends RestController
 {
 
     public function __construct()
@@ -13,13 +13,13 @@ class Riwayat extends RestController
     }
     public function index_get()
     {
-        $id = $this->get('id_penjual');
-        $data = $this->db->query("SELECT * FROM penjualan WHERE id_penjual = '$id'")->result_array();
+        $id = $this->get('id_notif');
+        $data = $this->db->query("SELECT * FROM notifikasi WHERE id_notif = '$id'")->result_array();
         if ($data) {
             $this->response(
                 [
                     'status' => 'true',
-                    'pesan' => 'Riwayat transaksi ditemukan',
+                    'pesan' => 'Detail notifikasi ditemukan',
                     'data' => $data
                 ],
                 RestController::HTTP_OK
@@ -28,7 +28,7 @@ class Riwayat extends RestController
             $this->response(
                 [
                     'status' => 'false',
-                    'pesan' => 'Tidak ada riwayat transaksi',
+                    'pesan' => 'Tidak ada detail notifikasi',
                     'data' => null
                 ],
                 RestController::HTTP_NOT_FOUND
