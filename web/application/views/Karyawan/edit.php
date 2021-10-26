@@ -15,7 +15,7 @@
                         <div class="page-header-content">
                             <h1 class="page-header-title">
                                 <div class="page-header-icon"><i data-feather="edit-3"></i></div>
-                                <span>Edit Data Kategori Barang</span>
+                                <span>Edit Data Karyawan</span>
                             </h1>
                         </div>
                     </div>
@@ -23,32 +23,30 @@
                 <div class="container-fluid mt-n10">
                     <form action="" method="post" autocomplete="off">
                         <div class="card mb-4">
-                            <div class="card-header">Edit Data Kategori Barang</div>
+                            <div class="card-header">Edit Data Karyawan</div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="form-group col-xxl-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                        <label class="small mb-1" for="nama">Nama barang</label>
-                                        <input class="form-control" id="nama" name="nama" type="text" placeholder="Masukkan Nama Barang" value="<?= $barang['nama_barang'] ?>" />
+                                        <label class="small mb-1" for="nama">Nama Karyawan</label>
+                                        <input class="form-control" id="nama" name="nama" type="text" placeholder="Masukkan Nama Barang" value="<?= $karyawan['nama'] ?>" />
                                         <?= form_error('nama', '<small class="text-danger pl-2">', '</small>'); ?>
                                     </div>
                                     <div class="form-group col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                        <label class="small mb-1" for="kategori">Kategori barang</label>
-                                        <select class="form-control" id="kategori" name="kategori">
-                                            <?php foreach ($kategori as $data) { ?>
-                                                <option value="<?= $data['id_kategori'] ?>" <?= ($barang['id_kategori'] == $data['id_kategori'] ? 'selected' : '') ?>><?= $data['nama_kategori'] ?></option>
+                                        <label class="small mb-1" for="otlet">Otlet</label>
+                                        <select class="form-control" id="otlet" name="otlet">
+                                            <?php foreach ($otlet as $data) { ?>
+                                                <option value="<?= $data['id_otlet'] ?>" <?= ($karyawan['id_otlet'] == $data['id_otlet'] ? 'selected' : '') ?>><?= $data['wilayah'] ?></option>
                                             <?php } ?>
                                         </select>
-                                        <?= form_error('kategori', '<small class="text-danger pl-2">', '</small>'); ?>
+                                        <?= form_error('otlet', '<small class="text-danger pl-2">', '</small>'); ?>
                                     </div>
-                                    <div class="form-group col-xxl-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                        <label class="small mb-1" for="stok">Stok</label>
-                                        <input class="form-control" id="stok" name="stok" type="number" placeholder="Masukkan Stok Barang" value="<?= $barang['stok'] ?>" />
-                                        <?= form_error('stok', '<small class="text-danger pl-2">', '</small>'); ?>
-                                    </div>
-                                    <div class="form-group col-xxl-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                        <label class="small mb-1" for="harga">Harga</label>
-                                        <input class="form-control" id="harga" name="harga" type="number" placeholder="Masukkan Harga Barang" value="<?= $barang['harga'] ?>" />
-                                        <?= form_error('harga', '<small class="text-danger pl-2">', '</small>'); ?>
+                                    <div class="form-group col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                        <label class="small mb-1" for="status">Status</label>
+                                        <select class="form-control" id="status" name="status">
+                                            <option value="on" <?= ($karyawan['status'] == 'on' ? 'selected' : '') ?>>on</option>
+                                            <option value="off" <?= ($karyawan['status'] == 'off' ? 'selected' : '') ?>>off</option>
+                                        </select>
+                                        <?= form_error('status', '<small class="text-danger pl-2">', '</small>'); ?>
                                     </div>
                                 </div>
                                 <button type="submit" href="" class="btn btn-success mr-2">

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Okt 2021 pada 14.04
--- Versi server: 10.4.18-MariaDB
--- Versi PHP: 7.4.16
+-- Generation Time: Oct 26, 2021 at 10:58 AM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 7.4.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `barang`
+-- Table structure for table `barang`
 --
 
 CREATE TABLE `barang` (
@@ -33,13 +33,21 @@ CREATE TABLE `barang` (
   `nama_barang` text NOT NULL,
   `stok` int(11) NOT NULL COMMENT 'per kg',
   `harga` int(11) NOT NULL,
-  `created_at` datetime NOT NULL
+  `created_at` datetime NOT NULL,
+  `status` enum('on','off') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `barang`
+--
+
+INSERT INTO `barang` (`id_barang`, `id_kategori`, `nama_barang`, `stok`, `harga`, `created_at`, `status`) VALUES
+('1', 2, 'pakan Sapi besar', 4, 44444, '2021-10-26 04:27:59', 'on');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `detail_penjualan`
+-- Table structure for table `detail_penjualan`
 --
 
 CREATE TABLE `detail_penjualan` (
@@ -54,7 +62,7 @@ CREATE TABLE `detail_penjualan` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `hutang`
+-- Table structure for table `hutang`
 --
 
 CREATE TABLE `hutang` (
@@ -70,7 +78,7 @@ CREATE TABLE `hutang` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kategori`
+-- Table structure for table `kategori`
 --
 
 CREATE TABLE `kategori` (
@@ -79,10 +87,18 @@ CREATE TABLE `kategori` (
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `kategori`
+--
+
+INSERT INTO `kategori` (`id_kategori`, `nama_kategori`, `created_at`) VALUES
+(1, 'Pakan Ikan', '2021-10-26 04:28:34'),
+(2, 'Pakan sapi\r\n', '2021-10-26 04:28:34');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `notifikasi`
+-- Table structure for table `notifikasi`
 --
 
 CREATE TABLE `notifikasi` (
@@ -96,7 +112,27 @@ CREATE TABLE `notifikasi` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `penjualan`
+-- Table structure for table `otlet`
+--
+
+CREATE TABLE `otlet` (
+  `id_otlet` int(11) NOT NULL,
+  `wilayah` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `otlet`
+--
+
+INSERT INTO `otlet` (`id_otlet`, `wilayah`) VALUES
+(1, 'Jember'),
+(2, 'Situbondo'),
+(3, 'Bali');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `penjualan`
 --
 
 CREATE TABLE `penjualan` (
@@ -112,11 +148,12 @@ CREATE TABLE `penjualan` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
+  `id_otlet` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `username` varchar(10) NOT NULL,
   `password` varchar(500) NOT NULL,
@@ -125,25 +162,26 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `nama`, `username`, `password`, `bagian`, `status`) VALUES
-(1, 'idris', 'idris', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'on');
+INSERT INTO `user` (`id`, `id_otlet`, `nama`, `username`, `password`, `bagian`, `status`) VALUES
+(1, 1, 'idris', 'idris', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'on'),
+(2, 2, 'Anggi Anggraeniii', 'anggi', '21232f297a57a5a743894a0e4a801fc3', 'karyawan', 'on');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `barang`
+-- Indexes for table `barang`
 --
 ALTER TABLE `barang`
   ADD PRIMARY KEY (`id_barang`),
   ADD KEY `id_kategori` (`id_kategori`);
 
 --
--- Indeks untuk tabel `detail_penjualan`
+-- Indexes for table `detail_penjualan`
 --
 ALTER TABLE `detail_penjualan`
   ADD PRIMARY KEY (`id_detail`),
@@ -151,26 +189,32 @@ ALTER TABLE `detail_penjualan`
   ADD KEY `id_barang` (`id_barang`);
 
 --
--- Indeks untuk tabel `hutang`
+-- Indexes for table `hutang`
 --
 ALTER TABLE `hutang`
   ADD PRIMARY KEY (`no_ktp`);
 
 --
--- Indeks untuk tabel `kategori`
+-- Indexes for table `kategori`
 --
 ALTER TABLE `kategori`
   ADD PRIMARY KEY (`id_kategori`);
 
 --
--- Indeks untuk tabel `notifikasi`
+-- Indexes for table `notifikasi`
 --
 ALTER TABLE `notifikasi`
   ADD PRIMARY KEY (`id_notif`),
   ADD KEY `id_tujuan` (`id_tujuan`);
 
 --
--- Indeks untuk tabel `penjualan`
+-- Indexes for table `otlet`
+--
+ALTER TABLE `otlet`
+  ADD PRIMARY KEY (`id_otlet`);
+
+--
+-- Indexes for table `penjualan`
 --
 ALTER TABLE `penjualan`
   ADD PRIMARY KEY (`id_penjualan`),
@@ -178,32 +222,38 @@ ALTER TABLE `penjualan`
   ADD KEY `ktp_penghutang` (`ktp_penghutang`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `detail_penjualan`
+-- AUTO_INCREMENT for table `detail_penjualan`
 --
 ALTER TABLE `detail_penjualan`
   MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `kategori`
+-- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `otlet`
+--
+ALTER TABLE `otlet`
+  MODIFY `id_otlet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

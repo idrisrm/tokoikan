@@ -62,7 +62,7 @@
                     <div class="nav-link-icon"><i data-feather="user"></i></div>
                     Data Penghutang
                 </a>
-                <a class="nav-link" href="<?= base_url('DataOPD/data') ?>">
+                <a class="nav-link" href="<?= base_url('Karyawan') ?>">
                     <div class="nav-link-icon"><i data-feather="users"></i></div>
                     Data Karyawan
                 </a>
