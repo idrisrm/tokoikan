@@ -25,7 +25,7 @@
                 <div class="container-fluid mt-n10">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <a class="btn btn-primary btn-sm shadow-sm" href="onclick=" confirm_modal() data-toggle="modal" data-target="#modalTambah">
+                            <a class="btn btn-primary btn-sm shadow-sm" href="<?= base_url('DataBarang/tambah')?>">
                                 Tambah Barang
                             </a>
                         </div>

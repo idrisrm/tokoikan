@@ -66,6 +66,10 @@ class DataBarang extends CI_Controller {
              redirect('DataBarang');
         }
     }
+
+    public function tambah(){
+        $this->load->view('DataBarang/tambah');
+    }
 }
 
 /* End of file DataBarang.php and path /application/controllers/DataBarang.php */
