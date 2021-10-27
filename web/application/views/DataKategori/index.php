@@ -74,8 +74,8 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="form-group">
-                                                        <label class="small mb-1" for="kategori">Nama Kategori</label>
-                                                        <input class="form-control" id="kategori" name="kategori" type="text" placeholder="Masukkan Nama Kategori" />
+                                                        <label class="small mb-1" for="nama">Nama Kategori</label>
+                                                        <input class="form-control" id="nama" name="nama" type="text" placeholder="Masukkan Nama Kategori" />
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">

@@ -73,6 +73,7 @@ class DataBarang extends CI_Controller
     public function tambah()
     {
 
+        $this->form_validation->set_rules('kode', 'Kode', 'required|is_unique[barang.id_barang]');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('otlet', 'Otlet', 'required');
         $this->form_validation->set_rules('kategori', 'Kategori', 'required');
@@ -85,11 +86,13 @@ class DataBarang extends CI_Controller
             $this->load->view('DataBarang/tambah', $data);
         } else {
             $data = [
+                'id_barang' => $this->input->post('kode'),
                 'nama_barang' => $this->input->post('nama'),
                 'id_kategori' => $this->input->post('kategori'),
                 'id_otlet' => $this->input->post('otlet'),
                 'harga' => $this->input->post('harga'),
                 'stok' => $this->input->post('stok'),
+                'created_at' => date("Y-m-d h:i:sa"),
                 'status' => 'on'
             ];
             $insert = $this->db->insert('barang', $data);
@@ -99,7 +102,7 @@ class DataBarang extends CI_Controller
                 </div>');
                 redirect('DataBarang');
             } else {
-                $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
             Barang Gagal Ditambahkan!
             </div>');
                 redirect('DataBarang');

@@ -87,7 +87,7 @@
         <div class="sidenav-footer">
             <div class="sidenav-footer-content">
                 <div class="sidenav-footer-subtitle">Log in sebagai:</div>
-                <div class="sidenav-footer-title">Idris</div>
+                <div class="sidenav-footer-title"><?= $this->session->userdata('nama');?></div>
             </div>
         </div>
     </nav>
