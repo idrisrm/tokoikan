@@ -16,9 +16,9 @@
                         <div class="page-header-content">
                             <h1 class="page-header-title">
                                 <div class="page-header-icon"><i data-feather="grid"></i></div>
-                                <span>Data Kategori Pengaduan</span>
+                                <span>Data Kategori Barang</span>
                             </h1>
-                            <div class="page-header-subtitle">Master Data Kategori Pengaduan</div>
+                            <div class="page-header-subtitle">Master Data Kategori Barang</div>
                         </div>
                     </div>
                 </div>
@@ -38,30 +38,28 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 20px;">No</th>
-                                            <th>Nama Barang</th>
-                                            <th>Kategori</th>
-                                            <th>Stok</th>
-                                            <th>Harga</th>
+                                            <th>Nama Kategori</th>
                                             <th style="width: 100px;">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $i = 1;
+                                        foreach ($kategori as $data) { ?>
                                             <tr>
-                                                <td>1</td>
-                                                <td>Pakan Ikan</td>
-                                                <td>Sentrat</td>
-                                                <td>15 Kg</td>
-                                                <td>Rp. 10.000</td>
+                                                <td><?= $i; ?></td>
+                                                <td><?= $data['nama_kategori']?></td>
                                                 <td>
-                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="<?= base_url('DataKategori/edit/'.$d['id_kategori'])?>" >
+                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="<?= base_url('DataKategori/edit/' . $data['id_kategori']) ?>">
                                                         <i data-feather="edit-2"></i>
                                                     </a>
-                                                    
-                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="" onclick="confirm_modal('<?php echo base_url('DataKategori/hapus/' . $d['id_kategori'])  ?>')" data-toggle="modal" data-target="#modalDelete">
+
+                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="" onclick="confirm_modal('<?php echo base_url('DataKategori/hapus/' . $data['id_kategori'])  ?>')" data-toggle="modal" data-target="#modalDelete">
                                                         <i data-feather="trash-2"></i>
                                                     </a>
                                                 </td>
                                             </tr>
+                                        <?php $i++;
+                                        } ?>
                                     </tbody>
                                 </table>
                                 <div class="modal fade" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel" aria-hidden="true">
@@ -101,7 +99,7 @@
                                                 <div class="modal-body">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="kategori">Nama Kategori</label>
-                                                        <input class="form-control" id="kategori" name="kategori" type="text" placeholder="Masukkan Nama Kategori" value=""/>
+                                                        <input class="form-control" id="kategori" name="kategori" type="text" placeholder="Masukkan Nama Kategori" value="" />
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">

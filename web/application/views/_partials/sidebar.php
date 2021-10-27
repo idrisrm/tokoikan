@@ -66,7 +66,7 @@
                     <div class="nav-link-icon"><i data-feather="users"></i></div>
                     Data Karyawan
                 </a>
-                <a class="nav-link" href="<?= base_url('DataKategori/data') ?>">
+                <a class="nav-link" href="<?= base_url('DataKategori') ?>">
                     <div class="nav-link-icon"><i data-feather="grid"></i></div>
                     Data Kategori Barang
                 </a>
