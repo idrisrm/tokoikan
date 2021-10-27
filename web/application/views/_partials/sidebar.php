@@ -58,7 +58,7 @@
                     <div class="nav-link-icon"><i data-feather="box"></i></div>
                     Data Barang
                 </a>
-                <a class="nav-link" href="<?= base_url('Pelapor/data') ?>">
+                <a class="nav-link" href="<?= base_url('DataPenghutang') ?>">
                     <div class="nav-link-icon"><i data-feather="user"></i></div>
                     Data Penghutang
                 </a>
