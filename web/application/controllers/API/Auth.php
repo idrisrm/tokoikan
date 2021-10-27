@@ -19,20 +19,36 @@ class Auth extends RestController
         $data = $this->db->get_where('user', ['username' => $user, 'status' => 'on'])->row_array();
         if ($data) {
             if ($data['password'] == md5($password)) {
+                $last_tokennya = $this->input->post('token');
+
+                $this->db->set('token', $last_tokennya);
+                $this->db->where('id', $data['id']);
+                $this->db->update('user');
+                $return_data = [
+                    'id' => $data['id'],
+                    'id_otlet' => $data['id_otlet'],
+                    'nama' => $data['nama'],
+                    'username' => $data['username'],
+                    'password' => $data['password'],
+                    'bagian' => $data['bagian'],
+                    'status' => $data['status'],
+                    'token' => $last_tokennya,
+                ];
+
                 $this->response(
                     [
-                        'status' => 'true',
+                        'status' => true,
                         'pesan' => 'Anda Berhasil Login',
-                        'data' => $data
+                        'data' => $return_data
                     ],
                     RestController::HTTP_OK
                 );
             } else {
                 $this->response(
                     [
-                        'status' => 'false',
+                        'status' => false,
                         'pesan' => 'Password Yang Anda Masukan Salah',
-                        'data' => 'null'
+                        'data' => null
                     ],
                     RestController::HTTP_FORBIDDEN
                 );
@@ -40,9 +56,9 @@ class Auth extends RestController
         } else {
             $this->response(
                 [
-                    'status' => 'false',
+                    'status' => false,
                     'pesan' => 'Username Tidak Ditemukan',
-                    'data' => 'null'
+                    'data' => null
                 ],
                 RestController::HTTP_FORBIDDEN
             );

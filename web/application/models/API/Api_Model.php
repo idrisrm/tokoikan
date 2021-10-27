@@ -20,6 +20,10 @@ class Api_Model extends CI_Model
         $this->db->where($column, $id);
         return $this->db->update($tb, $data);
     }
+    public function detail($id)
+    {
+        return $this->db->get_where('user', ['id_otlet' => $id])->row_array();
+    }
     function randomkode($maxlength)
     {
         $chary = array(

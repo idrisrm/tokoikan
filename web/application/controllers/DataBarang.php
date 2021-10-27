@@ -10,6 +10,7 @@ class DataBarang extends CI_Controller
         parent::__construct();
         belumlogin();
         $this->load->model('Models');
+        $this->load->model('API/Api_Model', 'ApiModel');
     }
     public function index()
     {
@@ -85,6 +86,9 @@ class DataBarang extends CI_Controller
             $data['otlet'] = $this->db->get('otlet')->result_array();
             $this->load->view('DataBarang/tambah', $data);
         } else {
+            $nama = $this->input->post('nama');
+            $stok = $this->input->post('stok');
+            $otlet = $this->input->post('otlet');
             $data = [
                 'id_barang' => $this->input->post('kode'),
                 'nama_barang' => $this->input->post('nama'),
@@ -96,6 +100,22 @@ class DataBarang extends CI_Controller
                 'status' => 'on'
             ];
             $insert = $this->db->insert('barang', $data);
+
+            $getDetail = $this->ApiModel->detail($otlet);
+            $token = $getDetail['token'];
+            $id_usernya = $getDetail['id'];
+            $this->sendNotification($token, "Penambahan Stok Baru", "Stok $nama baru saja ditambahkan oleh admin sebanyak $stok kg");
+            $kodeku = $this->ApiModel->randomkode(15);
+            $arr2 = [
+                'id_notif' => $kodeku,
+                'id_tujuan' => $id_usernya,
+                'judul' => "Penambahan Stok Baru",
+                'deskripsi' =>  "Stok $nama baru saja ditambahkan oleh admin sebanyak $stok kg",
+                'status' =>  0,
+                'created_at' => date('Y-m-d H:i:s'),
+            ];
+
+            $this->ApiModel->insert('notifikasi', $arr2);
             if ($insert) {
                 $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
                 Barang Berhasil Ditambahkan!
@@ -108,6 +128,41 @@ class DataBarang extends CI_Controller
                 redirect('DataBarang');
             }
         }
+    }
+
+    public function sendNotification($id, $pesan, $title)
+    {
+        $registrationIds = array($id);
+        $msg = array(
+            'message'   => $pesan,
+            'title'     => $title,
+            'subtitle'  => 'This is a subtitle. subtitle',
+            'tickerText'    => 'Ticker text here...Ticker text here...Ticker text here',
+            'vibrate'   => 1,
+            'sound'     => 1,
+            'largeIcon' => 'large_icon',
+            'smallIcon' => 'small_icon'
+        );
+        $fields = array(
+            'registration_ids'  => $registrationIds,
+            'data'          => $msg
+        );
+
+        $headers = array(
+            'Authorization: key= AAAAqEmeg8w:APA91bExiJQhq4ZP48U_N2A_v0pxkEarr8PCLMXyeXbWFgpzvdNi-mO3QgPxLbL9-YoRe9eTY7UlhhtD1OMtvr8Y46TqjB0usNZ4wxv4r19K_n3lSSBJ38U91q3fHuikgFGCIfZO4God',
+            'Content-Type: application/json'
+        );
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+        $result = curl_exec($ch);
+        curl_close($ch);
+        // echo $result;
     }
 }
 
