@@ -13,7 +13,8 @@ class Barang extends RestController
     }
     public function index_get()
     {
-        $data = $this->db->query("SELECT barang.nama_barang, barang.harga, barang.stok, kategori.nama_kategori FROM barang, kategori WHERE barang.id_kategori = kategori.id_kategori")->result_array();
+        $id_otlet = $this->get('id_otlet');
+        $data = $this->db->query("SELECT barang.nama_barang, barang.harga, barang.stok, kategori.nama_kategori FROM barang, kategori WHERE barang.id_kategori = kategori.id_kategori AND barang.id_otlet = '$id_otlet' AND barang.status = 'on'")->result_array();
         if ($data) {
             $this->response(
                 [
