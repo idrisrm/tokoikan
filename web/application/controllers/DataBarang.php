@@ -102,20 +102,22 @@ class DataBarang extends CI_Controller
             $insert = $this->db->insert('barang', $data);
 
             $getDetail = $this->ApiModel->detail($otlet);
-            $token = $getDetail['token'];
-            $id_usernya = $getDetail['id'];
-            $this->sendNotification($token, "Penambahan Stok Baru", "Stok $nama baru saja ditambahkan oleh admin sebanyak $stok kg");
-            $kodeku = $this->ApiModel->randomkode(15);
-            $arr2 = [
-                'id_notif' => $kodeku,
-                'id_tujuan' => $id_usernya,
-                'judul' => "Penambahan Stok Baru",
-                'deskripsi' =>  "Stok $nama baru saja ditambahkan oleh admin sebanyak $stok kg",
-                'status' =>  0,
-                'created_at' => date('Y-m-d H:i:s'),
-            ];
+            foreach ($getDetail as $g) {
+                $token = $g['token'];
+                $id_usernya = $g['id'];
+                $this->sendNotification($token, "Penambahan Stok Baru", "Stok $nama baru saja ditambahkan oleh admin sebanyak $stok kg");
+                $kodeku = $this->ApiModel->randomkode(15);
+                $arr2 = [
+                    'id_notif' => $kodeku,
+                    'id_tujuan' => $id_usernya,
+                    'judul' => "Penambahan Stok Baru",
+                    'deskripsi' =>  "Stok $nama baru saja ditambahkan oleh admin sebanyak $stok kg",
+                    'status' =>  0,
+                    'created_at' => date('Y-m-d H:i:s'),
+                ];
+                $this->ApiModel->insert('notifikasi', $arr2);
+            }
 
-            $this->ApiModel->insert('notifikasi', $arr2);
             if ($insert) {
                 $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
                 Barang Berhasil Ditambahkan!

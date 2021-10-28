@@ -22,7 +22,15 @@ class Api_Model extends CI_Model
     }
     public function detail($id)
     {
-        return $this->db->get_where('user', ['id_otlet' => $id])->row_array();
+        return $this->db->get_where('user', ['id_otlet' => $id])->result_array();
+    }
+    public function bagian($id)
+    {
+        return $this->db->get_where('user', ['bagian' => $id])->row_array();
+    }
+    public function ktphutang()
+    {
+        return $this->db->get('hutang')->row_array();
     }
     function randomkode($maxlength)
     {
