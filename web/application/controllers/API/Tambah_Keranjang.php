@@ -15,6 +15,7 @@ class Tambah_Keranjang extends RestController
     public function index_post()
     {
         $id_penjual = $this->input->post('id_penjual');
+        $id_otlet = $this->input->post('id_otlet');
         $id_barang = $this->input->post('id_barang');
         $qty = $this->input->post('qty');
         $totalharga = $this->input->post('totalharga');
@@ -57,6 +58,7 @@ class Tambah_Keranjang extends RestController
         } else {
             $data = [
                 'id_penjualan' => $id_penjualan,
+                'id_otlet' => $id_otlet,
                 'id_penjual' => $id_penjual,
                 'subtotal' => 0,
                 'status' => 0,
