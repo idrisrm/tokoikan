@@ -23,7 +23,7 @@
                                             </a>
                                             <i data-feather="file-text"></i>
                                         </div>
-                                        Detail Penghutang
+                                        Detail Pengajuan Hutang
                                     </h1>
                                 </div>
                             </div>
@@ -32,12 +32,12 @@
                 </header>
                 <div class="container mt-4">
                     <nav class="nav nav-borders">
-                        <a class="nav-link active" href="">Detail Penghutang</a>
+                        <a class="nav-link active" href="">Detail Pengajuan Hutang</a>
                     </nav>
 
                     <hr class="mt-0 mb-4" />
                     <div class="card card-header-actions mx-auto mb-4">
-                        <div class="card-header">Data Penghutang</div>
+                        <div class="card-header">Detail Pengajuan Hutang</div>
                         <div class="col">
                             <?php echo $this->session->flashdata('pesan') ?>
                         </div>
@@ -144,9 +144,9 @@
                                                 </div>
                                             </div> -->
 
-                            <!-- <button class="btn btn-success mr-2 mt-2" href="onclick=" confirm_modal() data-toggle="modal" data-target="#modalTambah">
+                            <button class="btn btn-success mr-2 mt-2" href="onclick=" confirm_modal() data-toggle="modal" data-target="#modalTambah">
                                 <span class="text">Konfirmasi</span>
-                            </button> -->
+                            </button>
                             <!-- <button class="btn btn-danger mr-2" type="submit" name="tolak" id="tolak">
                                                 <span class="text">Tolak Pengaduan</span>
                                             </button> -->

@@ -16,9 +16,9 @@
                         <div class="page-header-content">
                             <h1 class="page-header-title">
                                 <div class="page-header-icon"><i data-feather="users"></i></div>
-                                <span>Data Penghutang</span>
+                                <span>Pengajuan Hutang</span>
                             </h1>
-                            <div class="page-header-subtitle">Master Data Penghutang</div>
+                            <div class="page-header-subtitle">Pengajuan Hutang</div>
                         </div>
                     </div>
                 </div>
@@ -53,10 +53,10 @@
                                                 <td><?= $data['no_ktp']?></td>
                                                 <td><?= $data['nama_penghutang']?></td>
                                                 <td><?= $data['total_hutang']?></td>
-                                                <td><?= $data['wilayah']?></td>
-                                                <td><?= $data['status'] == 1 ? 'Bisa Hutang' : 'Tidak Bisa Hutang'?></td>
+                                                <td><?= $data['id_otlet']?></td>
+                                                <td><?= $data['status']?></td>
                                                 <td>
-                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="<?= base_url('DataPenghutang/detail/' . $data['no_ktp'])?>" >
+                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="<?= base_url('DataPenghutang/DetailPengajuan/' . $data['no_ktp'])?>" >
                                                         <i data-feather="eye"></i>
                                                     </a>
                                                     

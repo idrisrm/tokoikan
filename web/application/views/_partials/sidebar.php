@@ -26,7 +26,7 @@
                             Revisi Transaksi
                             <span class="badge badge-primary-soft text-primary ml-auto">2</span>
                         </a>
-                        <a class="nav-link" href="<?= base_url('Pengaduan/data_proses') ?>">
+                        <a class="nav-link" href="<?= base_url('DataPenghutang/PengajuanHutang') ?>">
                             <span class="badge badge-warning mr-1">  </span>
                             Pengajuan Hutang
                             <span class="badge badge-primary-soft text-primary ml-auto">2</span>
