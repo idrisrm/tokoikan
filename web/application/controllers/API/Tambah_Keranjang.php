@@ -24,27 +24,34 @@ class Tambah_Keranjang extends RestController
         $adakeranjang = $this->db->query("SELECT * FROM penjualan, detail_penjualan WHERE penjualan.id_penjualan = detail_penjualan.id_penjualan AND penjualan.id_penjual = '$id_penjual' AND penjualan.status = 0")->result_array();
         if ($adakeranjang) {
             foreach ($adakeranjang as $ad) {
-                // echo json_encode($ad);
                 $id_penjualanada = $ad['id_penjualan'];
-                $datadetail = [
-                    'id_penjualan' => $id_penjualanada,
-                    'id_barang' => $id_barang,
-                    'qty' => $qty,
-                    'total_harga' => $totalharga,
-                    'catatan' => $catatan,
-                    'created_at' => $now,
-                ];
-                $querydetail = $this->ApiModel->insert('detail_penjualan', $datadetail);
-                if ($querydetail) {
-                    $this->response([
-                        'status' => true,
-                        'pesan' => 'Berhasil tambah ke keranjang'
-                    ], RestController::HTTP_OK);
-                } else {
+                $adabarang = $this->db->query("SELECT * FROM detail_penjualan WHERE id_penjualan = '$id_penjualanada' AND id_barang = '$id_barang'")->result_array();
+                if ($adabarang) {
                     $this->response([
                         'status' => false,
-                        'pesan' => 'Gagal tambah ke keranjang'
+                        'pesan' => 'Gagal tambah ke keranjang, barang sudah ada di keranjang'
                     ], RestController::HTTP_FORBIDDEN);
+                } else {
+                    $datadetail = [
+                        'id_penjualan' => $id_penjualanada,
+                        'id_barang' => $id_barang,
+                        'qty' => $qty,
+                        'total_harga' => $totalharga,
+                        'catatan' => $catatan,
+                        'created_at' => $now,
+                    ];
+                    $querydetail = $this->ApiModel->insert('detail_penjualan', $datadetail);
+                    if ($querydetail) {
+                        $this->response([
+                            'status' => true,
+                            'pesan' => 'Berhasil tambah ke keranjang'
+                        ], RestController::HTTP_OK);
+                    } else {
+                        $this->response([
+                            'status' => false,
+                            'pesan' => 'Gagal tambah ke keranjang'
+                        ], RestController::HTTP_FORBIDDEN);
+                    }
                 }
             }
         } else {

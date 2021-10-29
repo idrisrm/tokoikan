@@ -19,7 +19,7 @@ class Hutang extends RestController
             foreach ($total as $t) {
                 $this->response(
                     [
-                        'status' => 'true',
+                        'status' => true,
                         'pesan' => 'List hutang ditemukan',
                         'data' => $data,
                         'total_hutang_semua' => $t['all_hutang'],
@@ -31,7 +31,7 @@ class Hutang extends RestController
         } else {
             $this->response(
                 [
-                    'status' => 'false',
+                    'status' => false,
                     'pesan' => 'Tidak ada list hutang',
                     'data' => null,
                 ],
