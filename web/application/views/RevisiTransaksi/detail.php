@@ -58,7 +58,7 @@
                                             <tr>
                                                 <td><?= $i; ?></td>
                                                 <td><?= $data['nama_barang'] ?></td>
-                                                <td><?= $data['qty']?></td>
+                                                <td><?= $data['qty'] ?></td>
                                                 <td>Rp. <?= number_format($data['total_harga'], 0, ",", ".") ?></td>
                                             </tr>
                                         <?php $i++;
@@ -67,21 +67,19 @@
                                 </table>
                                 <div class="modal fade" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
-                                        <form action="<?= base_url("DataKategori/tambah") ?>" method="post">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="tambahModalLabel">Konfirmasi</h5>
-                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">Apakah Anda yakin Ingin Mengkonfirmasi Pengajuan Ini?</div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-primary" type="submit">Konfirmasi</button>
-                                                    <button class="btn btn-danger" type="button" data-dismiss="modal">Batal</button>
-                                                </div>
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="tambahModalLabel">Konfirmasi</h5>
+                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
                                             </div>
-                                        </form>
+                                            <div class="modal-body">Apakah Anda yakin Ingin Mengkonfirmasi Pengajuan Ini?</div>
+                                            <div class="modal-footer">
+                                                <a class="btn btn-primary" href="<?= base_url('RevisiTransaksi/konfirmasi/' . $id['id_penjualan']) ?>">Konfirmasi</a>
+                                                <button class="btn btn-danger" type="button" data-dismiss="modal">Batal</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
