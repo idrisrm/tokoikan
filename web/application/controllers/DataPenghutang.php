@@ -51,7 +51,7 @@ class DataPenghutang extends CI_Controller
     public function DetailPengajuan($id)
     {
         $data['hutang'] = $this->db->join('otlet', 'otlet.id_otlet = hutang.id_otlet')->get_where('hutang', ['no_ktp' => $id])->row_array();
-        $this->load->view('DataPenghutang/detail', $data);
+        $this->load->view('DataPenghutang/detailpengajuan', $data);
     }
 }
 

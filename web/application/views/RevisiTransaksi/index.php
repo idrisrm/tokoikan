@@ -38,25 +38,27 @@
                                 <thead>
                                         <tr>
                                             <th style="width: 20px;">No</th>
-                                            <th>NIK</th>
-                                            <th>Nama Penghutang</th>
-                                            <th>Total Hutang</th>
+                                            <th>Nama Karyawan</th>
+                                            <th>Metode Pembayaran</th>
+                                            <th>KTP Penghutang</th>
                                             <th>Otlet</th>
-                                            <th>Status</th>
+                                            <th>Tanggal</th>
+                                            <th>Total Harga</th>
                                             <th style="width: 100px;">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $i=1; foreach($penghutang as $data){?>
+                                        <?php $i=1; foreach($revisi as $data){?>
                                             <tr>
                                                 <td><?= $i;?></td>
-                                                <td><?= $data['no_ktp']?></td>
-                                                <td><?= $data['nama_penghutang']?></td>
-                                                <td><?= $data['total_hutang']?></td>
+                                                <td><?= $data['nama']?></td>
+                                                <td><?= $data['status'] == 1 ? 'Bayar' : 'Hutang' ?></td>
+                                                <td><?= $data['ktp_penghutang']?></td>
                                                 <td><?= $data['wilayah']?></td>
-                                                <td>Belum Dikonfirmasi</td>
+                                                <td><?= $data['created_at']?></td>
+                                                <td><?= $data['subtotal']?></td>
                                                 <td>
-                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="<?= base_url('DataPenghutang/DetailPengajuan/' . $data['no_ktp'])?>" >
+                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="<?= base_url('RevisiTransaksi/DetailRevisi/' . $data['id_penjualan'])?>" >
                                                         <i data-feather="eye"></i>
                                                     </a>
                                                     

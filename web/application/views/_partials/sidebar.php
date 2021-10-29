@@ -21,7 +21,7 @@
                             Penjualan
                             <span class="badge badge-primary-soft text-primary ml-auto">2</span>
                         </a>
-                        <a class="nav-link" href="<?= base_url('Pengaduan/data_real') ?>">
+                        <a class="nav-link" href="<?= base_url('RevisiTransaksi') ?>">
                             <span class="badge badge-cyan mr-1">  </span>
                             Revisi Transaksi
                             <span class="badge badge-primary-soft text-primary ml-auto">2</span>
