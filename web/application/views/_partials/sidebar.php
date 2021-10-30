@@ -16,7 +16,7 @@
                 </a>
                 <div class="collapse show" id="collapsePengaduan" data-parent="#accordionSidenav">
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                        <a class="nav-link" href="<?= base_url('') ?>">
+                        <a class="nav-link" href="<?= base_url('DataPenjualan/jember') ?>">
                             <span class="badge badge-danger mr-1">  </span>
                             Penjualan
                             <span class="badge badge-primary-soft text-primary ml-auto">2</span>

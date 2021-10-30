@@ -14,7 +14,7 @@ class DataBarang extends CI_Controller
     }
     public function index()
     {
-        $data['barang'] = $this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori')->get_where('barang', ['barang.status' => 'on'])->result_array();
+        $data['barang'] = $this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori')->get_where('barang', ['barang.status_barang' => 'on'])->result_array();
         $this->load->view('DataBarang/data', $data);
     }
 
@@ -55,7 +55,7 @@ class DataBarang extends CI_Controller
     public function hapus($id)
     {
         $data = [
-            'status' => 'off'
+            'status_barang' => 'off'
         ];
         $update = $this->Models->update($data, "id_barang", "barang", $id);
         if ($update) {
@@ -97,7 +97,7 @@ class DataBarang extends CI_Controller
                 'harga' => $this->input->post('harga'),
                 'stok' => $this->input->post('stok'),
                 'created_at' => date("Y-m-d h:i:sa"),
-                'status' => 'on'
+                'status_barang' => 'on'
             ];
             $insert = $this->db->insert('barang', $data);
 
