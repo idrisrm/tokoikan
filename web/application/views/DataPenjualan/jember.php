@@ -47,10 +47,11 @@
                             <div class="datatable table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
-                                        <tr>
+                                    <tr>
                                             <th style="width: 20px;">No</th>
                                             <th>Nama Barang</th>
                                             <th>Jumlah</th>
+                                            <th>Harga</th>
                                             <th>Total Harga</th>
                                             <th>Metode Pembayaran</th>
                                         </tr>
@@ -62,6 +63,7 @@
                                                 <td><?= $i; ?></td>
                                                 <td><?= $data['nama_barang'] ?></td>
                                                 <td><?= $data['qty'] ?></td>
+                                                <td>Rp. <?= number_format($data['harga'], 0, ",", ".") ?></td>
                                                 <td>Rp. <?= number_format($data['total_harga'], 0, ",", ".") ?></td>
                                                 <td><?= $data['status'] == 1 ? 'Cash' : 'Hutang' ?></td>
                                             </tr>
