@@ -15,7 +15,7 @@ class Barang_Kategori extends RestController
     {
         $id = $this->get('id_kategori');
         $id_otlet = $this->get('id_otlet');
-        $data = $this->db->query("SELECT barang.*, kategori.nama_kategori FROM barang, kategori WHERE barang.id_kategori = kategori.id_kategori AND barang.id_kategori = '$id' AND barang.id_otlet = '$id_otlet' AND barang.status = 'on'")->result_array();
+        $data = $this->db->query("SELECT barang.*, kategori.nama_kategori FROM barang, kategori WHERE barang.id_kategori = kategori.id_kategori AND barang.id_kategori = '$id' AND barang.id_otlet = '$id_otlet' AND barang.status_barang = 'on'")->result_array();
         if ($data) {
             $this->response(
                 [

@@ -24,9 +24,12 @@ class Auth extends RestController
                 $this->db->set('token', $last_tokennya);
                 $this->db->where('id', $data['id']);
                 $this->db->update('user');
+                $id_otlet = $data['id_otlet'];
+                $otletnya = $this->db->query("SELECT * FROM otlet WHERE id_otlet='$id_otlet'")->row_array();
                 $return_data = [
                     'id' => $data['id'],
                     'id_otlet' => $data['id_otlet'],
+                    'nama_otlet' => $otletnya['wilayah'],
                     'nama' => $data['nama'],
                     'username' => $data['username'],
                     'password' => $data['password'],
