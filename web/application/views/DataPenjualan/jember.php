@@ -32,14 +32,23 @@
                 </header>
                 <div class="container mt-4">
                     <nav class="nav nav-borders">
-                        <a class="nav-link active" href="<?= base_url('DataPenjualan/jember')?>">Data Penjualan Wilayah Jember</a>
-                        <a class="nav-link " href="<?= base_url('DataPenjualan/situbondo')?>">Data Penjualan Wilayah Situbondo</a>
-                        <a class="nav-link " href="<?= base_url('DataPenjualan/bali')?>">Data Penjualan Wilayah Bali</a>
+                        <a class="nav-link active" href="<?= base_url('DataPenjualan/jember') ?>">Data Penjualan Wilayah Jember</a>
+                        <a class="nav-link " href="<?= base_url('DataPenjualan/situbondo') ?>">Data Penjualan Wilayah Situbondo</a>
+                        <a class="nav-link " href="<?= base_url('DataPenjualan/bali') ?>">Data Penjualan Wilayah Bali</a>
                     </nav>
 
                     <hr class="mt-0 mb-4" />
                     <div class="card card-header-actions mx-auto mb-4">
-                        <div class="card-header">Data Penjualan Wilayah Jember</div>
+                        <div class="card-header">Data Penjualan Wilayah Jember<div class="no-caret">
+
+                                <a class="btn btn-sm btn-primary" href="onclick=" confirm_modal() data-toggle="modal" data-target="#modalExport">
+
+                                    <i data-feather="printer"></i> Export to Excel
+
+                                </a>
+
+                            </div>
+                        </div>
                         <div class="col">
                             <?php echo $this->session->flashdata('pesan') ?>
                         </div>
@@ -47,7 +56,7 @@
                             <div class="datatable table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
-                                    <tr>
+                                        <tr>
                                             <th style="width: 20px;">No</th>
                                             <th>Nama Barang</th>
                                             <th>Jumlah</th>
@@ -71,34 +80,34 @@
                                         } ?>
                                     </tbody>
                                 </table>
-                                <div class="modal fade" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="modalExport" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="tambahModalLabel">Konfirmasi</h5>
-                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">Apakah Anda yakin Ingin Mengkonfirmasi Pengajuan Ini?</div>
-                                            <div class="modal-footer">
-                                                <!-- <a class="btn btn-primary" href="<?= base_url('RevisiTransaksi/konfirmasi/' . $id['id_penjualan']) ?>">Konfirmasi</a> -->
-                                                <button class="btn btn-danger" type="button" data-dismiss="modal">Batal</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <form action="<?= base_url("DataKategori/edit") ?>" method="post">
+                                        <form action="<?= base_url("LaporanPenjualan/jember") ?>" method="post">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="editModalLabel">Edit Data</h5>
+                                                    <h5 class="modal-title" id="tambahModalLabel">Laporan Penjualan Wilayah Jember</h5>
                                                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">×</span>
                                                     </button>
                                                 </div>
-                                                <div class="modal-body">Apakah Anda yakin Ingin Mengkonfirmasi Pengajuan Ini?</div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="daritanggal">Dari Tanggal</label>
+                                                        <input class="form-control" id="daritanggal" name="daritanggal" type="date" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="sampaitanggal">Sampai Tanggal</label>
+                                                        <input class="form-control" id="sampaitanggal" name="sampaitanggal" type="date" placeholder="Masukkan Nama Kategori" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="metode">Metode Pembayaran</label>
+                                                        <select class="form-control" id="metode" name="metode" required>
+                                                            <option value="">--Pilih Metode Pembayaran</option>
+                                                                <option value="1">Cash</option>
+                                                                <option value="2">Hutang</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-primary" type="submit">Simpan</button>
                                                     <button class="btn btn-danger" type="button" data-dismiss="modal">Batal</button>
@@ -107,25 +116,8 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="deleteModalLabel">Hapus Data</h5>
-                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">Apakah Anda yakin untuk menghapus data?</div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-primary" type="button" data-dismiss="modal">Batal</button>
-                                                <a class="btn btn-danger" name="delete_link" id="delete_link" type="button" href="">Hapus</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- <div class="sbp-preview">
+
+                                <!-- <div class="sbp-preview">
                                 <div class="sbp-preview-content">
                                     <div class="row">
                                         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -172,12 +164,12 @@
                             </div> -->
 
 
-                            <!-- <button class="btn btn-success mr-2 mt-2" href="onclick=" confirm_modal() data-toggle="modal" data-target="#modalTambah">
+                                <!-- <button class="btn btn-success mr-2 mt-2" href="onclick=" confirm_modal() data-toggle="modal" data-target="#modalTambah">
                                 <span class="text">Konfirmasi</span>
                             </button> -->
 
+                            </div>
                         </div>
-                    </div>
             </main>
             <footer class="footer mt-auto footer-light">
                 <?php $this->load->view('_partials/footer.php') ?>
