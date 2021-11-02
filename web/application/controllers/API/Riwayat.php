@@ -18,7 +18,7 @@ class Riwayat extends RestController
         if ($data) {
             $this->response(
                 [
-                    'status' => 'true',
+                    'status' => true,
                     'pesan' => 'Riwayat transaksi ditemukan',
                     'data' => $data
                 ],
@@ -27,7 +27,7 @@ class Riwayat extends RestController
         } else {
             $this->response(
                 [
-                    'status' => 'false',
+                    'status' => false,
                     'pesan' => 'Tidak ada riwayat transaksi',
                     'data' => null
                 ],
