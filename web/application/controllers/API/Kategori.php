@@ -17,7 +17,7 @@ class Kategori extends RestController
         if ($data) {
             $this->response(
                 [
-                    'status' => 'true',
+                    'status' => true,
                     'pesan' => 'Data kategori ditemukan',
                     'data' => $data
                 ],
@@ -26,7 +26,7 @@ class Kategori extends RestController
         } else {
             $this->response(
                 [
-                    'status' => 'false',
+                    'status' => false,
                     'pesan' => 'Tidak ada data kategori',
                     'data' => null
                 ],

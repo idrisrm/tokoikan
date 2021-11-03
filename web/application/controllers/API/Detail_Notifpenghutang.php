@@ -4,7 +4,7 @@ use chriskacerguis\RestServer\RestController;
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Barang extends RestController
+class Detail_Notifpenghutang extends RestController
 {
 
     public function __construct()
@@ -13,13 +13,13 @@ class Barang extends RestController
     }
     public function index_get()
     {
-        $id_otlet = $this->get('id_otlet');
-        $data = $this->db->query("SELECT barang.*, kategori.nama_kategori FROM barang, kategori WHERE barang.id_kategori = kategori.id_kategori AND barang.id_otlet = '$id_otlet' AND barang.status_barang = 'on'")->result_array();
+        $id = $this->get('id_notif');
+        $data = $this->db->query("SELECT notifikasi.*, hutang.nama_penghutang, hutang.foto_ktp FROM notifikasi, hutang WHERE notifikasi.no_ktp = hutang.no_ktp AND notifikasi.id_notif = '$id'")->result_array();
         if ($data) {
             $this->response(
                 [
                     'status' => true,
-                    'pesan' => 'Data barang ditemukan',
+                    'pesan' => 'Detail notifikasi ditemukan',
                     'data' => $data
                 ],
                 RestController::HTTP_OK
@@ -28,7 +28,7 @@ class Barang extends RestController
             $this->response(
                 [
                     'status' => false,
-                    'pesan' => 'Tidak ada data barang',
+                    'pesan' => 'Tidak ada detail notifikasi',
                     'data' => null
                 ],
                 RestController::HTTP_NOT_FOUND

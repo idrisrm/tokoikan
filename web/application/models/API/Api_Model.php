@@ -28,6 +28,18 @@ class Api_Model extends CI_Model
     {
         return $this->db->get_where('user', ['bagian' => $id])->row_array();
     }
+    public function otletnotif($id)
+    {
+        return $this->db->get_where('notifikasi', ['id_notif' => $id])->row_array();
+    }
+    public function otletuser($id)
+    {
+        return $this->db->get_where('user', ['id_otlet' => $id])->row_array();
+    }
+    public function getpenghutangdetail($id)
+    {
+        return $this->db->get_where('hutang', ['no_ktp' => $id])->row_array();
+    }
     public function ktphutang()
     {
         return $this->db->get('hutang')->row_array();

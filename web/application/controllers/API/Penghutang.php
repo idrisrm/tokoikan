@@ -17,7 +17,7 @@ class Penghutang extends RestController
         if ($data) {
             $this->response(
                 [
-                    'status' => 'true',
+                    'status' => true,
                     'pesan' => 'List penghutang ditemukan',
                     'data' => $data,
                 ],
@@ -26,7 +26,7 @@ class Penghutang extends RestController
         } else {
             $this->response(
                 [
-                    'status' => 'false',
+                    'status' => false,
                     'pesan' => 'Tidak ada list penghutang',
                     'data' => null,
                 ],

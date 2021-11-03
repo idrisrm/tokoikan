@@ -62,6 +62,7 @@ class Tambah_Penghutang extends RestController
                     $arr2 = [
                         'id_notif' => $kodeku,
                         'id_tujuan' => $id_usernya,
+                        'no_ktp' => $no_ktp,
                         'judul' => "Pengajuan Penghutang Baru",
                         'deskripsi' =>  "Pengajuan penghutang baru dengan nama $nama di otlet $otletnya",
                         'status' =>  0,

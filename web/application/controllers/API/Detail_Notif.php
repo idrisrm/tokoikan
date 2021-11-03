@@ -18,7 +18,7 @@ class Detail_Notif extends RestController
         if ($data) {
             $this->response(
                 [
-                    'status' => 'true',
+                    'status' => true,
                     'pesan' => 'Detail notifikasi ditemukan',
                     'data' => $data
                 ],
@@ -27,7 +27,7 @@ class Detail_Notif extends RestController
         } else {
             $this->response(
                 [
-                    'status' => 'false',
+                    'status' => false,
                     'pesan' => 'Tidak ada detail notifikasi',
                     'data' => null
                 ],
