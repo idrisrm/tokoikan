@@ -16,15 +16,21 @@ class Konfirmasi_Penghutang extends RestController
     {
         $id_notif = $this->input->post('id_notif');
         $now = date('Y-m-d H:i:s');
+        $limittanggal = date('Y-m-d', strtotime('+1 month', strtotime($now)));
         $otletnotif = $this->ApiModel->otletnotif($id_notif);
 
         $data = [
             'status' => 1,
             'updated_at' => $now,
         ];
+        $datapenghutang = [
+            'status' => 1,
+            'updated_at' => $now,
+            'limit_tanggal' => $limittanggal,
+        ];
         $no_ktp = $otletnotif['no_ktp'];
         $query = $this->ApiModel->ubah($data, $id_notif, 'id_notif', 'notifikasi');
-        $querypenghutang = $this->ApiModel->ubah($data, $no_ktp, 'no_ktp', 'hutang');
+        $querypenghutang = $this->ApiModel->ubah($datapenghutang, $no_ktp, 'no_ktp', 'hutang');
         if ($query && $querypenghutang) {
             $penghutang = $this->ApiModel->getpenghutangdetail($no_ktp);
             $id_otlet = $penghutang['id_otlet'];
