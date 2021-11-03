@@ -17,19 +17,19 @@
                 <div class="collapse show" id="collapsePengaduan" data-parent="#accordionSidenav">
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
                         <a class="nav-link" href="<?= base_url('DataPenjualan/jember') ?>">
-                            <span class="badge badge-danger mr-1">  </span>
+                            <span class="badge badge-success mr-1">  </span>
                             Penjualan
-                            <span class="badge badge-primary-soft text-primary ml-auto">2</span>
+                            <!-- <span class="badge badge-primary-soft text-primary ml-auto">2</span> -->
                         </a>
                         <a class="nav-link" href="<?= base_url('RevisiTransaksi') ?>">
                             <span class="badge badge-cyan mr-1">  </span>
                             Revisi Transaksi
-                            <span class="badge badge-primary-soft text-primary ml-auto">2</span>
+                            <!-- <span class="badge badge-primary-soft text-primary ml-auto">2</span> -->
                         </a>
                         <a class="nav-link" href="<?= base_url('DataPenghutang/PengajuanHutang') ?>">
                             <span class="badge badge-warning mr-1">  </span>
                             Pengajuan Hutang
-                            <span class="badge badge-primary-soft text-primary ml-auto">2</span>
+                            <!-- <span class="badge badge-primary-soft text-primary ml-auto">2</span> -->
                         </a>
                         <!-- <a class="nav-link" href="<?= base_url('Pengaduan/data_tindak_lanjut') ?>">
                             <span class="badge badge-blue mr-1">  </span>
