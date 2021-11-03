@@ -102,7 +102,7 @@
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="metode">Metode Pembayaran</label>
                                                         <select class="form-control" id="metode" name="metode" required>
-                                                            <option value="">--Pilih Metode Pembayaran</option>
+                                                            <option value="">--Pilih Metode Pembayaran--</option>
                                                                 <option value="1">Cash</option>
                                                                 <option value="2">Hutang</option>
                                                         </select>
