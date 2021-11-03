@@ -4,7 +4,7 @@ use chriskacerguis\RestServer\RestController;
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Riwayat extends RestController
+class Riwayat_Admin extends RestController
 {
 
     public function __construct()
@@ -13,8 +13,7 @@ class Riwayat extends RestController
     }
     public function index_get()
     {
-        $id = $this->get('id_penjual');
-        $data = $this->db->query("SELECT * FROM penjualan WHERE id_penjual = '$id' AND status != 0")->result_array();
+        $data = $this->db->query("SELECT penjualan.*, otlet.wilayah FROM penjualan, otlet WHERE penjualan.id_otlet = otlet.id_otlet AND penjualan.status != 0")->result_array();
         if ($data) {
             $this->response(
                 [
