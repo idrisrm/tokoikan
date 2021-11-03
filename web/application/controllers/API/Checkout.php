@@ -54,25 +54,28 @@ class Checkout extends RestController
                 );
             }
         } else {
-            $ubahstok = $this->db->query("SELECT * FROM detail_penjualan WHERE id_penjualan = '$id_penjualan'")->result_array();
-            foreach ($ubahstok as $us) {
-                $id_barang = $us['id_barang'];
-                $qty = $us['qty'];
-                $barang = $this->db->query("SELECT * FROM barang WHERE id_barang = '$id_barang'")->result_array();
-                foreach ($barang as $b) {
-                    $data = [
-                        'stok' => $b['stok'] - $qty,
-                    ];
-                    $this->ApiModel->ubah($data, $id_barang, 'id_barang', 'barang');
-                }
-            }
-            $datapenjualan = [
-                'subtotal' => $subtotal,
-                'status' => $status,
-                'ktp_penghutang' => $no_ktp,
-            ];
             $hutang = $this->db->query("SELECT * FROM hutang WHERE no_ktp = '$no_ktp'")->row_array();
-            if ($hutang) {
+            $banyakhutang = $hutang['total_hutang'] + $subtotal;
+            if ($banyakhutang <= 10000000) {
+                //ubah stok
+                $ubahstok = $this->db->query("SELECT * FROM detail_penjualan WHERE id_penjualan = '$id_penjualan'")->result_array();
+                foreach ($ubahstok as $us) {
+                    $id_barang = $us['id_barang'];
+                    $qty = $us['qty'];
+                    $barang = $this->db->query("SELECT * FROM barang WHERE id_barang = '$id_barang'")->result_array();
+                    foreach ($barang as $b) {
+                        $data = [
+                            'stok' => $b['stok'] - $qty,
+                        ];
+                        $this->ApiModel->ubah($data, $id_barang, 'id_barang', 'barang');
+                    }
+                }
+                $datapenjualan = [
+                    'subtotal' => $subtotal,
+                    'status' => $status,
+                    'ktp_penghutang' => $no_ktp,
+                ];
+                //ubah di hutang
                 $datahutang = [
                     'total_hutang' => $hutang['total_hutang'] + $subtotal,
                 ];
@@ -99,7 +102,7 @@ class Checkout extends RestController
                 $this->response(
                     [
                         'status' => false,
-                        'pesan' => 'Gagal checkout terjadi kesalahan',
+                        'pesan' => 'Gagal checkout hutang telah melewati limit',
                     ],
                     RestController::HTTP_FORBIDDEN
                 );
