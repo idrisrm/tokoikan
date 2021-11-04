@@ -90,7 +90,7 @@ class Tambah_Penghutang extends RestController
         }
     }
 
-    public function sendNotification($id, $pesan, $title)
+    public function sendNotification($id, $title, $pesan)
     {        
         $arguments = array(
             'message'   => $pesan,
