@@ -86,9 +86,9 @@ class DataBarang extends CI_Controller
             $data['otlet'] = $this->db->get('otlet')->result_array();
             $this->load->view('DataBarang/tambah', $data);
         } else {
-            $nama = $this->input->post('nama');
-            $stok = $this->input->post('stok');
-            $otlet = $this->input->post('otlet');
+            // $nama = $this->input->post('nama');
+            // $stok = $this->input->post('stok');
+            // $otlet = $this->input->post('otlet');
             $data = [
                 'id_barang' => $this->input->post('kode'),
                 'nama_barang' => $this->input->post('nama'),
@@ -101,22 +101,21 @@ class DataBarang extends CI_Controller
             ];
             $insert = $this->db->insert('barang', $data);
 
-            $getDetail = $this->ApiModel->detail($otlet);
-            foreach ($getDetail as $g) {
-                $token = $g['token'];
-                $id_usernya = $g['id'];
-                $this->sendNotification($token, "Penambahan Stok Baru", "Stok $nama baru saja ditambahkan oleh admin sebanyak $stok kg");
-                $kodeku = $this->ApiModel->randomkode(15);
-                $arr2 = [
-                    'id_notif' => $kodeku,
-                    'id_tujuan' => $id_usernya,
-                    'judul' => "Penambahan Stok Baru",
-                    'deskripsi' =>  "Stok $nama baru saja ditambahkan oleh admin sebanyak $stok kg",
-                    'status' =>  0,
-                    'created_at' => date('Y-m-d H:i:s'),
-                ];
-                $this->ApiModel->insert('notifikasi', $arr2);
-            }
+            // $getDetail = $this->ApiModel->detail($otlet);
+            // $this->sendNotification("topics/$otlet", "Penambahan Stok Baru", "Stok $nama baru saja ditambahkan oleh admin sebanyak $stok kg");
+            // foreach ($getDetail as $g) {
+            //     $id_usernya = $g['id'];
+            //     $kodeku = $this->ApiModel->randomkode(15);
+            //     $arr2 = [
+            //         'id_notif' => $kodeku,
+            //         'id_tujuan' => $id_usernya,
+            //         'judul' => "Penambahan Stok Baru",
+            //         'deskripsi' =>  "Stok $nama baru saja ditambahkan oleh admin sebanyak $stok kg",
+            //         'status' =>  0,
+            //         'created_at' => date('Y-m-d H:i:s'),
+            //     ];
+            //     $this->ApiModel->insert('notifikasi', $arr2);
+            // }
 
             if ($insert) {
                 $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
@@ -132,26 +131,27 @@ class DataBarang extends CI_Controller
         }
     }
 
-    public function sendNotification($id, $pesan, $title)
+    public function sendNotification($id, $title, $pesan)
     {
-        $registrationIds = array($id);
-        $msg = array(
+        $arguments = array(
             'message'   => $pesan,
             'title'     => $title,
-            'subtitle'  => 'This is a subtitle. subtitle',
-            'tickerText'    => 'Ticker text here...Ticker text here...Ticker text here',
-            'vibrate'   => 1,
-            'sound'     => 1,
-            'largeIcon' => 'large_icon',
-            'smallIcon' => 'small_icon'
         );
+
         $fields = array(
-            'registration_ids'  => $registrationIds,
-            'data'          => $msg
+            'to'  => $id,
+            'notification' => array(
+                'title' => $title,
+                'body' => $pesan,
+            ),
+            'data' => $arguments,
+            'android' => array(
+                'priority' => 'high',
+            ),
         );
 
         $headers = array(
-            'Authorization: key= AAAA1kSN8j0:APA91bG6wK18M-0ejs11mAOzaAue-1hiBrKOJkIzNqSa_QPIO8UrRJ34Gdu3BrMidGbzo5rsESdNqYbU2dmHdByO_gW9m5bLrcyXzyna3NrGqsbC-9dzLFGMuvxpafrwMMg54zH_3I1e',
+            'Authorization: key=AAAA1kSN8j0:APA91bG6wK18M-0ejs11mAOzaAue-1hiBrKOJkIzNqSa_QPIO8UrRJ34Gdu3BrMidGbzo5rsESdNqYbU2dmHdByO_gW9m5bLrcyXzyna3NrGqsbC-9dzLFGMuvxpafrwMMg54zH_3I1e',
             'Content-Type: application/json'
         );
 
@@ -160,11 +160,10 @@ class DataBarang extends CI_Controller
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
         $result = curl_exec($ch);
         curl_close($ch);
-        // echo $result;
+        echo $result;
     }
 }
 
