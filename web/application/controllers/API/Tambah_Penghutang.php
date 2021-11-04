@@ -91,25 +91,26 @@ class Tambah_Penghutang extends RestController
     }
 
     public function sendNotification($id, $pesan, $title)
-    {
-        $registrationIds = array($id);
-        $msg = array(
+    {        
+        $arguments = array(
             'message'   => $pesan,
-            'title'     => $title,
-            'subtitle'  => 'This is a subtitle. subtitle',
-            'tickerText'    => 'Ticker text here...Ticker text here...Ticker text here',
-            'vibrate'   => 1,
-            'sound'     => 1,
-            'largeIcon' => 'large_icon',
-            'smallIcon' => 'small_icon'
+            'title'     => $title,            
         );
+
         $fields = array(
-            'registration_ids'  => $registrationIds,
-            'data'          => $msg
+            'to'  => $id,
+            'notification' => array(
+                'title' => $title,
+                'body' => $pesan,
+            ),
+            'data' => $arguments,
+            'android' => array(
+                'priority' => 'high',
+            ),
         );
 
         $headers = array(
-            'Authorization: key= AAAA1kSN8j0:APA91bG6wK18M-0ejs11mAOzaAue-1hiBrKOJkIzNqSa_QPIO8UrRJ34Gdu3BrMidGbzo5rsESdNqYbU2dmHdByO_gW9m5bLrcyXzyna3NrGqsbC-9dzLFGMuvxpafrwMMg54zH_3I1e',
+            'Authorization: key=AAAA1kSN8j0:APA91bG6wK18M-0ejs11mAOzaAue-1hiBrKOJkIzNqSa_QPIO8UrRJ34Gdu3BrMidGbzo5rsESdNqYbU2dmHdByO_gW9m5bLrcyXzyna3NrGqsbC-9dzLFGMuvxpafrwMMg54zH_3I1e',
             'Content-Type: application/json'
         );
 
@@ -117,8 +118,7 @@ class Tambah_Penghutang extends RestController
         curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);        
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
         $result = curl_exec($ch);
         curl_close($ch);
