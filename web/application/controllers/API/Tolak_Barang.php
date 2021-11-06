@@ -4,7 +4,7 @@ use chriskacerguis\RestServer\RestController;
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Konfirmasi_Barang extends RestController
+class Tolak_Barang extends RestController
 {
 
     public function __construct()
@@ -20,23 +20,16 @@ class Konfirmasi_Barang extends RestController
         $id_tambah = $this->db->query("SELECT * FROM notifikasi WHERE id_notif = '$id_notif'")->row_array();
         $id_tambah_barang = $id_tambah['id_tambah_barang'];
         $id_otlet = $id_tambah['id_otlet'];
-        $tambahbarangdata = $this->db->query("SELECT * FROM tambah_stok WHERE id_tambah = '$id_tambah_barang'")->row_array();
-        $id_barang = $tambahbarangdata['id_barang'];
-        $stok = $this->db->query("SELECT * FROM barang WHERE id_barang = '$id_barang'")->row_array();
         $data = [
-            'status' => 1,
+            'status' => 2,
             'updated_at' => $now,
         ];
         $dataupdatetambah = [
-            'status' => 'konfirmasi'
-        ];
-        $datastok = [
-            'stok' => $stok['stok'] + $tambahbarangdata['jumlah']
+            'status' => 'tolak'
         ];
         $query = $this->ApiModel->ubah($data, $id_notif, 'id_notif', 'notifikasi');
         $querytambah = $this->ApiModel->ubah($dataupdatetambah, $id_tambah_barang, 'id_tambah', 'tambah_stok');
-        $querystok = $this->ApiModel->ubah($datastok, $id_barang, 'id_barang', 'barang');
-        if ($query && $querytambah && $querystok) {
+        if ($query && $querytambah) {
             $g = $this->ApiModel->bagian('admin');
             $token = $g['token'];
             if ($id_otlet == '1') {
@@ -50,12 +43,12 @@ class Konfirmasi_Barang extends RestController
 
             $this->response([
                 'status' => true,
-                'pesan' => 'Berhasil verifikasi stok'
+                'pesan' => 'Berhasil tolak stok'
             ], RestController::HTTP_OK);
         } else {
             $this->response([
                 'status' => false,
-                'pesan' => 'Gagal verifikasi stok'
+                'pesan' => 'Gagal tolak stok'
             ], RestController::HTTP_NOT_FOUND);
         }
     }
