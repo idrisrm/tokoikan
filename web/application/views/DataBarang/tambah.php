@@ -51,7 +51,7 @@
                                     <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                         <label class="small mb-1" for="kategori">Kategori barang</label>
                                         <select class="form-control" id="kategori" name="kategori">
-                                            <option value="">--Pilih Kategori</option>
+                                            <option value="">--Pilih Kategori--</option>
                                             <?php foreach ($kategori as $data) { ?>
                                                 <option value="<?= $data['id_kategori'] ?>"><?= $data['nama_kategori'] ?></option>
                                             <?php } ?>
@@ -60,12 +60,12 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                    <!-- <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                         <label class="small mb-1" for="stok">Stok</label>
                                         <input class="form-control" id="stok" name="stok" type="number" placeholder="Masukkan Stok" value="<?= set_value('stok') ?>" />
                                         <?= form_error('stok', '<small class="text-danger pl-2">', '</small>'); ?>
-                                    </div>
-                                    <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                    </div> -->
+                                    <div class="form-group col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                         <label class="small mb-1" for="harga">Harga</label>
                                         <input class="form-control" id="harga" name="harga" type="number" placeholder="Masukkan Harga" value="<?= set_value('harga') ?>" />
                                         <?= form_error('harga', '<small class="text-danger pl-2">', '</small>'); ?>

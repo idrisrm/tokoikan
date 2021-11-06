@@ -54,6 +54,9 @@
                                                 <td><?= $data['stok']?> Kg</td>
                                                 <td>Rp. <?= number_format($data['harga'], 0, ",", ".")?></td>
                                                 <td>
+                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="<?= base_url('DataBarang/stok/' . $data['id_barang'])?>" >
+                                                        <i data-feather="plus"></i>
+                                                    </a>
                                                     <a class="btn btn-datatable btn-icon btn-transparent-dark" href="<?= base_url('DataBarang/edit/' . $data['id_barang'])?>" >
                                                         <i data-feather="edit-2"></i>
                                                     </a>

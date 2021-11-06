@@ -23,7 +23,7 @@ class DataBarang extends CI_Controller
     {
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('kategori', 'Kategori', 'required');
-        $this->form_validation->set_rules('stok', 'Stok', 'required|numeric');
+        // $this->form_validation->set_rules('stok', 'Stok', 'required|numeric');
         $this->form_validation->set_rules('harga', 'Harga', 'required|numeric');
 
         if ($this->form_validation->run() == false) {
@@ -34,7 +34,7 @@ class DataBarang extends CI_Controller
             $data = [
                 'nama_barang' => $this->input->post('nama'),
                 'id_kategori' => $this->input->post('kategori'),
-                'stok' => $this->input->post('stok'),
+                // 'stok' => $this->input->post('stok'),
                 'harga' => $this->input->post('harga'),
             ];
             $update = $this->Models->update($data, "id_barang", "barang", $id);
@@ -46,6 +46,37 @@ class DataBarang extends CI_Controller
             } else {
                 $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
                 Barang Gagal Diupdate!
+                </div>');
+                redirect('DataBarang');
+            }
+        }
+    }
+
+
+    public function stok($id)
+    {
+        $this->form_validation->set_rules('stok', 'Stok', 'required|numeric');
+        $data['barang'] = $this->db->get_where('barang', ['id_barang' => $id])->row_array();
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('DataBarang/stok', $data);
+        } else {
+            $data = [
+                'id_barang' => $id,
+                'id_otlet' => $data['barang']['id_otlet'],
+                'jumlah' => $this->input->post('stok'),
+                'status' => 'pending',
+                'created_at' => date("Y-m-d h:i:sa")
+            ];
+            $insert = $this->db->insert('tambah_stok', $data);
+            if ($insert) {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+                Stok Barang Berhasil Ditambahkan!
+                </div>');
+                redirect('DataBarang');
+            } else {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
+                Stok Barang Gagal Ditambahkan!
                 </div>');
                 redirect('DataBarang');
             }
@@ -74,11 +105,11 @@ class DataBarang extends CI_Controller
     public function tambah()
     {
 
-        $this->form_validation->set_rules('kode', 'Kode', 'required|is_unique[barang.id_barang]');
+        $this->form_validation->set_rules('kode', 'Kode', 'required|is_unique[barang.kode_barang]');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('otlet', 'Otlet', 'required');
         $this->form_validation->set_rules('kategori', 'Kategori', 'required');
-        $this->form_validation->set_rules('stok', 'Stok', 'required|numeric');
+        // $this->form_validation->set_rules('stok', 'Stok', 'required|numeric');
         $this->form_validation->set_rules('harga', 'Harga', 'required|numeric');
 
         if ($this->form_validation->run() == false) {
@@ -90,12 +121,12 @@ class DataBarang extends CI_Controller
             // $stok = $this->input->post('stok');
             // $otlet = $this->input->post('otlet');
             $data = [
-                'id_barang' => $this->input->post('kode'),
+                'kode_barang' => $this->input->post('kode'),
                 'nama_barang' => $this->input->post('nama'),
                 'id_kategori' => $this->input->post('kategori'),
                 'id_otlet' => $this->input->post('otlet'),
                 'harga' => $this->input->post('harga'),
-                'stok' => $this->input->post('stok'),
+                // 'stok' => $this->input->post('stok'),
                 'created_at' => date("Y-m-d h:i:sa"),
                 'status_barang' => 'on'
             ];
