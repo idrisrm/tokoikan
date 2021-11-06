@@ -63,6 +63,8 @@
                                             <th>Harga</th>
                                             <th>Total Harga</th>
                                             <th>Metode Pembayaran</th>
+                                            <th>Catatan</th>
+                                            <th>Tanggal</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -75,6 +77,8 @@
                                                 <td>Rp. <?= number_format($data['harga'], 0, ",", ".") ?></td>
                                                 <td>Rp. <?= number_format($data['total_harga'], 0, ",", ".") ?></td>
                                                 <td><?= $data['status'] == 1 ? 'Cash' : 'Hutang' ?></td>
+                                                <td><?= $data['catatan']?></td>
+                                                <td><?= $data['created_at']?></td>
                                             </tr>
                                         <?php $i++;
                                         } ?>
@@ -105,6 +109,14 @@
                                                             <option value="">--Pilih Metode Pembayaran--</option>
                                                                 <option value="1">Cash</option>
                                                                 <option value="2">Hutang</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="aksi">Setelah Export</label>
+                                                        <select class="form-control" id="aksi" name="aksi" required>
+                                                            <option value="">--Pilih Aksi--</option>
+                                                                <option value="1">Jangan Dihapus</option>
+                                                                <option value="2">Hapus</option>
                                                         </select>
                                                     </div>
                                                 </div>

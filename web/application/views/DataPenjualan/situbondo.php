@@ -58,11 +58,13 @@
                                             <th>Harga</th>
                                             <th>Total Harga</th>
                                             <th>Metode Pembayaran</th>
+                                            <th>Catatan</th>
+                                            <th>Tanggal</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $i = 1;
-                                        foreach ($jember as $data) { ?>
+                                        foreach ($situbondo as $data) { ?>
                                             <tr>
                                                 <td><?= $i; ?></td>
                                                 <td><?= $data['nama_barang'] ?></td>
@@ -70,6 +72,8 @@
                                                 <td>Rp. <?= number_format($data['harga'], 0, ",", ".") ?></td>
                                                 <td>Rp. <?= number_format($data['total_harga'], 0, ",", ".") ?></td>
                                                 <td><?= $data['status'] == 1 ? 'Cash' : 'Hutang' ?></td>
+                                                <td><?= $data['catatan'] ?></td>
+                                                <td><?= $data['created_at'] ?></td>
                                             </tr>
                                         <?php $i++;
                                         } ?>
@@ -77,7 +81,7 @@
                                 </table>
                                 <div class="modal fade" id="modalExport" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
-                                        <form action="<?= base_url("LaporanPenjualan/jember") ?>" method="post">
+                                        <form action="<?= base_url("LaporanPenjualan/situbondo") ?>" method="post">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="tambahModalLabel">Laporan Penjualan Wilayah Situbondo</h5>
@@ -98,8 +102,16 @@
                                                         <label class="small mb-1" for="metode">Metode Pembayaran</label>
                                                         <select class="form-control" id="metode" name="metode" required>
                                                             <option value="">--Pilih Metode Pembayaran--</option>
-                                                                <option value="1">Cash</option>
-                                                                <option value="2">Hutang</option>
+                                                            <option value="1">Cash</option>
+                                                            <option value="2">Hutang</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="small mb-1" for="aksi">Setelah Export</label>
+                                                        <select class="form-control" id="aksi" name="aksi" required>
+                                                            <option value="">--Pilih Aksi--</option>
+                                                            <option value="1">Jangan Dihapus</option>
+                                                            <option value="2">Hapus</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -237,41 +249,40 @@
             });
         });
 
-        function getData() {
-            $.ajax({
-                url: "<?php echo base_url() . "Pengaduan/getKategori" ?>",
-                dataType: "json",
-                success: function(data) {
-                    var html = '<option value="">' + " Pilih Kategori " + '</option>';
-                    var no = 1;
-                    for (var i = 0; i < data.length; i++) {
-                        html += '<option value="' + data[i].id_kategori + '">' + data[i].nm_kategori + '</option>';
-                    }
-                    $('#kategori_pengaduan').html(html);
-                },
-            });
-        }
+        // $.ajax({
+        //     url: "<?php echo base_url() . "DataPenjualan/datasitubondo" ?>",
+        //     dataType: "json",
+        //     success: function(data) {
+        //         var html = '';
+        //         var no = 1;
+        //         for (var i = 0; i < data.length; i++) {
+        //             html += '<td>' + no + '</td> <td > '+ data[i].nama_barang+' </td><td>'+ data[i].qty +'</td><td>Rp.'+ data[i].harga +'</td><td>Rp. '+ data[i].total_harga+'</td><td>'+ data[i].status+'</td><td>'+ data[i].catatan +'</td><td>'+ data[i].created_at +'</td>';
+        //         }
+        //         $('#tabel').html(html);
+        //         console.log("boleng",data);
+        //     },
+        // });
 
-        function get(datakey) {
-            $.ajax({
-                url: "<?= base_url(); ?>Pengaduan/getOPD",
-                method: "POST",
-                data: {
-                    id_kategori: datakey
-                },
-                async: false,
-                dataType: "json",
-                success: function(data) {
-                    var html = '<option value="">' + " Pilih OPD " + '</option>';
-                    var no = 1;
-                    for (var i = 0; i < data.length; i++) {
-                        html += '<option value="' + data[i].id_opd + '">' + data[i].nm_opd + '</option>';
-                    }
-                    $('#opd').html(html);
-                    console.log("ini", html)
-                }
-            });
-        }
+        // function get(datakey) {
+        //     $.ajax({
+        //         url: "<?= base_url(); ?>Pengaduan/getOPD",
+        //         method: "POST",
+        //         data: {
+        //             id_kategori: datakey
+        //         },
+        //         async: false,
+        //         dataType: "json",
+        //         success: function(data) {
+        //             var html = '<option value="">' + " Pilih OPD " + '</option>';
+        //             var no = 1;
+        //             for (var i = 0; i < data.length; i++) {
+        //                 html += '<option value="' + data[i].id_opd + '">' + data[i].nm_opd + '</option>';
+        //             }
+        //             $('#opd').html(html);
+        //             console.log("ini", html)
+        //         }
+        //     });
+        // }
 
         function getOPD(idKey) {
             $.ajax({
