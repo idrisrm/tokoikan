@@ -39,7 +39,7 @@ class Tolak_Barang extends RestController
             } elseif ($id_otlet == '3') {
                 $otletnya = 'Bali';
             }
-            $this->sendNotification($token, "Verifikasi stok dari karyawan", "Stok telah di verifikasi oleh karyawan di otlet $otletnya");
+            $this->sendNotification($token, "Verifikasi stok dari karyawan", "Stok telah ditolak oleh karyawan di otlet $otletnya");
 
             $this->response([
                 'status' => true,

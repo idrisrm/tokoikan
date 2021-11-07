@@ -75,7 +75,7 @@ class DataBarang extends CI_Controller
             ];
             $insert = $this->db->insert('tambah_stok', $data);
             if ($insert) {
-                $this->sendNotification("topics/$otlet", "Penambahan Stok Baru", "Stok $nama baru saja ditambahkan oleh admin sebanyak $stok kg");
+                $this->sendNotification("/topics/$otlet", "Penambahan Stok Baru", "Stok $nama baru saja ditambahkan oleh admin sebanyak $stok kg");
                 $kodeku = $this->ApiModel->randomkode(15);
                 $arr2 = [
                     'id_notif' => $kodeku,

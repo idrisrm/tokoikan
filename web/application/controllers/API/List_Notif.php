@@ -14,7 +14,7 @@ class List_Notif extends RestController
     public function index_get()
     {
         $id = $this->get('id_user');
-        $data = $this->db->query("SELECT * FROM notifikasi WHERE id_tujuan = '$id'")->result_array();
+        $data = $this->db->query("SELECT * FROM notifikasi WHERE id_tujuan = '$id' ORDER BY created_at DESC")->result_array();
         if ($data) {
             $this->response(
                 [
