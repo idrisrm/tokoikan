@@ -18,8 +18,12 @@ class Konfirmasi_Penghutang extends RestController
         $now = date('Y-m-d H:i:s');
         $limittanggal = date('Y-m-d', strtotime('+1 month', strtotime($now)));
         $otletnotif = $this->ApiModel->otletnotif($id_notif);
+        $no_ktp = $otletnotif['no_ktp'];
+        $penghutang = $this->ApiModel->getpenghutangdetail($no_ktp);
+        $id_otlet = $penghutang['id_otlet'];
 
         $data = [
+            'id_otlet' => $id_otlet,
             'status' => 1,
             'updated_at' => $now,
         ];
@@ -28,18 +32,11 @@ class Konfirmasi_Penghutang extends RestController
             'updated_at' => $now,
             'limit_tanggal' => $limittanggal,
         ];
-        $no_ktp = $otletnotif['no_ktp'];
         $query = $this->ApiModel->ubah($data, $id_notif, 'id_notif', 'notifikasi');
         $querypenghutang = $this->ApiModel->ubah($datapenghutang, $no_ktp, 'no_ktp', 'hutang');
         if ($query && $querypenghutang) {
-            $penghutang = $this->ApiModel->getpenghutangdetail($no_ktp);
-            $id_otlet = $penghutang['id_otlet'];
             $nama_penghutang = $penghutang['nama_penghutang'];
-            // $gotlet = $this->db->query("SELECT * FROM user WHERE id_otlet = '$id_otlet' AND bagian = 'karyawan' AND status = 'on'")->result_array();
 
-            // foreach ($gotlet as $g) {
-            //     $token = $g['token'];
-            // }
             if ($id_otlet == '1') {
                 $otletnya = 'Jember';
             } elseif ($id_otlet == '2') {

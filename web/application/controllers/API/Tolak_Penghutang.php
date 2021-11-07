@@ -4,7 +4,7 @@ use chriskacerguis\RestServer\RestController;
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Ajukan_Revisi extends RestController
+class Tolak_Penghutang extends RestController
 {
 
     public function __construct()
@@ -14,38 +14,38 @@ class Ajukan_Revisi extends RestController
     }
     public function index_post()
     {
-        $id_penjualan = $this->input->post('id_penjualan');
-        $data = [
-            'pengajuan' => 'revisi',
-        ];
-        $query = $this->ApiModel->ubah($data, $id_penjualan, 'id_penjualan', 'penjualan');
-        if ($query) {
-            $transaksinya = $this->db->query("SELECT penjualan.*, otlet.wilayah, user.nama FROM penjualan, otlet, user WHERE penjualan.id_otlet = otlet.id_otlet AND penjualan.id_penjual = user.id")->row_array();
-            $g = $this->ApiModel->bagian('admin');
-            $token = $g['token'];
-            $id_usernya = $g['id'];
-            $nama = $transaksinya['nama'];
-            $otletnya = $transaksinya['wilayah'];
-            $this->sendNotification($token, "Pengajuan Revisi Transaksi Penjualan", "Pengajuan penghutang baru dengan nama $nama di otlet $otletnya");
-            $kodeku = $this->ApiModel->randomkode(15);
-            $arr2 = [
-                'id_notif' => $kodeku,
-                'id_tujuan' => $id_usernya,
-                'judul' => "Pengajuan Revisi Transaksi Penjualan",
-                'deskripsi' =>  "Pengajuan revisi transaksi penjualan dengan id $id_penjualan dengan nama $nama di otlet $otletnya",
-                'status' =>  3,
-                'created_at' => date('Y-m-d H:i:s'),
-            ];
-            $this->ApiModel->insert('notifikasi', $arr2);
+        $id_notif = $this->input->post('id_notif');
+        $now = date('Y-m-d H:i:s');
+        $otletnotif = $this->ApiModel->otletnotif($id_notif);
+        $no_ktp = $otletnotif['no_ktp'];
+        $penghutang = $this->ApiModel->getpenghutangdetail($no_ktp);
+        $id_otlet = $penghutang['id_otlet'];
 
+        $data = [
+            'id_otlet' => $id_otlet,
+            'status' => 2,
+            'updated_at' => $now,
+        ];
+        $query = $this->ApiModel->ubah($data, $id_notif, 'id_notif', 'notifikasi');
+        if ($query) {
+            $nama_penghutang = $penghutang['nama_penghutang'];
+            if ($id_otlet == '1') {
+                $otletnya = 'Jember';
+            } elseif ($id_otlet == '2') {
+                $otletnya = 'Situbondo';
+            } elseif ($id_otlet == '3') {
+                $otletnya = 'Bali';
+            }
+            $this->sendNotification("/topics/$id_otlet", "Verifikasi penghutang baru", "Penghutang baru dengan nama $nama_penghutang telah di tolak oleh admin di otlet $otletnya");
+            $this->ApiModel->hapus($no_ktp, 'no_ktp', 'hutang');
             $this->response([
                 'status' => true,
-                'pesan' => 'Berhasil kirim revisi'
+                'pesan' => 'Berhasil tolak penghutang'
             ], RestController::HTTP_OK);
         } else {
             $this->response([
                 'status' => false,
-                'pesan' => 'Gagal kirim revisi'
+                'pesan' => 'Gagal tolak penghutang'
             ], RestController::HTTP_NOT_FOUND);
         }
     }

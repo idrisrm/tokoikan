@@ -14,7 +14,7 @@ class List_Notifkaryawan extends RestController
     public function index_get()
     {
         $id = $this->get('id_otlet');
-        $data = $this->db->query("SELECT * FROM notifikasi WHERE id_otlet = '$id'")->result_array();
+        $data = $this->db->query("SELECT * FROM notifikasi WHERE id_otlet = '$id' ORDER BY created_at DESC")->result_array();
         if ($data) {
             $this->response(
                 [
