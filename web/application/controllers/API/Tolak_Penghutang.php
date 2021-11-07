@@ -4,7 +4,7 @@ use chriskacerguis\RestServer\RestController;
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Konfirmasi_Penghutang extends RestController
+class Tolak_Penghutang extends RestController
 {
 
     public function __construct()
@@ -16,7 +16,6 @@ class Konfirmasi_Penghutang extends RestController
     {
         $id_notif = $this->input->post('id_notif');
         $now = date('Y-m-d H:i:s');
-        $limittanggal = date('Y-m-d', strtotime('+1 month', strtotime($now)));
         $otletnotif = $this->ApiModel->otletnotif($id_notif);
         $no_ktp = $otletnotif['no_ktp'];
         $penghutang = $this->ApiModel->getpenghutangdetail($no_ktp);
@@ -24,19 +23,12 @@ class Konfirmasi_Penghutang extends RestController
 
         $data = [
             'id_otlet' => $id_otlet,
-            'status' => 1,
+            'status' => 2,
             'updated_at' => $now,
-        ];
-        $datapenghutang = [
-            'status' => 1,
-            'updated_at' => $now,
-            'limit_tanggal' => $limittanggal,
         ];
         $query = $this->ApiModel->ubah($data, $id_notif, 'id_notif', 'notifikasi');
-        $querypenghutang = $this->ApiModel->ubah($datapenghutang, $no_ktp, 'no_ktp', 'hutang');
-        if ($query && $querypenghutang) {
+        if ($query) {
             $nama_penghutang = $penghutang['nama_penghutang'];
-
             if ($id_otlet == '1') {
                 $otletnya = 'Jember';
             } elseif ($id_otlet == '2') {
@@ -44,15 +36,16 @@ class Konfirmasi_Penghutang extends RestController
             } elseif ($id_otlet == '3') {
                 $otletnya = 'Bali';
             }
-            $this->sendNotification("/topics/$id_otlet", "Verifikasi penghutang baru", "Penghutang baru dengan nama $nama_penghutang telah di vefirikasi oleh admin di otlet $otletnya");
+            $this->sendNotification("/topics/$id_otlet", "Verifikasi penghutang baru", "Penghutang baru dengan nama $nama_penghutang telah di tolak oleh admin di otlet $otletnya");
+            $this->ApiModel->hapus($no_ktp, 'no_ktp', 'hutang');
             $this->response([
                 'status' => true,
-                'pesan' => 'Berhasil verifikasi penghutang'
+                'pesan' => 'Berhasil tolak penghutang'
             ], RestController::HTTP_OK);
         } else {
             $this->response([
                 'status' => false,
-                'pesan' => 'Gagal verifikasi penghutang'
+                'pesan' => 'Gagal tolak penghutang'
             ], RestController::HTTP_NOT_FOUND);
         }
     }
