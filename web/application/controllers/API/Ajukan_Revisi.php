@@ -33,7 +33,7 @@ class Ajukan_Revisi extends RestController
                 'id_tujuan' => $id_usernya,
                 'judul' => "Pengajuan Revisi Transaksi Penjualan",
                 'deskripsi' =>  "Pengajuan revisi transaksi penjualan dengan id $id_penjualan dengan nama $nama di otlet $otletnya",
-                'status' =>  0,
+                'status' =>  3,
                 'created_at' => date('Y-m-d H:i:s'),
             ];
             $this->ApiModel->insert('notifikasi', $arr2);
