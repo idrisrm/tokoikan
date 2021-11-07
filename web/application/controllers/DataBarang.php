@@ -12,10 +12,20 @@ class DataBarang extends CI_Controller
         $this->load->model('Models');
         $this->load->model('API/Api_Model', 'ApiModel');
     }
-    public function index()
+    public function bali()
     {
-        $data['barang'] = $this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori')->get_where('barang', ['barang.status_barang' => 'on'])->result_array();
-        $this->load->view('DataBarang/data', $data);
+        $data['barang'] = $this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori')->get_where('barang', ['barang.status_barang' => 'on', 'id_otlet' => 3])->result_array();
+        $this->load->view('DataBarang/bali', $data);
+    }
+    public function jember()
+    {
+        $data['barang'] = $this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori')->get_where('barang', ['barang.status_barang' => 'on', 'id_otlet' => 1])->result_array();
+        $this->load->view('DataBarang/jember', $data);
+    }
+    public function situbondo()
+    {
+        $data['barang'] = $this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori')->get_where('barang', ['barang.status_barang' => 'on', 'id_otlet' => 2])->result_array();
+        $this->load->view('DataBarang/situbondo', $data);
     }
 
 

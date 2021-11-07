@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="sidenav-menu-heading">Master Data</div>
-                <a class="nav-link" href="<?= base_url('DataBarang') ?>">
+                <a class="nav-link" href="<?= base_url('DataBarang/jember') ?>">
                     <div class="nav-link-icon"><i data-feather="box"></i></div>
                     Data Barang
                 </a>
