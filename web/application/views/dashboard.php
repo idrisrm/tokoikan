@@ -46,7 +46,7 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="mr-3">
                                             <div class="text-white-75 small">Pengajuan Hutang</div>
-                                            <div class="text-lg font-weight-bold">2</div>
+                                            <div class="text-lg font-weight-bold"><?= $pengajuan?></div>
                                             <!-- <input class="form-control" id="wait" name="wait" type="text" value="<?= $menungguDashboard ?>" hidden />
                                             <input class="form-control" id="proses" name="proses" type="text" value="<?= $prosesDashboard ?>" hidden />
                                             <input class="form-control" id="selesai" name="selesai" type="text" value="<?= $selesaiDashboard ?>" hidden />
@@ -70,7 +70,7 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="mr-3">
                                             <div class="text-white-75 small">Pengajuan Revisi Transaksi</div>
-                                            <div class="text-lg font-weight-bold">10</div>
+                                            <div class="text-lg font-weight-bold"><?= $revisi?></div>
                                         </div>
                                         <i class="feather-xl text-white-50" data-feather="activity"></i>
                                     </div>
@@ -246,7 +246,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-4">
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-4">
                             <div class="card card-header-actions h-100">
                                 <div class="card-header">
                                     Grafik Pengaduan (Nama OPD)
@@ -262,7 +262,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-4">

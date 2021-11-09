@@ -11,7 +11,11 @@ class Dashboard extends CI_Controller
 	}
     public function index()
     {
-        $this->load->view('dashboard');
+        $data['pengajuan'] = $this->db->get_where('hutang', ['status' => 0])->num_rows();
+
+        $data['revisi'] = $this->db->get_where('penjualan', ['pengajuan' => 'revisi'])->num_rows();
+
+        $this->load->view('dashboard', $data);
     }
 }
 
