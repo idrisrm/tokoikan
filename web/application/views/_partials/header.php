@@ -92,6 +92,10 @@
                     </div>
                 </h6>
                 <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="<?= base_url('Pengaturan')?>">
+                    <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
+                    Pengaturan
+                </a>
                 <a class="dropdown-item" href="onclick="confirm_modal() data-toggle="modal" data-target="#modalLogout">
                     <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
                     Logout
