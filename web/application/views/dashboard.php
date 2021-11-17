@@ -222,7 +222,7 @@
                 // labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
                 labels: cData.bulan,
                 datasets: [{
-                    label: "",
+                    label: "Penjualan ",
                     backgroundColor: "rgba(6, 121, 79, 1)",
                     hoverBackgroundColor: "rgba(6, 121, 79, 0.9)",
                     borderColor: "rgba(6, 121, 79, 1)",
@@ -257,7 +257,7 @@
                     yAxes: [{
                         ticks: {
                             min: 0,
-                            max: 10,
+                            max: 1500,
                             maxTicksLimit: 5,
                             padding: 10,
                             // Include a dollar sign in the ticks
@@ -313,7 +313,7 @@
                 // labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
                 labels: cData2.bulan,
                 datasets: [{
-                    label: "",
+                    label: "Penjualan ",
                     backgroundColor: "rgba(6, 121, 79, 1)",
                     hoverBackgroundColor: "rgba(6, 121, 79, 0.9)",
                     borderColor: "rgba(6, 121, 79, 1)",
@@ -348,7 +348,7 @@
                     yAxes: [{
                         ticks: {
                             min: 0,
-                            max: 10,
+                            max: 1500,
                             maxTicksLimit: 5,
                             padding: 10,
                             // Include a dollar sign in the ticks
@@ -404,7 +404,7 @@
                 // labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
                 labels: cData3.bulan,
                 datasets: [{
-                    label: "",
+                    label: "Penjualan ",
                     backgroundColor: "rgba(6, 121, 79, 1)",
                     hoverBackgroundColor: "rgba(6, 121, 79, 0.9)",
                     borderColor: "rgba(6, 121, 79, 1)",
@@ -439,7 +439,7 @@
                     yAxes: [{
                         ticks: {
                             min: 0,
-                            max: 10,
+                            max: 1500,
                             maxTicksLimit: 5,
                             padding: 10,
                             // Include a dollar sign in the ticks
