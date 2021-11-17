@@ -16,9 +16,9 @@
                         <div class="page-header-content">
                             <h1 class="page-header-title">
                                 <div class="page-header-icon"><i data-feather="users"></i></div>
-                                <span>Pengajuan Hutang</span>
+                                <span>Revisi Transaksi</span>
                             </h1>
-                            <div class="page-header-subtitle">Pengajuan Hutang</div>
+                            <div class="page-header-subtitle">Revisi Transaksi</div>
                         </div>
                     </div>
                 </div>
