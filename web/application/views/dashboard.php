@@ -20,7 +20,7 @@
                                         </div>
                                         Dashboard
                                     </h1>
-                                    <div class="page-header-subtitle">Dashboard Grafik Penjuaalan</div>
+                                    <div class="page-header-subtitle">Dashboard Grafik Penjualan</div>
                                 </div>
                                 <!-- <div class="col-12 col-xl-auto">
                                     <div class="card bg-white text-black mb-4">
@@ -147,7 +147,7 @@
                         <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-4">
                             <div class="card card-header-actions h-100">
                                 <div class="card-header">
-                                    Grafik Penjualan Daerah Bondowoso
+                                    Grafik Penjualan Daerah Bali
                                     <!-- <div class="no-caret">
                                         <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#modalFilterDinas">
                                             <i data-feather="filter"></i>
@@ -174,13 +174,14 @@
     <script>
         var ctx = document.getElementById("GrafikJember");
         var cData = JSON.parse(`<?php echo $grafikjember; ?>`);
+        // console.log(cData.jumlah);
         var myBarChart = new Chart(ctx, {
             type: "bar",
             data: {
                 // labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
                 labels: cData.bulan,
                 datasets: [{
-                    label: "Penjualan ",
+                    label: "Jumlah Penjualan ",
                     backgroundColor: "rgba(6, 121, 79, 1)",
                     hoverBackgroundColor: "rgba(6, 121, 79, 0.9)",
                     borderColor: "rgba(6, 121, 79, 1)",
@@ -271,7 +272,7 @@
                 // labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
                 labels: cData2.bulan,
                 datasets: [{
-                    label: "Penjualan ",
+                    label: "Jumlah Penjualan ",
                     backgroundColor: "rgba(6, 121, 79, 1)",
                     hoverBackgroundColor: "rgba(6, 121, 79, 0.9)",
                     borderColor: "rgba(6, 121, 79, 1)",
@@ -362,7 +363,7 @@
                 // labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
                 labels: cData3.bulan,
                 datasets: [{
-                    label: "Penjualan ",
+                    label: "Jumlah Penjualan ",
                     backgroundColor: "rgba(6, 121, 79, 1)",
                     hoverBackgroundColor: "rgba(6, 121, 79, 0.9)",
                     borderColor: "rgba(6, 121, 79, 1)",

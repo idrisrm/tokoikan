@@ -21,14 +21,14 @@ class Dashboard extends CI_Controller
         if($jember){
             foreach ($jember as $jember) {
                 $data['bulan'][] = $jember['month_name'];
-                $data['jumlah'][] = (int)$jember['count'];
+                $data['jumlah'][] = $jember['count'];
             }
         }else{
                 $data['bulan'][] = '-';
                 $data['jumlah'][] = 0;
         }
 
-        // var_dump($jember);die;
+        // var_dump(json_encode($data));die;
         $data['grafikjember'] = json_encode($data);
 
         $situbondo =  $this->db->query("SELECT SUM(qty) as count,MONTHNAME(detail_penjualan.created_at) as month_name FROM detail_penjualan, penjualan WHERE penjualan.id_otlet = 2 AND penjualan.pengajuan = '' AND detail_penjualan.id_penjualan = penjualan.id_penjualan AND YEAR(detail_penjualan.created_at) = '" . date('Y') . "' GROUP BY YEAR(detail_penjualan.created_at), MONTH(detail_penjualan.created_at)")->result_array();
@@ -36,7 +36,7 @@ class Dashboard extends CI_Controller
         if ($situbondo) {
             foreach ($situbondo as $situbondo) {
                 $datasitubondo['bulan'][] = $situbondo['month_name'];
-                $datasitubondo['jumlah'][] = (int)$situbondo['count'];
+                $datasitubondo['jumlah'][] = $situbondo['count'];
             }
         } else {
             $datasitubondo['bulan'][] = '-';
@@ -55,7 +55,7 @@ class Dashboard extends CI_Controller
         if ($bali) {
             foreach ($bali as $bali) {
                 $databali['bulan'][] = $bali['month_name'];
-                $databali['jumlah'][] = (int)$bali['count'];
+                $databali['jumlah'][] = $bali['count'];
             }
         } else {
             $databali['bulan'][] = '-';
