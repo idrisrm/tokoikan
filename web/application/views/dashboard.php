@@ -20,7 +20,7 @@
                                         </div>
                                         Dashboard
                                     </h1>
-                                    <div class="page-header-subtitle">Dashboard Grafik Pengaduan</div>
+                                    <div class="page-header-subtitle">Dashboard Grafik Penjuaalan</div>
                                 </div>
                                 <!-- <div class="col-12 col-xl-auto">
                                     <div class="card bg-white text-black mb-4">
@@ -47,19 +47,12 @@
                                         <div class="mr-3">
                                             <div class="text-white-75 small">Pengajuan Hutang</div>
                                             <div class="text-lg font-weight-bold"><?= $pengajuan ?></div>
-                                            <!-- <input class="form-control" id="wait" name="wait" type="text" value="<?= $menungguDashboard ?>" hidden />
-                                            <input class="form-control" id="proses" name="proses" type="text" value="<?= $prosesDashboard ?>" hidden />
-                                            <input class="form-control" id="selesai" name="selesai" type="text" value="<?= $selesaiDashboard ?>" hidden />
-                                            <input class="form-control" id="tindak" name="tindak" type="text" value="<?= $konfirmasiDashboard ?>" hidden />
-                                            <input class="form-control" id="tolak" name="tolak" type="text" value="<?= $tolakDashboard ?>" hidden />
-                                            <input class="form-control" id="real" name="real" type="text" value="<?= $realDashboard ?>" hidden />
-                                            <input class="form-control" id="real1" name="real1" type="text" value="<?= $real ?>" hidden/> -->
                                         </div>
                                         <i class="feather-xl text-white-50" data-feather="activity"></i>
                                     </div>
                                 </div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="<?= base_url('Pengaduan/data_menunggu') ?>">Lihat Detail</a>
+                                    <a class="small text-white stretched-link" href="<?= base_url('DataPenghutang/PengajuanHutang') ?>">Lihat Detail</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
@@ -76,7 +69,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="<?= base_url('Pengaduan/data_proses') ?>">Lihat Detail</a>
+                                    <a class="small text-white stretched-link" href="<?= base_url('RevisiTransaksi/index') ?>">Lihat Detail</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
@@ -117,50 +110,15 @@
                         </div> -->
                     </div>
                     <div class="row">
-                        <div class="col-xxl-12 col-xl-12 mb-4">
-                            <div class="card card-header-actions h-100">
-                                <div class="card-header">
-                                    Persentase Status Laporan Pengaduan
-                                </div>
-                                <div class="card-body">
-                                    <h4 class="small">
-                                        Masuk
-                                        <!-- (status : hoax/real (menunggu)) -->
-                                        <span class="float-right font-weight-bold">100%</span>
-                                    </h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-blue" role="progressbar" style="width: 100%" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small">
-                                        Menunggu
-                                        <!--  (status : disposisi + tindak lanjut) -->
-                                        <span class="float-right font-weight-bold"> 100%</span>
-                                    </h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 100%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small">
-                                        Selesai
-                                        <!--  (statuse : online) -->
-                                        <span class="float-right font-weight-bold">90%</span>
-                                    </h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 90%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-4">
                             <div class="card card-header-actions h-100">
                                 <div class="card-header">
                                     Grafik Penjualan Daerah Jember
-                                    <div class="no-caret">
+                                    <!-- <div class="no-caret">
                                         <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#modalFilterDinas">
                                             <i data-feather="filter"></i>
                                         </a>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-bar">
@@ -173,11 +131,11 @@
                             <div class="card card-header-actions h-100">
                                 <div class="card-header">
                                     Grafik Penjualan Daerah Situbondo
-                                    <div class="no-caret">
+                                    <!-- <div class="no-caret">
                                         <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#modalFilterDinas">
                                             <i data-feather="filter"></i>
                                         </a>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-bar">
@@ -190,11 +148,11 @@
                             <div class="card card-header-actions h-100">
                                 <div class="card-header">
                                     Grafik Penjualan Daerah Bondowoso
-                                    <div class="no-caret">
+                                    <!-- <div class="no-caret">
                                         <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#modalFilterDinas">
                                             <i data-feather="filter"></i>
                                         </a>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-bar">
