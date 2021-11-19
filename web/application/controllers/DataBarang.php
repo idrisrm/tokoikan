@@ -143,6 +143,7 @@ class DataBarang extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data['kategori'] = $this->db->get('kategori')->result_array();
             $data['otlet'] = $this->db->get('otlet')->result_array();
+            $data['satuanbarang'] = $this->db->get('satuan')->result_array();
             $this->load->view('DataBarang/tambah', $data);
         } else {
             $data = [

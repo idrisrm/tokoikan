@@ -73,7 +73,7 @@
                                             <tr>
                                                 <td><?= $i; ?></td>
                                                 <td><?= $data['nama_barang'] ?></td>
-                                                <td><?= $data['qty'] ?></td>
+                                                <td><?= $data['qty'] ?> <?= $data['satuan']?></td>
                                                 <td>Rp. <?= number_format($data['harga'], 0, ",", ".") ?></td>
                                                 <td>Rp. <?= number_format($data['total_harga'], 0, ",", ".") ?></td>
                                                 <td><?= $data['status'] == 1 ? 'Cash' : 'Hutang' ?></td>

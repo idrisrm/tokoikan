@@ -58,7 +58,7 @@
                                             <tr>
                                                 <td><?= $i; ?></td>
                                                 <td><?= $data['nama_barang'] ?></td>
-                                                <td><?= $data['qty'] ?></td>
+                                                <td><?= $data['qty'] ?> <?= $data['satuan']?></td>
                                                 <td>Rp. <?= number_format($data['total_harga'], 0, ",", ".") ?></td>
                                             </tr>
                                         <?php $i++;

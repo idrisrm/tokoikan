@@ -67,7 +67,7 @@
                                                 <td><?= $i; ?></td>
                                                 <td><?= $data['nama_barang'] ?></td>
                                                 <td><?= $data['nama_kategori'] ?></td>
-                                                <td><?= $data['stok'] ?> Kg</td>
+                                                <td><?= $data['stok'] ?> <?= $data['satuan']?></td>
                                                 <td>Rp. <?= number_format($data['harga'], 0, ",", ".") ?></td>
                                                 <td>
                                                     <a class="btn btn-datatable btn-icon btn-transparent-dark" href="<?= base_url('DataBarang/stok/' . $data['id_barang']) ?>">

@@ -70,6 +70,10 @@
                     <div class="nav-link-icon"><i data-feather="grid"></i></div>
                     Data Kategori Barang
                 </a>
+                <a class="nav-link" href="<?= base_url('DataSatuan') ?>">
+                    <div class="nav-link-icon"><i data-feather="grid"></i></div>
+                    Data Satuan Barang
+                </a>
                 <!-- <a class="nav-link" href="<?= base_url('Kecamatan/data') ?>">
                     <div class="nav-link-icon"><i data-feather="home"></i></div>
                     Kecamatan
