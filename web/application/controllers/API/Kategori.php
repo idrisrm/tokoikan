@@ -13,7 +13,7 @@ class Kategori extends RestController
     }
     public function index_get()
     {
-        $data = $this->db->query("SELECT * FROM kategori")->result_array();
+        $data = $this->db->query("SELECT * FROM kategori WHERE status = 'on'")->result_array();
         if ($data) {
             $this->response(
                 [

@@ -17,27 +17,41 @@ class Update_Qty extends RestController
         $id_detail = $this->input->post('id_detail');
         $qty = $this->input->post('qty');
         $total_harga = $this->input->post('total_harga');
-        $data = [
-            'qty' => $qty,
-            'total_harga' => $total_harga
-        ];
-        $query = $this->ApiModel->ubah($data, $id_detail, 'id_detail', 'detail_penjualan');
-        if ($query) {
-            $this->response(
-                [
-                    'status' => true,
-                    'pesan' => 'Berhasil ubah qty',
-                ],
-                RestController::HTTP_OK
-            );
-        } else {
+        $a = $this->db->query("SELECT * FROM detail_penjualan WHERE id_detail = '$id_detail'")->row_array();
+        $qtydetail = $a['qty'];
+        $id_barang = $a['id_barang'];
+        $barang = $this->db->query("SELECT * FROM barang WHERE id_barang = '$id_barang'")->row_array();
+        if ($barang['stok'] - $qtydetail < 0) {
             $this->response(
                 [
                     'status' => false,
-                    'pesan' => 'Gagal ubah qty',
+                    'pesan' => 'Gagal ubah qty stok barang tidak cukup',
                 ],
                 RestController::HTTP_FORBIDDEN
             );
+        } else {
+            $data = [
+                'qty' => $qty,
+                'total_harga' => $total_harga
+            ];
+            $query = $this->ApiModel->ubah($data, $id_detail, 'id_detail', 'detail_penjualan');
+            if ($query) {
+                $this->response(
+                    [
+                        'status' => true,
+                        'pesan' => 'Berhasil ubah qty',
+                    ],
+                    RestController::HTTP_OK
+                );
+            } else {
+                $this->response(
+                    [
+                        'status' => false,
+                        'pesan' => 'Gagal ubah qty',
+                    ],
+                    RestController::HTTP_FORBIDDEN
+                );
+            }
         }
     }
 }

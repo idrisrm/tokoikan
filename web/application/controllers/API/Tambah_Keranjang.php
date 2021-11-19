@@ -33,25 +33,33 @@ class Tambah_Keranjang extends RestController
                         'pesan' => 'Gagal tambah ke keranjang, barang sudah ada di keranjang'
                     ], RestController::HTTP_FORBIDDEN);
                 } else {
-                    $datadetail = [
-                        'id_penjualan' => $id_penjualanada,
-                        'id_barang' => $id_barang,
-                        'qty' => $qty,
-                        'total_harga' => $totalharga,
-                        'catatan' => $catatan,
-                        'created_at' => $now,
-                    ];
-                    $querydetail = $this->ApiModel->insert('detail_penjualan', $datadetail);
-                    if ($querydetail) {
-                        $this->response([
-                            'status' => true,
-                            'pesan' => 'Berhasil tambah ke keranjang'
-                        ], RestController::HTTP_OK);
-                    } else {
+                    $barang = $this->db->query("SELECT * FROM barang WHERE id_barang = '$id_barang'")->row_array();
+                    if ($barang['stok'] - $qty < 0) {
                         $this->response([
                             'status' => false,
-                            'pesan' => 'Gagal tambah ke keranjang'
+                            'pesan' => 'Gagal tambah ke keranjang stok barang tidak cukup'
                         ], RestController::HTTP_FORBIDDEN);
+                    } else {
+                        $datadetail = [
+                            'id_penjualan' => $id_penjualanada,
+                            'id_barang' => $id_barang,
+                            'qty' => $qty,
+                            'total_harga' => $totalharga,
+                            'catatan' => $catatan,
+                            'created_at' => $now,
+                        ];
+                        $querydetail = $this->ApiModel->insert('detail_penjualan', $datadetail);
+                        if ($querydetail) {
+                            $this->response([
+                                'status' => true,
+                                'pesan' => 'Berhasil tambah ke keranjang'
+                            ], RestController::HTTP_OK);
+                        } else {
+                            $this->response([
+                                'status' => false,
+                                'pesan' => 'Gagal tambah ke keranjang'
+                            ], RestController::HTTP_FORBIDDEN);
+                        }
                     }
                 }
             }
@@ -72,18 +80,26 @@ class Tambah_Keranjang extends RestController
                 'catatan' => $catatan,
                 'created_at' => $now,
             ];
-            $query = $this->ApiModel->insert('penjualan', $data);
-            $querydetail = $this->ApiModel->insert('detail_penjualan', $datadetail);
-            if ($query && $querydetail) {
-                $this->response([
-                    'status' => true,
-                    'pesan' => 'Berhasil tambah ke keranjang'
-                ], RestController::HTTP_OK);
-            } else {
+            $barang = $this->db->query("SELECT * FROM barang WHERE id_barang = '$id_barang'")->row_array();
+            if ($barang['stok'] - $qty < 0) {
                 $this->response([
                     'status' => false,
-                    'pesan' => 'Gagal tambah ke keranjang'
+                    'pesan' => 'Gagal tambah ke keranjang stok barang tidak cukup'
                 ], RestController::HTTP_FORBIDDEN);
+            } else {
+                $query = $this->ApiModel->insert('penjualan', $data);
+                $querydetail = $this->ApiModel->insert('detail_penjualan', $datadetail);
+                if ($query && $querydetail) {
+                    $this->response([
+                        'status' => true,
+                        'pesan' => 'Berhasil tambah ke keranjang'
+                    ], RestController::HTTP_OK);
+                } else {
+                    $this->response([
+                        'status' => false,
+                        'pesan' => 'Gagal tambah ke keranjang'
+                    ], RestController::HTTP_FORBIDDEN);
+                }
             }
         }
     }

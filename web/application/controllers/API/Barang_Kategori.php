@@ -15,7 +15,7 @@ class Barang_Kategori extends RestController
     {
         $id = $this->get('id_kategori');
         $id_otlet = $this->get('id_otlet');
-        $data = $this->db->query("SELECT barang.*, kategori.nama_kategori FROM barang, kategori WHERE barang.id_kategori = kategori.id_kategori AND barang.id_kategori = '$id' AND barang.id_otlet = '$id_otlet' AND barang.status_barang = 'on'")->result_array();
+        $data = $this->db->query("SELECT barang.*, kategori.nama_kategori FROM barang, kategori WHERE barang.id_kategori = kategori.id_kategori AND barang.id_kategori = '$id' AND barang.id_otlet = '$id_otlet' AND barang.status_barang = 'on' AND barang.stok > 0")->result_array();
         if ($data) {
             $this->response(
                 [
@@ -37,11 +37,3 @@ class Barang_Kategori extends RestController
         }
     }
 }
-
-
-
-
-
-
-
-        // $data = $this->db->query("SELECT barang.nama_barang, barang.harga, barang.stok, kategori.nama_kategori FROM barang, kategori WHERE barang.id_kategori = kategori.id_kategori AND kategori.id_kategori = '$id'")->result_array();
