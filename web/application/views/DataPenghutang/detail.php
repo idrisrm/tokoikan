@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6 col-sm-12">
-                                            <label>Foto Pengaduan</label>
+                                            <label>Foto KTP Penghutang</label>
                                             <div>
                                                 <img class="img-fluid mb-2" style="width: 600px;" src="<?= base_url($hutang['foto_ktp']) ?>" alt="" />
                                             </div>
