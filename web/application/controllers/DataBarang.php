@@ -75,6 +75,7 @@ class DataBarang extends CI_Controller
             $nama = $data['barang']['nama_barang'];
             $stok = $this->input->post('stok');
             $otlet = $data['barang']['id_otlet'];
+            $satuan = $data['barang']['satuan'];
             $data = [
                 'id_tambah' => $kodetambah,
                 'id_barang' => $id,
@@ -85,7 +86,7 @@ class DataBarang extends CI_Controller
             ];
             $insert = $this->db->insert('tambah_stok', $data);
             if ($insert) {
-                $this->sendNotification("/topics/$otlet", "Penambahan Stok Baru", "Stok $nama baru saja ditambahkan oleh admin sebanyak $stok kg");
+                $this->sendNotification("/topics/$otlet", "Penambahan Stok Baru", "Stok $nama baru saja ditambahkan oleh admin sebanyak $stok $satuan");
                 $kodeku = $this->ApiModel->randomkode(15);
                 $arr2 = [
                     'id_notif' => $kodeku,
@@ -93,7 +94,7 @@ class DataBarang extends CI_Controller
                     'id_otlet' => $otlet,
                     'id_tambah_barang' => $kodetambah,
                     'judul' => "Penambahan Stok Baru",
-                    'deskripsi' =>  "Stok $nama baru saja ditambahkan oleh admin sebanyak $stok kg",
+                    'deskripsi' =>  "Stok $nama baru saja ditambahkan oleh admin sebanyak $stok $satuan",
                     'status' =>  0,
                     'created_at' => date('Y-m-d H:i:s'),
                 ];

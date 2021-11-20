@@ -23,6 +23,7 @@ class Konfirmasi_Barang extends RestController
         $tambahbarangdata = $this->db->query("SELECT * FROM tambah_stok WHERE id_tambah = '$id_tambah_barang'")->row_array();
         $id_barang = $tambahbarangdata['id_barang'];
         $stok = $this->db->query("SELECT * FROM barang WHERE id_barang = '$id_barang'")->row_array();
+        $barangnya = $stok['nama_barang'];
         $data = [
             'status' => 1,
             'updated_at' => $now,
@@ -46,7 +47,7 @@ class Konfirmasi_Barang extends RestController
             } elseif ($id_otlet == '3') {
                 $otletnya = 'Bali';
             }
-            $this->sendNotification($token, "Verifikasi stok dari karyawan", "Stok telah di verifikasi oleh karyawan di otlet $otletnya");
+            $this->sendNotification($token, "Verifikasi stok dari karyawan", "Stok barang $barangnya telah di verifikasi oleh karyawan di otlet $otletnya");
 
             $this->response([
                 'status' => true,
