@@ -61,14 +61,14 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                        <label class="small mb-1" for="otlet">Satuan Barang</label>
-                                        <select class="form-control" id="otlet" name="otlet">
+                                        <label class="small mb-1" for="satuan">Satuan Barang</label>
+                                        <select class="form-control" id="satuan" name="satuan">
                                             <option value="">--Pilih Satuan--</option>
                                             <?php foreach ($satuanbarang as $data) { ?>
                                                 <option value="<?= $data['nama_satuan'] ?>"><?= $data['nama_satuan'] ?></option>
                                             <?php } ?>
                                         </select>
-                                        <?= form_error('otlet', '<small class="text-danger pl-2">', '</small>'); ?>
+                                        <?= form_error('satuan', '<small class="text-danger pl-2">', '</small>'); ?>
                                     </div>
                                     <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                         <label class="small mb-1" for="harga">Harga</label>

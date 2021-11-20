@@ -137,7 +137,7 @@ class DataBarang extends CI_Controller
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('otlet', 'Otlet', 'required');
         $this->form_validation->set_rules('kategori', 'Kategori', 'required');
-        // $this->form_validation->set_rules('stok', 'Stok', 'required|numeric');
+        $this->form_validation->set_rules('satuan', 'Satuan Barang', 'required');
         $this->form_validation->set_rules('harga', 'Harga', 'required|numeric');
 
         if ($this->form_validation->run() == false) {
@@ -152,7 +152,7 @@ class DataBarang extends CI_Controller
                 'id_kategori' => $this->input->post('kategori'),
                 'id_otlet' => $this->input->post('otlet'),
                 'harga' => $this->input->post('harga'),
-                // 'stok' => $this->input->post('stok'),
+                'satuan' => $this->input->post('satuan'),
                 'created_at' => date("Y-m-d h:i:sa"),
                 'status_barang' => 'on'
             ];
