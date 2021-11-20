@@ -6,3 +6,4 @@ function belumlogin()
         redirect("Auth");
     }
 }
+
