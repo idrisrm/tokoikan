@@ -26,24 +26,51 @@ class Bayar_Hutang extends RestController
         $datahutang = [
             'total_hutang' => $hutangnya['total_hutang'] - $bayar,
         ];
-        $querybayar = $this->ApiModel->insert('bayar_hutang', $databayar);
-        $queryhutang = $this->ApiModel->ubah($datahutang, $no_ktp, 'no_ktp', 'hutang');
-        if ($querybayar && $queryhutang) {
-            $this->response(
-                [
-                    'status' => true,
-                    'pesan' => 'Berhasil bayar hutang',
-                ],
-                RestController::HTTP_OK
-            );
+        $datahutangstatus = [
+            'total_hutang' => $hutangnya['total_hutang'] - $bayar,
+            'status' => 1,
+        ];
+        $total = $hutangnya['total_hutang'] - $bayar;
+        if ($total < 10000000) {
+            $querybayar = $this->ApiModel->insert('bayar_hutang', $databayar);
+            $queryhutang = $this->ApiModel->ubah($datahutangstatus, $no_ktp, 'no_ktp', 'hutang');
+            if ($querybayar && $queryhutang) {
+                $this->response(
+                    [
+                        'status' => true,
+                        'pesan' => 'Berhasil bayar hutang',
+                    ],
+                    RestController::HTTP_OK
+                );
+            } else {
+                $this->response(
+                    [
+                        'status' => false,
+                        'pesan' => 'Gagal bayar hutang terjadi kesalahan',
+                    ],
+                    RestController::HTTP_FORBIDDEN
+                );
+            }
         } else {
-            $this->response(
-                [
-                    'status' => false,
-                    'pesan' => 'Gagal bayar hutang terjadi kesalahan',
-                ],
-                RestController::HTTP_FORBIDDEN
-            );
+            $querybayar = $this->ApiModel->insert('bayar_hutang', $databayar);
+            $queryhutang = $this->ApiModel->ubah($datahutang, $no_ktp, 'no_ktp', 'hutang');
+            if ($querybayar && $queryhutang) {
+                $this->response(
+                    [
+                        'status' => true,
+                        'pesan' => 'Berhasil bayar hutang',
+                    ],
+                    RestController::HTTP_OK
+                );
+            } else {
+                $this->response(
+                    [
+                        'status' => false,
+                        'pesan' => 'Gagal bayar hutang terjadi kesalahan',
+                    ],
+                    RestController::HTTP_FORBIDDEN
+                );
+            }
         }
     }
 }
