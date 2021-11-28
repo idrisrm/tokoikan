@@ -13,7 +13,7 @@ class Riwayat_Admin extends RestController
     }
     public function index_get()
     {
-        $data = $this->db->query("SELECT penjualan.*, otlet.wilayah FROM penjualan, otlet WHERE penjualan.id_otlet = otlet.id_otlet AND penjualan.status != 0")->result_array();
+        $data = $this->db->query("SELECT penjualan.*, otlet.wilayah FROM penjualan, otlet WHERE penjualan.id_otlet = otlet.id_otlet AND penjualan.status != 0 ORDER BY penjualan.created_at DESC")->result_array();
         if ($data) {
             $this->response(
                 [

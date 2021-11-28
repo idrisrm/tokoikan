@@ -14,7 +14,7 @@ class Riwayat extends RestController
     public function index_get()
     {
         $id = $this->get('id_penjual');
-        $data = $this->db->query("SELECT * FROM penjualan WHERE id_penjual = '$id' AND status != 0")->result_array();
+        $data = $this->db->query("SELECT * FROM penjualan WHERE id_penjual = '$id' AND status != 0 ORDER BY created_at DESC")->result_array();
         if ($data) {
             $this->response(
                 [
