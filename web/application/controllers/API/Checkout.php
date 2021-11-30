@@ -17,6 +17,7 @@ class Checkout extends RestController
         $id_penjualan = $this->input->post('id_penjualan');
         $status = $this->input->post('status');
         $subtotal = $this->input->post('subtotal');
+        $bayar = $this->input->post('bayar');
         $no_ktp = $this->input->post('no_ktp');
         if ($status == '1') {
             $ubahstok = $this->db->query("SELECT * FROM detail_penjualan WHERE id_penjualan = '$id_penjualan'")->result_array();
@@ -34,6 +35,7 @@ class Checkout extends RestController
             $datapenjualan = [
                 'subtotal' => $subtotal,
                 'status' => $status,
+                'jumlah_pembayaran' => $bayar
             ];
             $querypenjualan = $this->ApiModel->ubah($datapenjualan, $id_penjualan, 'id_penjualan', 'penjualan');
             if ($querypenjualan) {
@@ -74,6 +76,7 @@ class Checkout extends RestController
                     'subtotal' => $subtotal,
                     'status' => $status,
                     'ktp_penghutang' => $no_ktp,
+                    'jumlah_pembayaran' => 0
                 ];
                 //ubah di hutang
                 $datahutang = [
@@ -124,6 +127,7 @@ class Checkout extends RestController
                     'subtotal' => $subtotal,
                     'status' => $status,
                     'ktp_penghutang' => $no_ktp,
+                    'jumlah_pembayaran' => 0
                 ];
                 //ubah di hutang
                 $datahutang = [
