@@ -70,7 +70,7 @@
                             Stok Produk
                             <!-- <span class="badge badge-primary-soft text-primary ml-auto">2</span> -->
                         </a>
-                        <a class="nav-link" href="<?= base_url('RevisiTransaksi') ?>">
+                        <a class="nav-link" href="<?= base_url('Peringkat') ?>">
                             <span class="badge badge-cyan mr-1">  </span>
                             Peringkat Produk Yang terjual
                             <!-- <span class="badge badge-primary-soft text-primary ml-auto">2</span> -->
@@ -114,7 +114,7 @@
         <div class="sidenav-footer">
             <div class="sidenav-footer-content">
                 <div class="sidenav-footer-subtitle">Log in sebagai:</div>
-                <div class="sidenav-footer-title"><?= $this->session->userdata('nama');?></div>
+                <div class="sidenav-footer-title"><?= $this->session->userdata('nama'); ?></div>
             </div>
         </div>
     </nav>
