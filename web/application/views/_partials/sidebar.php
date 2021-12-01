@@ -39,7 +39,7 @@
                 </a>
                 <div class="collapse show" id="collapsePengaduan" data-parent="#accordionSidenav">
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                        <a class="nav-link" href="<?= base_url('DataPenjualan/jember') ?>">
+                        <a class="nav-link" href="<?= base_url('Pengeluaran') ?>">
                             <span class="badge badge-success mr-1">  </span>
                             Arus kas
                             <!-- <span class="badge badge-primary-soft text-primary ml-auto">2</span> -->
