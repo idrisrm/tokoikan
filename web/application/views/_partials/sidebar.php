@@ -77,7 +77,7 @@
                         </a>
                     </nav>
                 </div>
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="<?= base_url('DataPembelian') ?>">
                     <div class="nav-link-icon"><i data-feather="shopping-bag"></i></div>
                     Pembelian Produk
                 </a>
@@ -88,6 +88,10 @@
                 <a class="nav-link" href="<?= base_url('Karyawan') ?>">
                     <div class="nav-link-icon"><i data-feather="users"></i></div>
                     Data Karyawan
+                </a>
+                <a class="nav-link" href="<?= base_url('Supplier') ?>">
+                    <div class="nav-link-icon"><i data-feather="users"></i></div>
+                    Data Supplier
                 </a>
                 <a class="nav-link" href="<?= base_url('DataKategori') ?>">
                     <div class="nav-link-icon"><i data-feather="grid"></i></div>
