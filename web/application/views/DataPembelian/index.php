@@ -32,11 +32,17 @@
                         <div class="card-header">Data Pembelian
                             <div class="no-caret">
                                 <div class="page-header-icon mt-2 ml-2">
-                                    <a href="<?= base_url("DataPembelian/keranjang"); ?>">
-                                        <i data-feather="shopping-cart"></i>
-                                    </a>
                                     <?php foreach ($keranjang as $k) : ?>
-                                        <div style="position: absolute; right: 8px; top: 8px; width: 20px; height: 20px; line-height: 20px; text-align: center; border-radius: 50%; font-size: 10px; color: #fff; background-color: #f53302;"><?= $k['total']; ?></div>
+                                        <?php if ($k['total'] > 0) : ?>
+                                            <a href="<?= base_url("DataPembelian/keranjang"); ?>">
+                                                <i data-feather="shopping-cart"></i>
+                                            </a>
+                                            <div style="position: absolute; right: 8px; top: 8px; width: 20px; height: 20px; line-height: 20px; text-align: center; border-radius: 50%; font-size: 10px; color: #fff; background-color: #f53302;"><?= $k['total']; ?></div>
+                                        <?php else : ?>
+                                            <a href="<?= base_url("DataPembelian/keranjang"); ?>">
+                                                <i data-feather="shopping-cart"></i>
+                                            </a>
+                                        <?php endif; ?>
                                     <?php endforeach; ?>
                                 </div>
                             </div>

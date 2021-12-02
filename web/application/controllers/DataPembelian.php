@@ -113,17 +113,36 @@ class DataPembelian extends CI_Controller
 
     public function hapuskeranjang($id)
     {
-        $query = $this->Models->hapus($id, 'id_detail_pembelian', 'detail_pembelian');
-        if ($query) {
-            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
-                        Berhasil hapus dari keranjang!
-                        </div>');
-            redirect('DataPembelian/keranjang');
+        $id_pem = $this->db->query("SELECT Distinct(id_pembelian) as idnya FROM detail_pembelian WHERE id_detail_pembelian = '$id'")->row_array();
+        $id_pembelian = $id_pem['idnya'];
+        $banyakbarang = $this->db->query("SELECT COUNT(id_pembelian) as banyak FROM detail_pembelian WHERE id_pembelian = '$id_pembelian'")->row_array();
+        if ($banyakbarang['banyak'] > 1) {
+            $query = $this->Models->hapus($id, 'id_detail_pembelian', 'detail_pembelian');
+            if ($query) {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+                            Berhasil hapus dari keranjang!
+                            </div>');
+                redirect('DataPembelian/keranjang');
+            } else {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
+                            Gagal hapus dari keranjang!
+                            </div>');
+                redirect('DataPembelian/keranjang');
+            }
         } else {
-            $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
-                        Gagal hapus dari keranjang!
-                        </div>');
-            redirect('DataPembelian/keranjang');
+            $query = $this->Models->hapus($id, 'id_detail_pembelian', 'detail_pembelian');
+            $querypembelian = $this->Models->hapus($id_pembelian, 'id_pembelian', 'pembelian');
+            if ($query && $querypembelian) {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+                            Berhasil hapus dari keranjang!
+                            </div>');
+                redirect('DataPembelian/keranjang');
+            } else {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
+                            Gagal hapus dari keranjang!
+                            </div>');
+                redirect('DataPembelian/keranjang');
+            }
         }
     }
 }
