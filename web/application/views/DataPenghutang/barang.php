@@ -23,7 +23,7 @@
                                             </a>
                                             <i data-feather="file-text"></i>
                                         </div>
-                                        Detail Penghutang
+                                        Barang yang dibeli oleh pelanggan
                                     </h1>
                                 </div>
                             </div>
@@ -32,68 +32,44 @@
                 </header>
                 <div class="container mt-4">
                     <nav class="nav nav-borders">
-                        <a class="nav-link active" href="">Detail Penghutang</a>
-                        <a class="nav-link " href="<?= base_url('DataPenghutang/DetailPembelian/' . $hutang['no_ktp'])?>">Detail Pembelian</a>
-                        <a class="nav-link " href="<?= base_url('DataPenghutang/DetailPembayaran/' . $hutang['no_ktp'])?>">Detail Pembayaran</a>
+                        <a class="nav-link active" href="">Barang yang dibeli oleh pelanggan</a>
                     </nav>
 
                     <hr class="mt-0 mb-4" />
                     <div class="card card-header-actions mx-auto mb-4">
-                        <div class="card-header">Data Penghutang</div>
+                        <div class="card-header">Barang yang dibeli oleh pelanggan</div>
                         <div class="col">
                             <?php echo $this->session->flashdata('pesan') ?>
                         </div>
                         <div class="card-body">
-                            <div class="sbp-preview">
-                                <div class="sbp-preview-content">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-6 col-sm-12">
-                                            <label>NO KTP</label>
-                                            <p><b><?= $hutang['no_ktp'] ?></b></p>
-                                        </div>
-                                        <div class="col-lg-4 col-sm-12">
-                                            <label>Nama Calon Penghutang</label>
-                                            <p><b><?= $hutang['nama_penghutang'] ?></b></p>
-                                        </div>
-                                        <div class="col-lg-4 col-sm-12">
-                                            <label>Otlet</label>
-                                            <p><b><?= $hutang['wilayah'] ?></b></p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6 col-sm-12">
-                                            <label>Foto KTP Penghutang</label>
-                                            <div>
-                                                <img class="img-fluid mb-2" style="width: 600px;" src="<?= base_url($hutang['foto_ktp']) ?>" alt="" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="datatable table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 20px;">No</th>
+                                            <th>Nama Barang</th>
+                                            <th>Jumlah</th>
+                                            <th>Total Harga</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 1;
+                                        foreach ($barang as $data) { ?>
+                                            <tr>
+                                                <td><?= $i; ?></td>
+                                                <td><?= $data['nama_barang'] ?></td>
+                                                <td><?= $data['qty'] ?> <?= $data['satuan']?></td>
+                                                <td>Rp. <?= number_format($data['total_harga'], 0, ",", ".") ?></td>
+                                            </tr>
+                                        <?php $i++;
+                                        } ?>
+                                    </tbody>
+                                </table>
                             </div>
-                            
-                            <div class="modal fade" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="tambahModalLabel">Konfirmasi</h5>
-                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">×</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Apakah Anda Yakin Ingin Mengkonfirmasi Pengajuan Ini?</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn btn-danger" type="button" data-dismiss="modal">Batal</button>
-                                            <a href="<?= base_url('DataPenghutang/konfirmasi/' . $hutang['no_ktp']) ?>" class="btn btn-primary">Simpan</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        
+
+
                         </div>
                     </div>
-                </div>
             </main>
             <footer class="footer mt-auto footer-light">
                 <?php $this->load->view('_partials/footer.php') ?>
