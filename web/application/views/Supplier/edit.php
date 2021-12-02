@@ -37,7 +37,16 @@
                                             <input class="form-control" id="alamat" name="alamat" type="text" placeholder="Masukkan Alamat" value="<?= $s['alamat'] ?>" />
                                             <?= form_error('alamat', '<small class="text-danger pl-2">', '</small>'); ?>
                                         </div>
-                                        <div class="form-group col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                        <div class="form-group col-xxl-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                            <label class="small mb-1" for="otlet">Otlet</label>
+                                            <select class="form-control" id="otlet" name="otlet">
+                                                <?php foreach ($otlet as $data) { ?>
+                                                    <option value="<?= $data['id_otlet'] ?>" <?= ($s['id_otlet'] == $data['id_otlet'] ? 'selected' : '') ?>><?= $data['wilayah'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                            <?= form_error('otlet', '<small class="text-danger pl-2">', '</small>'); ?>
+                                        </div>
+                                        <div class="form-group col-xxl-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                             <label class="small mb-1" for="status">Status</label>
                                             <select class="form-control" id="status" name="status">
                                                 <option value="on" <?= ($s['status'] == 'on' ? 'selected' : '') ?>>on</option>

@@ -59,7 +59,9 @@
                             </select> -->
                         </div>
                         <div class="col">
-                            <?php echo $this->session->flashdata('pesan') ?>
+                            <div id="pesan">
+                                <?php echo $this->session->flashdata('pesan') ?>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="datatable table-responsive">
@@ -67,17 +69,21 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 20px;">No</th>
+                                            <th>No. Invoice</th>
+                                            <th>Supplier</th>
                                             <th>Tanggal</th>
                                             <th>Total Harga</th>
                                             <th>Keterangan</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="hasil_supplier">
                                         <?php $i = 1;
                                         foreach ($pembelian as $data) { ?>
                                             <tr>
                                                 <td><?= $i; ?></td>
+                                                <td><?= $data['id_pembelian']; ?></td>
+                                                <td><?= $data['namasupplier']; ?></td>
                                                 <td><?= $data['created_at'] ?></td>
                                                 <td>Rp. <?= number_format($data['subtotal'], 0, ",", ".") ?></td>
                                                 <?php if ($data['status'] == 1) : ?>
@@ -160,7 +166,8 @@
                 data: getData()
             }).on('change', function(e) {
                 idKey = $("#supplier").val();
-                console.log(idKey)
+                // console.log(idKey)
+                // ambildata();
             });
         });
 
@@ -180,6 +187,49 @@
                 },
             });
         }
+
+        // function ambildata() {
+        //     var id_supplier = $("#supplier").val();
+        //     // console.log(id_supplier);
+        //     $.ajax({
+        //         type: "POST",
+        //         url: "<?= base_url('DataPembelian/ambildata'); ?>",
+        //         data: {
+        //             'id': id_supplier,
+        //         },
+        //         dataType: "json",
+        //         success: function(data) {
+        //             console.log(data);
+        //             var baris = '';
+        //             var pesannya = '';
+        //             var statusnya = '';
+        //             if (data.length == 0) {
+        //                 pesannya += '<div class="alert alert-warning mb-3" role="alert">' + 'Tidak ada data!' + '</div>'
+        //                 $('#pesan').html(pesannya)
+        //             } else {
+        //                 pesannya += '<div class="alert alert-success mb-3" role="alert">' + 'Data ditemukan!' + '</div>'
+        //                 $('#pesan').html(pesannya)
+        //             }
+
+        //             for (var i = 0; i < data.length; i++) {
+        //                 if (data[i].status == 1) {
+        //                     statusnya = "Sudah terbayar"
+        //                 } else {
+        //                     statusnya = "Belum terbayar"
+        //                 }
+        //                 baris += '<tr>' +
+        //                     '<td> ' + (i + 1) + ' </td>' +
+        //                     '<td> ' + data[i].created_at + ' </td>' +
+        //                     '<td> ' + data[i].subtotal + ' </td>' +
+        //                     '<td> ' + statusnya + ' </td>' +
+        //                     '<td> ' + '<a href="<?= base_url('DataPembelian/keranjang'); ?>">' + 'Detail' + '</a>' + '</td>'
+        //                 '</tr>'
+        //             }
+
+        //             $('#hasil_supplier').html(baris)
+        //         },
+        //     });
+        // }
     </script>
 </body>
 

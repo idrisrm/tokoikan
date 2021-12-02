@@ -14,17 +14,17 @@
 }
 .select2-container .select2-selection--single .select2-selection__rendered {
 	display: block;
-	padding: 0.475rem 1.125rem;
+	/* padding: 0.475rem 1.125rem; */
 	overflow: hidden;
 	text-overflow: ellipsis;
-    white-space: nowrap;
+	white-space: nowrap;
 	font-size: 0.875rem;
 	font-weight: 400;
 	color: #6c737d;
 	width: 100%;
 	overflow: hidden;
 	text-overflow: ellipsis;
-    -webkit-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	-webkit-box-shadow: none;
@@ -192,13 +192,13 @@
 .select2-container--default
 	.select2-selection--single
 	.select2-selection__arrow {
-        display: block;
-        position: absolute;
-        top: 50%;
-        right: 17px;
-        margin-top: -3px;
-        width: 0;
-        height: 0;
+	display: block;
+	position: absolute;
+	top: 50%;
+	right: 17px;
+	margin-top: -3px;
+	width: 0;
+	height: 0;
 }
 .select2-container--default
 	.select2-selection--single

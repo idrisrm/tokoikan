@@ -12,15 +12,22 @@ class DataPembelian extends CI_Controller
     }
     public function index()
     {
-        $data['pembelian'] = $this->db->query("SELECT * FROM pembelian")->result_array();
-        $data['supplier'] = $this->db->query("SELECT * FROM supplier")->result_array();
+        // $data['pembelian'] = $this->db->query("SELECT * FROM pembelian")->result_array();
+        $data['pembelian'] = $this->db->query("SELECT pembelian.*, supplier.nama_supplier as namasupplier FROM pembelian, supplier WHERE pembelian.id_supplier = supplier.id_supplier ORDER BY pembelian.created_at ASC")->result_array();
         $data['keranjang'] = $this->db->query("SELECT COUNT(detail_pembelian.id_pembelian) as total FROM detail_pembelian, pembelian WHERE pembelian.id_pembelian = detail_pembelian.id_pembelian AND pembelian.id_admin = 1 AND pembelian.status = 0")->result_array();
         $this->load->view('DataPembelian/index', $data);
     }
 
+    public function ambildata()
+    {
+        $id = $this->input->post('id');
+        $datasupplier = $this->db->query("SELECT pembelian.*, supplier.nama_supplier as namasupplier FROM pembelian, supplier WHERE pembelian.id_supplier = supplier.id_supplier AND  supplier.id_supplier = '$id' ORDER BY pembelian.created_at ASC")->result();
+        echo json_encode($datasupplier);
+    }
+
     public function keranjang()
     {
-        $data['keranjang'] = $this->db->query("SELECT * FROM pembelian, detail_pembelian, supplier, barang WHERE pembelian.id_pembelian = detail_pembelian.id_pembelian AND pembelian.id_supplier = supplier.id_supplier AND detail_pembelian.id_barang = barang.id_barang")->result_array();
+        $data['keranjang'] = $this->db->query("SELECT * FROM pembelian, detail_pembelian, supplier, barang WHERE pembelian.id_pembelian = detail_pembelian.id_pembelian AND pembelian.id_supplier = supplier.id_supplier AND detail_pembelian.id_barang = barang.id_barang AND pembelian.status = 0")->result_array();
         $this->load->view('DataPembelian/keranjang', $data);
     }
 

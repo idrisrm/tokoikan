@@ -31,6 +31,15 @@
                     <div class="card card-header-actions mx-auto mb-4">
                         <div class="card-header">
                             Data Keranjang
+                            <?php if ($keranjang) : ?>
+                                <div class="card-header">
+                                    <div class="page-header-icon mt-2">
+                                        <a class="btn btn-primary btn-sm shadow-sm" href="" onclick="confirm_kirim('')" data-toggle="modal" data-target="#modalCheckout">
+                                            Checkout
+                                        </a>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
                         </div>
                         <div class="col">
                             <?php echo $this->session->flashdata('pesan') ?>
@@ -89,6 +98,35 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="modal fade" id="modalCheckout" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="deleteModalLabel">Checkout Data</h5>
+                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                        <label class="small mb-1" for="metode">Pilih Metode Pembayaran</label>
+                                                        <select class="form-control" id="metode" name="metode">
+                                                            <option value="">Pilih metode pembayaran</option>
+                                                            <option value="1">Cash</option>
+                                                            <option value="2">Hutang</option>
+                                                        </select>
+                                                        <?= form_error('metode', '<small class="text-danger pl-2">', '</small>'); ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-danger" type="button" data-dismiss="modal">Batal</button>
+                                                <a class="btn btn-primary" name="kirim_link" id="kirim_link" type="button" href="">Lanjut</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
@@ -106,6 +144,15 @@
             document.getElementById('delete_link').setAttribute('href', delete_url);
 
             $('#hapusModal').modal('show', {
+                backdrop: 'static'
+            });
+        }
+
+        function confirm_kirim(checkout_url) {
+            console.log(checkout_url);
+            document.getElementById('kirim_link').setAttribute('href', checkout_url);
+
+            $('#checkoutModal').modal('show', {
                 backdrop: 'static'
             });
         }

@@ -39,6 +39,7 @@
                                         <tr>
                                             <th style="width: 20px;">No</th>
                                             <th>Nama Supplier</th>
+                                            <th>Otlet</th>
                                             <th>Alamat</th>
                                             <th>Status</th>
                                             <th style="width: 100px;">Aksi</th>
@@ -50,6 +51,15 @@
                                             <tr>
                                                 <td><?= $i; ?></td>
                                                 <td><?= $data['nama_supplier'] ?></td>
+                                                <td>
+                                                    <?php if ($data['id_otlet'] == 1) : ?>
+                                                        <?= "Jember" ?>
+                                                    <?php elseif ($data['id_otlet'] == 2) : ?>
+                                                        <?= "Situbondo" ?>
+                                                    <?php else : ?>
+                                                        <?= "Bali" ?>
+                                                    <?php endif; ?>
+                                                </td>
                                                 <td><?= $data['alamat'] ?></td>
                                                 <td><?= $data['status'] ?></td>
                                                 <td>

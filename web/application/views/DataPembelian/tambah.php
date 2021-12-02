@@ -38,8 +38,8 @@
                                             <?php endforeach; ?>
                                         <?php else : ?>
                                             <select class="form-control" id="supplier" name="supplier">
+                                                <option value="">Pilih supplier</option>
                                                 <?php foreach ($supplier as $data) { ?>
-                                                    <option value="">Pilih supplier</option>
                                                     <option value="<?= $data['id_supplier'] ?>"><?= $data['nama_supplier'] ?></option>
                                                 <?php } ?>
                                             </select>

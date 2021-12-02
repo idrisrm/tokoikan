@@ -23,14 +23,17 @@ class Supplier extends CI_Controller
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('status', 'Status', 'required');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        $this->form_validation->set_rules('otlet', 'Otlet', 'required');
 
         if ($this->form_validation->run() == false) {
-            $data['supplier'] = $this->db->query("SELECT * FROM supplier")->result_array();
+            $data['supplier'] = $this->db->query("SELECT * FROM supplier WHERE id_supplier = '$id'")->result_array();
+            $data['otlet'] = $this->db->query("SELECT * FROM otlet")->result_array();
             $this->load->view('Supplier/edit', $data);
         } else {
             $data = [
                 'nama_supplier' => $this->input->post('nama'),
                 'alamat' => $this->input->post('alamat'),
+                'id_otlet' => $this->input->post('otlet'),
                 'status' => $this->input->post('status'),
             ];
             $update = $this->Models->update($data, "id_supplier", "supplier", $id);
@@ -52,13 +55,17 @@ class Supplier extends CI_Controller
     {
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        $this->form_validation->set_rules('otlet', 'Otlet', 'required');
         if ($this->form_validation->run() == false) {
-            $this->load->view('Supplier/tambah');
+            $data['otlet'] = $this->db->query("SELECT * FROM otlet")->result_array();
+            $this->load->view('Supplier/tambah', $data);
         } else {
             $data = [
                 'nama_supplier' => $this->input->post('nama'),
                 'alamat' => $this->input->post('alamat'),
+                'id_otlet' => $this->input->post('otlet'),
                 'status' => 'on',
+                'created_at' => date('Y-m-d H:i:s'),
             ];
             $insert = $this->db->insert('supplier', $data);
             if ($insert) {
