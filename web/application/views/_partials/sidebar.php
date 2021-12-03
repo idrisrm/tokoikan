@@ -26,10 +26,14 @@
                             Revisi Penjualan
                             <!-- <span class="badge badge-primary-soft text-primary ml-auto">2</span> -->
                         </a>
-                        <!-- <a class="nav-link" href="<?= base_url('DataPenghutang/PengajuanHutang') ?>">
+                        <a class="nav-link" href="<?= base_url('DataPenghutang/PengajuanHutang') ?>">
                             <span class="badge badge-warning mr-1">  </span>
                             Pengajuan Hutang
-                        </a> -->
+                        </a>
+                        <a class="nav-link" href="<?= base_url('DataPenghutang/PengajuanHutang') ?>">
+                            <span class="badge badge-danger mr-1">  </span>
+                            Pengambilan pelanggan
+                        </a>
                     </nav>
                 </div>
                 <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse" data-target="#collapsePengaduan" aria-expanded="false" aria-controls="collapsePengaduan">
