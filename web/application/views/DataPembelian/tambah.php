@@ -126,7 +126,7 @@
                             <?php if ($keranjang) : ?>
                                 <div class="card-header">
                                     <div class="page-header-icon mt-2">
-                                        <a class="btn btn-primary btn-sm shadow-sm" href="" onclick="confirm_kirim('')" data-toggle="modal" data-target="#modalCheckout">
+                                        <a class="btn btn-primary btn-sm shadow-sm" data-toggle="modal" data-target="#modalCheckout">
                                             Checkout
                                         </a>
                                     </div>
@@ -199,23 +199,25 @@
                                                     <span aria-hidden="true">×</span>
                                                 </button>
                                             </div>
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                                        <label class="small mb-1" for="metode">Pilih Metode Pembayaran</label>
-                                                        <select class="form-control" id="metode" name="metode">
-                                                            <option value="">Pilih metode pembayaran</option>
-                                                            <option value="1">Cash</option>
-                                                            <option value="2">Hutang</option>
-                                                        </select>
-                                                        <?= form_error('metode', '<small class="text-danger pl-2">', '</small>'); ?>
+                                            <form action="<?= base_url('DataPembelian/checkout'); ?>" method="post">
+                                                <input type="hidden" id="id_pembeliannya" name="id_pembeliannya" value="<?= $data['id_pembelian']; ?>">
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                            <label class="small mb-1" for="metode">Pilih Metode Pembayaran</label>
+                                                            <select class="form-control" id="metode" name="metode">
+                                                                <option value="1">Cash</option>
+                                                                <option value="2">Hutang</option>
+                                                            </select>
+                                                            <?= form_error('metode', '<small class="text-danger pl-2">', '</small>'); ?>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-danger" type="button" data-dismiss="modal">Batal</button>
-                                                <a class="btn btn-primary" name="kirim_link" id="kirim_link" type="button" href="">Lanjut</a>
-                                            </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-danger" type="button" data-dismiss="modal">Batal</button>
+                                                    <button class="btn btn-primary" type="submit">Lanjut</a>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -225,10 +227,11 @@
                     </div>
                 </div>
             </main>
-            <footer class="footer mt-auto footer-light">
-                <?php $this->load->view('_partials/footer.php') ?>
-            </footer>
         </div>
+        <br>
+        <footer class="footer mt-auto footer-light">
+            <?php $this->load->view('_partials/footer.php') ?>
+        </footer>
     </div>
     <?php $this->load->view("_partials/js.php") ?>
     <script type="text/javascript">

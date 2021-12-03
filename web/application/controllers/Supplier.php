@@ -41,7 +41,7 @@ class Supplier extends CI_Controller
                 redirect('Supplier/index');
             } else {
                 $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
-                Data Supplier Berhasil Diupdate!
+                Data Supplier Gagal Diupdate!
                 </div>');
                 redirect('Supplier/index');
             }

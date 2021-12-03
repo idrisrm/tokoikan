@@ -13,7 +13,7 @@ class DataPembelian extends CI_Controller
     public function index()
     {
         // $data['pembelian'] = $this->db->query("SELECT * FROM pembelian")->result_array();
-        $data['pembelian'] = $this->db->query("SELECT pembelian.*, supplier.nama_supplier as namasupplier FROM pembelian, supplier WHERE pembelian.id_supplier = supplier.id_supplier ORDER BY pembelian.created_at ASC")->result_array();
+        $data['pembelian'] = $this->db->query("SELECT pembelian.*, supplier.nama_supplier as namasupplier FROM pembelian, supplier WHERE pembelian.id_supplier = supplier.id_supplier AND pembelian.status != 0 ORDER BY pembelian.created_at ASC")->result_array();
         $data['keranjang'] = $this->db->query("SELECT COUNT(detail_pembelian.id_pembelian) as total FROM detail_pembelian, pembelian WHERE pembelian.id_pembelian = detail_pembelian.id_pembelian AND pembelian.id_admin = 1 AND pembelian.status = 0")->result_array();
         $this->load->view('DataPembelian/index', $data);
     }
@@ -162,6 +162,113 @@ class DataPembelian extends CI_Controller
                             Gagal hapus dari keranjang!
                             </div>');
                 redirect('DataPembelian/tambah');
+            }
+        }
+    }
+
+    public function checkout()
+    {
+        $id_pembelian = $this->input->post('id_pembeliannya');
+        $metode = $this->input->post('metode');
+        $now = date('Y-m-d H:i:s');
+        $limittanggal = date('Y-m-d', strtotime('+1 month', strtotime($now)));
+        if ($metode == '1') {
+            $datadetail = $this->db->query("SELECT * FROM detail_pembelian WHERE id_pembelian = '$id_pembelian'")->result_array();
+            $totalharga = $this->db->query("SELECT SUM(total_harga) as total FROM detail_pembelian WHERE id_pembelian = '$id_pembelian'")->row_array();
+            foreach ($datadetail as $dd) {
+                $id_barang = $dd['id_barang'];
+                $databarang = [
+                    'harga_beli' => $dd['harga_satuan'],
+                ];
+                $this->Models->update($databarang, "id_barang", "barang", $id_barang);
+            }
+            $datapembelian = [
+                'status' => $metode,
+                'subtotal' => $totalharga['total'],
+            ];
+            $updatepembelian = $this->Models->update($datapembelian, "id_pembelian", "pembelian", $id_pembelian);
+            if ($updatepembelian) {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+                Checkout Data Berhasil!
+                </div>');
+                redirect('DataPembelian');
+            } else {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
+                Checkout Data Gagal!
+                </div>');
+                redirect('DataPembelian');
+            }
+        } else {
+            $datadetail = $this->db->query("SELECT * FROM detail_pembelian WHERE id_pembelian = '$id_pembelian'")->result_array();
+            $totalharga = $this->db->query("SELECT SUM(total_harga) as total FROM detail_pembelian WHERE id_pembelian = '$id_pembelian'")->row_array();
+            $dataadmin = $this->db->query("SELECT * FROM pembelian WHERE id_pembelian = '$id_pembelian'")->row_array();
+            $id_admin = $dataadmin['id_admin'];
+            $id_supplier = $dataadmin['id_supplier'];
+            $hutangada = $this->db->query("SELECT * FROM hutang_admin WHERE id_admin = '$id_admin' AND id_supplier = '$id_supplier'")->row_array();
+            if ($hutangada) {
+                $hutanglama = $hutangada['total_hutang'];
+                $idhutangadmin = $hutangada['id_hutang_admin'];
+                foreach ($datadetail as $dd) {
+                    $id_barang = $dd['id_barang'];
+                    $databarang = [
+                        'harga_beli' => $dd['harga_satuan'],
+                    ];
+                    $this->Models->update($databarang, "id_barang", "barang", $id_barang);
+                }
+                $datapembelian = [
+                    'status' => $metode,
+                    'subtotal' => $totalharga['total'],
+                ];
+                $datahutang = [
+                    'total_hutang' => $hutanglama + $totalharga['total'],
+                    'updated_at' => $now,
+                    'limit_tanggal' => $limittanggal,
+                ];
+                $updatepembelian = $this->Models->update($datapembelian, "id_pembelian", "pembelian", $id_pembelian);
+                $queryhutang = $this->Models->update($datahutang, "id_hutang_admin", "hutang_admin", $idhutangadmin);
+                if ($updatepembelian && $queryhutang) {
+                    $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+                Checkout Data Berhasil!
+                </div>');
+                    redirect('DataPembelian');
+                } else {
+                    $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
+                Checkout Data Gagal!
+                </div>');
+                    redirect('DataPembelian');
+                }
+            } else {
+                foreach ($datadetail as $dd) {
+                    $id_barang = $dd['id_barang'];
+                    $databarang = [
+                        'harga_beli' => $dd['harga_satuan'],
+                    ];
+                    $this->Models->update($databarang, "id_barang", "barang", $id_barang);
+                }
+                $datapembelian = [
+                    'status' => $metode,
+                    'subtotal' => $totalharga['total'],
+                ];
+                $datahutang = [
+                    'id_admin' => $id_admin,
+                    'id_supplier' => $id_supplier,
+                    'total_hutang' => $totalharga['total'],
+                    'created_at' => $now,
+                    'limit_tanggal' => $limittanggal,
+                ];
+                $updatepembelian = $this->Models->update($datapembelian, "id_pembelian", "pembelian", $id_pembelian);
+                $queryhutang = $this->Models->insert('hutang_admin', $datahutang);
+                if ($updatepembelian && $queryhutang) {
+                    $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+                Checkout Data Berhasil!
+                </div>');
+                    redirect('DataPembelian');
+                } else {
+                    $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
+                Checkout Data Gagal!
+                </div>');
+                    redirect('DataPembelian');
+                }
             }
         }
     }
