@@ -34,12 +34,12 @@
                                 <div class="page-header-icon mt-2 ml-2">
                                     <?php foreach ($keranjang as $k) : ?>
                                         <?php if ($k['total'] > 0) : ?>
-                                            <a href="<?= base_url("DataPembelian/keranjang"); ?>">
+                                            <a href="<?= base_url("DataPembelian/tambah"); ?>">
                                                 <i data-feather="shopping-cart"></i>
                                             </a>
                                             <div style="position: absolute; right: 8px; top: 8px; width: 20px; height: 20px; line-height: 20px; text-align: center; border-radius: 50%; font-size: 10px; color: #fff; background-color: #f53302;"><?= $k['total']; ?></div>
                                         <?php else : ?>
-                                            <a href="<?= base_url("DataPembelian/keranjang"); ?>">
+                                            <a href="<?= base_url("DataPembelian/tambah"); ?>">
                                                 <i data-feather="shopping-cart"></i>
                                             </a>
                                         <?php endif; ?>

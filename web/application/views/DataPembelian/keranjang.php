@@ -130,6 +130,8 @@
 
                             </div>
                         </div>
+                    </div>
+                </div>
             </main>
             <footer class="footer mt-auto footer-light">
                 <?php $this->load->view('_partials/footer.php') ?>
