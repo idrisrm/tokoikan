@@ -30,7 +30,7 @@
                             <span class="badge badge-warning mr-1">  </span>
                             Pengajuan Hutang
                         </a>
-                        <a class="nav-link" href="<?= base_url('DataPenghutang/PengajuanHutang') ?>">
+                        <a class="nav-link" href="<?= base_url('PengambilanPelanggan/index') ?>">
                             <span class="badge badge-danger mr-1">  </span>
                             Pengambilan pelanggan
                         </a>
