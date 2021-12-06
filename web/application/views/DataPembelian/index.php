@@ -69,11 +69,7 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 20px;">No</th>
-                                            <th>No. Invoice</th>
-                                            <th>Supplier</th>
-                                            <th>Tanggal</th>
-                                            <th>Total Harga</th>
-                                            <th>Keterangan</th>
+                                            <th>Nama Supplier</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -82,21 +78,9 @@
                                         foreach ($pembelian as $data) { ?>
                                             <tr>
                                                 <td><?= $i; ?></td>
-                                                <td><?= $data['id_pembelian']; ?></td>
-                                                <td><?= $data['namasupplier']; ?></td>
-                                                <td><?= $data['created_at'] ?></td>
-                                                <td>Rp. <?= number_format($data['subtotal'], 0, ",", ".") ?></td>
-                                                <?php if ($data['status'] == 1) : ?>
-                                                    <td>
-                                                        <p style="color: green">Sudah terbayar</p>
-                                                    </td>
-                                                <?php else : ?>
-                                                    <td>
-                                                        <p style="color: red;">Belum terbayar</p>
-                                                    </td>
-                                                <?php endif; ?>
+                                                <td><?= $data['nama_supplier']; ?></td>
                                                 <td>
-                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#">
+                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="<?= base_url("DataPembelian/detail/" . $data['id_supplier']); ?>">
                                                         <i data-feather="eye"></i>
                                                     </a>
                                                 </td>

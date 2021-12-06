@@ -13,9 +13,16 @@ class DataPembelian extends CI_Controller
     public function index()
     {
         // $data['pembelian'] = $this->db->query("SELECT * FROM pembelian")->result_array();
-        $data['pembelian'] = $this->db->query("SELECT pembelian.*, supplier.nama_supplier as namasupplier FROM pembelian, supplier WHERE pembelian.id_supplier = supplier.id_supplier AND pembelian.status != 0 ORDER BY pembelian.created_at ASC")->result_array();
+        // $data['pembelian'] = $this->db->query("SELECT pembelian.*, supplier.nama_supplier as namasupplier FROM pembelian, supplier WHERE pembelian.id_supplier = supplier.id_supplier AND pembelian.status != 0 ORDER BY pembelian.created_at ASC")->result_array();
+        $data['pembelian'] = $this->db->query("SELECT DISTINCT(pembelian.id_supplier), supplier.nama_supplier, supplier.id_supplier FROM pembelian, supplier WHERE pembelian.id_supplier = supplier.id_supplier AND pembelian.status != 0 ORDER BY pembelian.created_at ASC")->result_array();
         $data['keranjang'] = $this->db->query("SELECT COUNT(detail_pembelian.id_pembelian) as total FROM detail_pembelian, pembelian WHERE pembelian.id_pembelian = detail_pembelian.id_pembelian AND pembelian.id_admin = 1 AND pembelian.status = 0")->result_array();
         $this->load->view('DataPembelian/index', $data);
+    }
+
+    public function detail($id)
+    {
+        $data['pembelian'] = $this->db->query("SELECT pembelian.*, otlet.*, supplier.nama_supplier as nama_supplier FROM pembelian, otlet, supplier WHERE pembelian.id_otlet = otlet.id_otlet AND pembelian.id_supplier = supplier.id_supplier AND pembelian.id_supplier = '$id' AND pembelian.status != 0 ORDER BY pembelian.created_at ASC")->result_array();
+        $this->load->view('DataPembelian/detail', $data);
     }
 
     public function ambildata()
@@ -270,6 +277,36 @@ class DataPembelian extends CI_Controller
                     redirect('DataPembelian');
                 }
             }
+        }
+    }
+
+    public function bayar()
+    {
+        $bayar = $this->input->post('bayar');
+        $supplier = $this->input->post('supplier');
+        $id_pembelian = $this->input->post('pembelian');
+        $now = date('Y-m-d H:i:s');
+        $data = $this->db->query("SELECT * FROM hutang_admin WHERE id_admin = '1' AND id_supplier = '$supplier'")->row_array();
+        $id_hutang_admin = $data['id_hutang_admin'];
+        $datahutang = [
+            'total_hutang' => $data['total_hutang'] - $bayar,
+            'updated_at' => $now,
+        ];
+        $datapembelian = [
+            'status' => '1',
+        ];
+        $updatepembelian = $this->Models->update($datapembelian, "id_pembelian", "pembelian", $id_pembelian);
+        $updatedatahutang = $this->Models->update($datahutang, "id_hutang_admin", "hutang_admin", $id_hutang_admin);
+        if ($updatepembelian && $updatedatahutang) {
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+        Bayar Piutang Berhasil!
+        </div>');
+            redirect('DataPembelian');
+        } else {
+            $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
+        Bayar Piutang Gagal!
+        </div>');
+            redirect('DataPembelian');
         }
     }
 }
