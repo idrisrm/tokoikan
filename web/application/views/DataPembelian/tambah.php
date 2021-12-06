@@ -228,11 +228,10 @@
                 </div>
             </main>
         </div>
-        <br>
-        <footer class="footer mt-auto footer-light">
-            <?php $this->load->view('_partials/footer.php') ?>
-        </footer>
     </div>
+    <footer class="footer mt-auto footer-light">
+        <?php $this->load->view('_partials/footer.php') ?>
+    </footer>
     <?php $this->load->view("_partials/js.php") ?>
     <script type="text/javascript">
         function confirm_modal(delete_url) {

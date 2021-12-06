@@ -21,7 +21,7 @@ class DataPembelian extends CI_Controller
 
     public function detail($id)
     {
-        $data['pembelian'] = $this->db->query("SELECT pembelian.*, otlet.*, supplier.nama_supplier as nama_supplier FROM pembelian, otlet, supplier WHERE pembelian.id_otlet = otlet.id_otlet AND pembelian.id_supplier = supplier.id_supplier AND pembelian.id_supplier = '$id' AND pembelian.status != 0 ORDER BY pembelian.created_at ASC")->result_array();
+        $data['pembelian'] = $this->db->query("SELECT pembelian.*, otlet.*, supplier.nama_supplier as nama_supplier FROM pembelian, otlet, supplier WHERE pembelian.id_otlet = otlet.id_otlet AND pembelian.id_supplier = supplier.id_supplier AND pembelian.id_supplier = '$id' AND pembelian.status != 0 ORDER BY pembelian.created_at DESC")->result_array();
         $this->load->view('DataPembelian/detail', $data);
     }
 
@@ -32,6 +32,12 @@ class DataPembelian extends CI_Controller
         echo json_encode($datasupplier);
     }
 
+    public function databayar()
+    {
+        $id_pembelian = $this->input->post('id');
+        $datahutang = $this->db->query("SELECT * FROM bayar_hutang_admin WHERE id_admin = '1' AND id_pembelian = '$id_pembelian'")->result();
+        echo json_encode($datahutang);
+    }
     public function getBarang()
     {
         $id_otlet = $this->input->post('id_otlet');
@@ -285,28 +291,78 @@ class DataPembelian extends CI_Controller
         $bayar = $this->input->post('bayar');
         $supplier = $this->input->post('supplier');
         $id_pembelian = $this->input->post('pembelian');
+        $total = $this->input->post('total');
         $now = date('Y-m-d H:i:s');
-        $data = $this->db->query("SELECT * FROM hutang_admin WHERE id_admin = '1' AND id_supplier = '$supplier'")->row_array();
-        $id_hutang_admin = $data['id_hutang_admin'];
-        $datahutang = [
-            'total_hutang' => $data['total_hutang'] - $bayar,
-            'updated_at' => $now,
-        ];
-        $datapembelian = [
-            'status' => '1',
-        ];
-        $updatepembelian = $this->Models->update($datapembelian, "id_pembelian", "pembelian", $id_pembelian);
-        $updatedatahutang = $this->Models->update($datahutang, "id_hutang_admin", "hutang_admin", $id_hutang_admin);
-        if ($updatepembelian && $updatedatahutang) {
-            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
-        Bayar Piutang Berhasil!
-        </div>');
-            redirect('DataPembelian');
+        var_dump($bayar);
+        var_dump($supplier);
+        var_dump($id_pembelian);
+        var_dump($total);
+        $datakurang = $this->db->query("SELECT SUM(bayar) as bayar FROM bayar_hutang_admin WHERE id_admin = '1' AND id_pembelian = '$id_pembelian'")->row_array();
+        $totalbayar = $datakurang['bayar'];
+        if (($total - $totalbayar) == $bayar) {
+            var_dump('status jadi 1 langsung');
+            $data = $this->db->query("SELECT * FROM hutang_admin WHERE id_admin = '1' AND id_supplier = '$supplier'")->row_array();
+            $id_hutang_admin = $data['id_hutang_admin'];
+            $datahutang = [
+                'total_hutang' => $data['total_hutang'] - $bayar,
+                'updated_at' => $now,
+            ];
+            $datapembelian = [
+                'status' => '1',
+            ];
+            $bayarnya = [
+                'id_admin' => '1',
+                'id_pembelian' => $id_pembelian,
+                'bayar' => $bayar,
+                'created_at' => $now
+            ];
+            $updatepembelian = $this->Models->update($datapembelian, "id_pembelian", "pembelian", $id_pembelian);
+            $updatedatahutang = $this->Models->update($datahutang, "id_hutang_admin", "hutang_admin", $id_hutang_admin);
+            $querybayar = $this->Models->insert('bayar_hutang_admin', $bayarnya);
+            if ($updatepembelian && $updatedatahutang && $querybayar) {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+            Bayar Piutang Berhasil!
+            </div>');
+                redirect('DataPembelian/detail/' . $supplier);
+            } else {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
+            Bayar Piutang Gagal!
+            </div>');
+                redirect('DataPembelian/detail/' . $supplier);
+            }
         } else {
-            $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
-        Bayar Piutang Gagal!
-        </div>');
-            redirect('DataPembelian');
+            if ($bayar > ($total - $totalbayar)) {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
+                Jumlah pembayaran melebihi total atau kekurangan piutang!
+                </div>');
+                redirect('DataPembelian/detail/' . $supplier);
+            } else {
+                $data = $this->db->query("SELECT * FROM hutang_admin WHERE id_admin = '1' AND id_supplier = '$supplier'")->row_array();
+                $id_hutang_admin = $data['id_hutang_admin'];
+                $datahutang = [
+                    'total_hutang' => $data['total_hutang'] - $bayar,
+                    'updated_at' => $now,
+                ];
+                $bayarnya = [
+                    'id_admin' => '1',
+                    'id_pembelian' => $id_pembelian,
+                    'bayar' => $bayar,
+                    'created_at' => $now
+                ];
+                $updatedatahutang = $this->Models->update($datahutang, "id_hutang_admin", "hutang_admin", $id_hutang_admin);
+                $querybayar = $this->Models->insert('bayar_hutang_admin', $bayarnya);
+                if ($updatedatahutang && $querybayar) {
+                    $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+                Bayar Piutang Berhasil!
+                </div>');
+                    redirect('DataPembelian/detail/' . $supplier);
+                } else {
+                    $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
+                Bayar Piutang Gagal!
+                </div>');
+                    redirect('DataPembelian/detail/' . $supplier);
+                }
+            }
         }
     }
 }
