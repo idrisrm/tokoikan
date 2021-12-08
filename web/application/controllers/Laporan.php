@@ -17,14 +17,16 @@ class Laporan extends CI_Controller {
         }else{
             $bulan = $this->input->post('bulan');
             $tahun = $this->input->post('tahun');
-            $pokok = $this->db->query("SELECT detail_penjualan.total_harga, detail_penjualan.created_at, detail_penjualan.id_barang, detail_penjualan.qty, barang.harga, barang.harga_beli FROM detail_penjualan, barang WHERE barang.id_barang = detail_penjualan.id_barang AND month(detail_penjualan.created_at) = $bulan AND year(detail_penjualan.created_at) = $tahun ")->result_array();
+            $data['pokok'] = $this->db->query("SELECT detail_penjualan.id_barang, detail_penjualan.qty, barang.harga_beli ,SUM(detail_penjualan.qty * barang.harga_beli) as totalnya FROM detail_penjualan, barang WHERE detail_penjualan.id_barang = barang.id_barang AND month(detail_penjualan.created_at) = $bulan AND year(detail_penjualan.created_at) = $tahun")->row_array();
 
-            foreach ($pokok as $pokok) {
-                $datapokok['jumlah'][] = $pokok['qty'] * $pokok['harga_beli'];
-                // $datapokok['jumlah'][] = $pokok['count'];
-            }
+            // foreach ($pokok as $pokok) {
+            //     $datapokok['jumlah'][] = $pokok['qty'] * $pokok['harga_beli'];
+            //     // $datapokok['jumlah'][] = $pokok['count'];
+            // }a
 
             $data['penjualan'] = $this->db->query("SELECT detail_penjualan.total_harga, SUM(detail_penjualan.total_harga) as totalpenjualan FROM detail_penjualan WHERE month(detail_penjualan.created_at) = $bulan AND year(detail_penjualan.created_at) = $tahun ")->row_array();
+
+            $data['biaya'] = $this->db->query("SELECT biaya, SUM(biaya) as total FROM pengeluaran WHERE month(created_at) = $bulan AND year(created_at) = $tahun AND status = 'on'")->row_array();
 
             // var_dump($pokok);die;
 

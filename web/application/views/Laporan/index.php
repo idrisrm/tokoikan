@@ -87,32 +87,33 @@
                                             </center>
                                         </div>
                                     </div>
+                                    <br><br>
                                     <div class="row">
                                         <div class="col-md-6">Penjualan</div>
                                         <div class="col-md-6 text-right">Rp. <?= number_format($penjualan['totalpenjualan'], 0, ",", ".") ?></div>
                                     </div>
                                     <div class="row border-bottom">
                                         <div class="col-md-6">Harga Pokok Penjualan</div>
-                                        <div class="col-md-6 text-right">Rp. 20.000.000</div>
+                                        <div class="col-md-6 text-right">Rp. <?= number_format($pokok['totalnya'], 0, ",", ".") ?></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">Laba Kotor</div>
-                                        <div class="col-md-6 text-right">Rp. 20.000.000</div>
+                                        <div class="col-md-6 text-right">Rp. <?= number_format($penjualan['totalpenjualan'] - $pokok['totalnya'], 0, ",", ".") ?></div>
+                        
                                     </div>
-
 <br><br>
 
                                     <div class="row">
                                         <div class="col-md-6">Laba Kotor</div>
-                                        <div class="col-md-6 text-right">Rp. 20.000.000</div>
+                                        <div class="col-md-6 text-right">Rp. <?= number_format($penjualan['totalpenjualan'] - $pokok['totalnya'], 0, ",", ".") ?></div>
                                     </div>
                                     <div class="row border-bottom">
                                         <div class="col-md-6">Biaya Usaha</div>
-                                        <div class="col-md-6 text-right">Rp. 5.000.000</div>
+                                        <div class="col-md-6 text-right">Rp. <?= number_format($biaya['total'], 0, ",", ".") ?></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">Laba Bersih</div>
-                                        <div class="col-md-6 text-right">Rp. 15.000.000</div>
+                                        <div class="col-md-6 text-right">Rp. <?= number_format($penjualan['totalpenjualan'] - $pokok['totalnya'] - $biaya['total'], 0, ",", ".") ?></div>
                                     </div>
                                 </div>
                             </div>
