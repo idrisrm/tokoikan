@@ -23,7 +23,7 @@
                                             </a>
                                             <i data-feather="file-text"></i>
                                         </div>
-                                        Detail Penghutang
+                                        laporan Laba/Rugi Bulanan
                                     </h1>
                                 </div>
                             </div>
@@ -32,64 +32,64 @@
                 </header>
                 <div class="container mt-4">
                     <nav class="nav nav-borders">
-                        <a class="nav-link active" href="">Detail Penghutang</a>
-                        <a class="nav-link " href="<?= base_url('DataPenghutang/DetailPembelian/' . $hutang['no_ktp'])?>">Detail Pembelian</a>
-                        <a class="nav-link " href="<?= base_url('DataPenghutang/DetailPembayaran/' . $hutang['no_ktp'])?>">Detail Pembayaran</a>
+                        <a class="nav-link " href="<?= base_url('Laporan/index/' )?>">Laporan Laba/Rugi harian</a>
+                        <a class="nav-link active" href="<?= base_url('Laporan/bulanan' )?>">laporan Laba/Rugi Bulanan</a>
                     </nav>
 
                     <hr class="mt-0 mb-4" />
                     <div class="card card-header-actions mx-auto mb-4">
-                        <div class="card-header">Data Penghutang</div>
+                        <div class="card-header">Laba/Rugi</div>
                         <div class="col">
                             <?php echo $this->session->flashdata('pesan') ?>
                         </div>
-                        <div class="card-body">
-                            <div class="sbp-preview">
-                                <div class="sbp-preview-content">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-6 col-sm-12">
-                                            <label>NO KTP</label>
-                                            <p><b><?= $hutang['no_ktp'] ?></b></p>
-                                        </div>
-                                        <div class="col-lg-4 col-sm-12">
-                                            <label>Nama Calon Penghutang</label>
-                                            <p><b><?= $hutang['nama_penghutang'] ?></b></p>
-                                        </div>
-                                        <div class="col-lg-4 col-sm-12">
-                                            <label>Otlet</label>
-                                            <p><b><?= $hutang['wilayah'] ?></b></p>
-                                        </div>
+
+                        <form action="" method="post" autocomplete="off">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                        <label class="small mb-1" for="bulan">Bulan</label>
+                                        <select class="form-control" id="bulan" name="bulan">
+                                            <option value="">--Pilih Bulan--</option>
+
+                                            <option value="1">January</option>
+                                            <option value="2">February</option>
+                                            <option value="3">March</option>
+                                            <option value="4">April</option>
+                                            <option value="5">May</option>
+                                            <option value="6">June</option>
+                                            <option value="7">July</option>
+                                            <option value="8">August</option>
+                                            <option value="9">September</option>
+                                            <option value="10">October</option>
+                                            <option value="11">November</option>
+                                            <option value="12">December</option>
+
+                                        </select>
+                                        <?= form_error('bulan', '<small class="text-danger pl-2">', '</small>'); ?>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-lg-6 col-sm-12">
-                                            <label>Foto KTP Penghutang</label>
-                                            <div>
-                                                <img class="img-fluid mb-2" style="width: 600px;" src="<?= base_url($hutang['foto_ktp']) ?>" alt="" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="modal fade" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="tambahModalLabel">Konfirmasi</h5>
-                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">×</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Apakah Anda Yakin Ingin Mengkonfirmasi Pengajuan Ini?</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn btn-danger" type="button" data-dismiss="modal">Batal</button>
-                                            <a href="<?= base_url('DataPenghutang/konfirmasi/' . $hutang['no_ktp']) ?>" class="btn btn-primary">Simpan</a>
-                                        </div>
+                                    <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                        <label class="small mb-1" for="tahun">Tahun</label>
+                                        <select class="form-control" id="tahun" name="tahun">
+                                            <option value="">--Pilih tahun--</option>
+
+                                            <option value="2021">2021</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2024">2024</option>
+                                            <option value="2025">2025</option>
+                                            <option value="2026">2026</option>
+
+                                        </select>
+                                        <?= form_error('tahun', '<small class="text-danger pl-2">', '</small>'); ?>
                                     </div>
                                 </div>
-                            </div>
+                                <a class="btn btn-danger" href="javascript:history.go(-1)">
+                                    Batal
+                                </a>
+                                <button type="submit" href="" class="btn btn-success mr-2">
+                                    <span class="text">Kirim</span>
+                                </button>
+                    </form>
                         
                         </div>
                     </div>

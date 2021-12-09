@@ -28,7 +28,7 @@
                         </a>
                         <a class="nav-link" href="<?= base_url('DataPenghutang/PengajuanHutang') ?>">
                             <span class="badge badge-warning mr-1">  </span>
-                            Pengajuan Hutang
+                            Pengajuan Kredit
                         </a>
                         <a class="nav-link" href="<?= base_url('PengambilanPelanggan/index') ?>">
                             <span class="badge badge-danger mr-1">  </span>
@@ -50,12 +50,12 @@
                         </a>
                         <a class="nav-link" href="<?= base_url('RevisiTransaksi') ?>">
                             <span class="badge badge-cyan mr-1">  </span>
-                            Hutang Ke Supplier
+                            Suplier Kredit
                             <!-- <span class="badge badge-primary-soft text-primary ml-auto">2</span> -->
                         </a>
                         <a class="nav-link" href="<?= base_url('DataPenghutang/') ?>">
                             <span class="badge badge-warning mr-1">  </span>
-                            Piutang Pelanggan
+                            Customer Kredit
                             <!-- <span class="badge badge-primary-soft text-primary ml-auto">2</span> -->
                         </a>
                     </nav>
@@ -87,7 +87,7 @@
                 </a>
                 <a class="nav-link" href="<?= base_url('DataPenghutang') ?>">
                     <div class="nav-link-icon"><i data-feather="user"></i></div>
-                    Data Penghutang
+                    Data Customer Kredit
                 </a>
                 <a class="nav-link" href="<?= base_url('Karyawan') ?>">
                     <div class="nav-link-icon"><i data-feather="users"></i></div>
@@ -106,8 +106,8 @@
                     Data Satuan Barang
                 </a>
                 <a class="nav-link" href="<?= base_url('Laporan/index') ?>">
-                    <div class="nav-link-icon"><i data-feather="grid"></i></div>
-                    Laporan
+                    <div class="nav-link-icon"><i data-feather="dollar-sign"></i></div>
+                    Laporan Laba/Rugi
                 </a>
                 <!-- <a class="nav-link" href="<?= base_url('Kecamatan/data') ?>">
                     <div class="nav-link-icon"><i data-feather="home"></i></div>
