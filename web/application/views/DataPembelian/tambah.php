@@ -93,19 +93,19 @@
                                     </div>
                                     <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                         <label class="small mb-1" for="qty">Qty</label>
-                                        <input class="form-control" id="qty" name="qty" type="text" placeholder="Masukkan Qty" />
+                                        <input class="form-control" id="qty" name="qty" type="number" placeholder="Masukkan Qty" />
                                         <?= form_error('qty', '<small class="text-danger pl-2">', '</small>'); ?>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                         <label class="small mb-1" for="hargasatuan">Harga Satuan</label>
-                                        <input class="form-control" id="hargasatuan" name="hargasatuan" type="text" placeholder="Masukkan Harga Satuan" value="<?= set_value('hargasatuan') ?>" />
+                                        <input class="form-control" id="hargasatuan" name="hargasatuan" type="number" placeholder="Masukkan Harga Satuan" value="<?= set_value('hargasatuan') ?>" />
                                         <?= form_error('hargasatuan', '<small class="text-danger pl-2">', '</small>'); ?>
                                     </div>
                                     <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                         <label class="small mb-1" for="totalharga">Total Harga</label>
-                                        <input class="form-control" id="totalharga" name="totalharga" type="text" placeholder="Masukkan Total Harga" value="<?= set_value('totalharga') ?>" />
+                                        <input class="form-control" id="totalharga" name="totalharga" type="number" placeholder="Masukkan Total Harga" value="<?= set_value('totalharga') ?>" />
                                         <?= form_error('totalharga', '<small class="text-danger pl-2">', '</small>'); ?>
                                     </div>
                                 </div>
