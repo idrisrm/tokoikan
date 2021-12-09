@@ -25,7 +25,7 @@ class Pengeluaran extends CI_Controller
         $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
 
         if ($this->form_validation->run() == false) {
-            $data['pengeluaran'] = $this->db->query("SELECT * FROM pengeluaran WHERE status = 'on'")->result_array();
+            $data['pengeluaran'] = $this->db->query("SELECT * FROM pengeluaran WHERE status = 'on' AND id_pengeluaran = '$id'")->result_array();
             $this->load->view('DataPengeluaran/edit', $data);
         } else {
             $data = [
