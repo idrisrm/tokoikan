@@ -32,8 +32,8 @@
                 </header>
                 <div class="container mt-4">
                     <nav class="nav nav-borders">
-                        <a class="nav-link " href="<?= base_url('Laporan/index/' )?>">Laporan Laba/Rugi harian</a>
-                        <a class="nav-link active" href="<?= base_url('Laporan/bulanan' )?>">laporan Laba/Rugi Bulanan</a>
+                        <a class="nav-link " href="<?= base_url('Laporan/index/') ?>">Laporan Laba/Rugi harian</a>
+                        <a class="nav-link active" href="<?= base_url('Laporan/bulanan') ?>">laporan Laba/Rugi Bulanan</a>
                     </nav>
 
                     <hr class="mt-0 mb-4" />
@@ -83,16 +83,29 @@
                                         <?= form_error('tahun', '<small class="text-danger pl-2">', '</small>'); ?>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="form-group col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                        <label class="small mb-1" for="otlet">Otlet</label>
+                                        <select class="form-control" id="otlet" name="otlet">
+                                            <option value="">--Pilih Otlet--</option>
+                                            <option value="1">Wilayah Jember</option>
+                                            <option value="2">Wilayah Situbondo</option>
+                                            <option value="3">Wilayah Bali</option>
+
+                                        </select>
+                                        <?= form_error('otlet', '<small class="text-danger pl-2">', '</small>'); ?>
+                                    </div>
+                                </div>
                                 <a class="btn btn-danger" href="javascript:history.go(-1)">
                                     Batal
                                 </a>
                                 <button type="submit" href="" class="btn btn-success mr-2">
                                     <span class="text">Kirim</span>
                                 </button>
-                    </form>
-                        
-                        </div>
-                        <div class="container-fluid">
+                        </form>
+
+                    </div>
+                    <div class="container-fluid">
                         <div class="card card-header-actions mx-auto mb-4">
                             <div class="card-body">
                                 <div class="sbp-preview">
@@ -101,7 +114,7 @@
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <center>
                                                     <label>laporan Laba/Rugi</label><br>
-                                                    <label>Untuk Periode <?= date('F', mktime(0, 0, 0, $bulan));?></label>
+                                                    <label>Untuk Periode <?= date('F', mktime(0, 0, 0, $bulan)); ?> Otlet <?= $otlet['wilayah']?></label>
 
                                                 </center>
                                             </div>
@@ -139,13 +152,13 @@
                             </div>
                         </div>
                     </div>
-                    </div>
                 </div>
-            </main>
-            <footer class="footer mt-auto footer-light">
-                <?php $this->load->view('_partials/footer.php') ?>
-            </footer>
         </div>
+        </main>
+        <footer class="footer mt-auto footer-light">
+            <?php $this->load->view('_partials/footer.php') ?>
+        </footer>
+    </div>
     </div>
     <?php $this->load->view("_partials/js.php") ?>
     <script>

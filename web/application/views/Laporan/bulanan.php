@@ -83,6 +83,19 @@
                                         <?= form_error('tahun', '<small class="text-danger pl-2">', '</small>'); ?>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="form-group col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                        <label class="small mb-1" for="otlet">Otlet</label>
+                                        <select class="form-control" id="otlet" name="otlet">
+                                            <option value="">--Pilih Otlet--</option>
+                                            <option value="1">Wilayah Jember</option>
+                                            <option value="2">Wilayah Situbondo</option>
+                                            <option value="3">Wilayah Bali</option>
+
+                                        </select>
+                                        <?= form_error('otlet', '<small class="text-danger pl-2">', '</small>'); ?>
+                                    </div>
+                                </div>
                                 <a class="btn btn-danger" href="javascript:history.go(-1)">
                                     Batal
                                 </a>
