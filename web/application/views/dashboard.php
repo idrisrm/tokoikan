@@ -113,7 +113,7 @@
                         <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-4">
                             <div class="card card-header-actions h-100">
                                 <div class="card-header">
-                                    Grafik Penjualan Daerah Jember
+                                Omset Penjualan Daerah Jember
                                     <!-- <div class="no-caret">
                                         <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#modalFilterDinas">
                                             <i data-feather="filter"></i>
@@ -130,7 +130,7 @@
                         <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-4">
                             <div class="card card-header-actions h-100">
                                 <div class="card-header">
-                                    Grafik Penjualan Daerah Situbondo
+                                    Omset Penjualan Daerah Situbondo
                                     <!-- <div class="no-caret">
                                         <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#modalFilterDinas">
                                             <i data-feather="filter"></i>
@@ -147,7 +147,7 @@
                         <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 mb-4">
                             <div class="card card-header-actions h-100">
                                 <div class="card-header">
-                                    Grafik Penjualan Daerah Bali
+                                Omset Penjualan Daerah Bali
                                     <!-- <div class="no-caret">
                                         <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#modalFilterDinas">
                                             <i data-feather="filter"></i>
@@ -181,7 +181,7 @@
                 // labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
                 labels: cData.bulan,
                 datasets: [{
-                    label: "Jumlah Penjualan ",
+                    label: "",
                     backgroundColor: "rgba(6, 121, 79, 1)",
                     hoverBackgroundColor: "rgba(6, 121, 79, 0.9)",
                     borderColor: "rgba(6, 121, 79, 1)",
@@ -216,8 +216,8 @@
                     yAxes: [{
                         ticks: {
                             min: 0,
-                            max: 1500,
-                            maxTicksLimit: 5,
+                            max: 400000000,
+                            maxTicksLimit: 6,
                             padding: 10,
                             // Include a dollar sign in the ticks
                             callback: function(value, index, values) {
@@ -307,7 +307,7 @@
                     yAxes: [{
                         ticks: {
                             min: 0,
-                            max: 1500,
+                            max: 400000000,
                             maxTicksLimit: 5,
                             padding: 10,
                             // Include a dollar sign in the ticks
@@ -398,7 +398,7 @@
                     yAxes: [{
                         ticks: {
                             min: 0,
-                            max: 1500,
+                            max: 400000000,
                             maxTicksLimit: 5,
                             padding: 10,
                             // Include a dollar sign in the ticks

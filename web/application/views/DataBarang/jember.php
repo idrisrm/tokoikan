@@ -39,8 +39,8 @@
 
                     <hr class="mt-0 mb-4" />
                     <div class="card card-header-actions mx-auto mb-4">
-                    <div class="card-header">
-                            <a class="btn btn-primary btn-sm shadow-sm" href="<?= base_url('DataBarang/tambah')?>">
+                        <div class="card-header">
+                            <a class="btn btn-primary btn-sm shadow-sm" href="<?= base_url('DataBarang/tambah') ?>">
                                 Tambah Barang
                             </a>
                         </div>
@@ -67,7 +67,7 @@
                                                 <td><?= $i; ?></td>
                                                 <td><?= $data['nama_barang'] ?></td>
                                                 <td><?= $data['nama_kategori'] ?></td>
-                                                <td><?= $data['stok'] ?> <?= $data['satuan']?></td>
+                                                <td><?= $data['stok'] ?> <?= $data['satuan'] ?></td>
                                                 <td>Rp. <?= number_format($data['harga'], 0, ",", ".") ?></td>
                                                 <td>
                                                     <a class="btn btn-datatable btn-icon btn-transparent-dark" href="<?= base_url('DataBarang/stok/' . $data['id_barang']) ?>">
@@ -128,6 +128,24 @@
                                                 </div>
                                             </div>
                                         </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel">Hapus Data</h5>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">Apakah Anda yakin untuk menghapus data?</div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" type="button" data-dismiss="modal">Batal</button>
+                                            <a class="btn btn-danger" name="delete_link" id="delete_link" type="button" href="">Hapus</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -237,6 +255,16 @@
         </div>
     </div>
     <?php $this->load->view("_partials/js.php") ?>
+    <script type="text/javascript">
+        function confirm_modal(delete_url) {
+            console.log(delete_url);
+            document.getElementById('delete_link').setAttribute('href', delete_url);
+
+            $('#hapusModal').modal('show', {
+                backdrop: 'static'
+            });
+        }
+    </script>
     <script>
         $(document).ready(function() {
             var idKey, datakey;

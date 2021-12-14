@@ -122,12 +122,12 @@ class DataBarang extends CI_Controller
             $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
             Barang Berhasil Dihapus!
             </div>');
-            redirect('DataBarang');
+            redirect('DataBarang/jember');
         } else {
             $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
             Barang Gagal Dihapus!
             </div>');
-            redirect('DataBarang');
+            redirect('DataBarang/jember');
         }
     }
 

@@ -16,7 +16,7 @@ class Dashboard extends CI_Controller
         $data['revisi'] = $this->db->get_where('penjualan', ['pengajuan' => 'revisi'])->num_rows();
 
 
-        $jember =  $this->db->query("SELECT SUM(qty) as count,MONTHNAME(detail_penjualan.created_at) as month_name FROM detail_penjualan, penjualan WHERE penjualan.id_otlet = 1 AND penjualan.pengajuan = '' AND detail_penjualan.id_penjualan = penjualan.id_penjualan AND YEAR(detail_penjualan.created_at) = '" . date('Y') . "' GROUP BY YEAR(detail_penjualan.created_at), MONTH(detail_penjualan.created_at)")->result_array();
+        $jember =  $this->db->query("SELECT SUM(total_harga) as count,MONTHNAME(detail_penjualan.created_at) as month_name FROM detail_penjualan, penjualan WHERE penjualan.id_otlet = 1 AND penjualan.pengajuan = '' AND detail_penjualan.id_penjualan = penjualan.id_penjualan AND YEAR(detail_penjualan.created_at) = '" . date('Y') . "' GROUP BY YEAR(detail_penjualan.created_at), MONTH(detail_penjualan.created_at)")->result_array();
 
         if($jember){
             foreach ($jember as $jember) {
@@ -31,7 +31,7 @@ class Dashboard extends CI_Controller
         // var_dump(json_encode($data));die;
         $data['grafikjember'] = json_encode($data);
 
-        $situbondo =  $this->db->query("SELECT SUM(qty) as count,MONTHNAME(detail_penjualan.created_at) as month_name FROM detail_penjualan, penjualan WHERE penjualan.id_otlet = 2 AND penjualan.pengajuan = '' AND detail_penjualan.id_penjualan = penjualan.id_penjualan AND YEAR(detail_penjualan.created_at) = '" . date('Y') . "' GROUP BY YEAR(detail_penjualan.created_at), MONTH(detail_penjualan.created_at)")->result_array();
+        $situbondo =  $this->db->query("SELECT SUM(total_harga) as count,MONTHNAME(detail_penjualan.created_at) as month_name FROM detail_penjualan, penjualan WHERE penjualan.id_otlet = 2 AND penjualan.pengajuan = '' AND detail_penjualan.id_penjualan = penjualan.id_penjualan AND YEAR(detail_penjualan.created_at) = '" . date('Y') . "' GROUP BY YEAR(detail_penjualan.created_at), MONTH(detail_penjualan.created_at)")->result_array();
 
         if ($situbondo) {
             foreach ($situbondo as $situbondo) {
@@ -49,7 +49,7 @@ class Dashboard extends CI_Controller
 
 
         ///grafik Bali
-        $bali =  $this->db->query("SELECT SUM(qty) as count,MONTHNAME(detail_penjualan.created_at) as month_name FROM detail_penjualan, penjualan WHERE penjualan.id_otlet = 3 AND penjualan.pengajuan = '' AND detail_penjualan.id_penjualan = penjualan.id_penjualan AND YEAR(detail_penjualan.created_at) = '" . date('Y') . "' GROUP BY YEAR(detail_penjualan.created_at), MONTH(detail_penjualan.created_at)")->result_array();
+        $bali =  $this->db->query("SELECT SUM(total_harga) as count,MONTHNAME(detail_penjualan.created_at) as month_name FROM detail_penjualan, penjualan WHERE penjualan.id_otlet = 3 AND penjualan.pengajuan = '' AND detail_penjualan.id_penjualan = penjualan.id_penjualan AND YEAR(detail_penjualan.created_at) = '" . date('Y') . "' GROUP BY YEAR(detail_penjualan.created_at), MONTH(detail_penjualan.created_at)")->result_array();
 
 
         if ($bali) {
