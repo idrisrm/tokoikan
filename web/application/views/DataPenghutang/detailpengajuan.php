@@ -23,7 +23,7 @@
                                             </a>
                                             <i data-feather="file-text"></i>
                                         </div>
-                                        Detail Pengajuan Hutang
+                                        Detail Pengajuan Kredit
                                     </h1>
                                 </div>
                             </div>
@@ -32,12 +32,12 @@
                 </header>
                 <div class="container mt-4">
                     <nav class="nav nav-borders">
-                        <a class="nav-link active" href="">Detail Pengajuan Hutang</a>
+                        <a class="nav-link active" href="">Detail Pengajuan Kredit</a>
                     </nav>
 
                     <hr class="mt-0 mb-4" />
                     <div class="card card-header-actions mx-auto mb-4">
-                        <div class="card-header">Detail Pengajuan Hutang</div>
+                        <div class="card-header">Detail Pengajuan Kredit</div>
                         <div class="col">
                             <?php echo $this->session->flashdata('pesan') ?>
                         </div>
@@ -50,7 +50,7 @@
                                             <p><b><?= $hutang['no_ktp'] ?></b></p>
                                         </div>
                                         <div class="col-lg-4 col-sm-12">
-                                            <label>Nama Calon Penghutang</label>
+                                            <label>Nama Calon Customer Kredit</label>
                                             <p><b><?= $hutang['nama_penghutang'] ?></b></p>
                                         </div>
                                         <div class="col-lg-4 col-sm-12">
@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6 col-sm-12">
-                                            <label>Foto KTP Calon Penghutang</label>
+                                            <label>Foto KTP Calon Customer Kredit</label>
                                             <div>
                                                 <img class="img-fluid mb-2" style="width: 600px;" src="<?= base_url($hutang['foto_ktp']) ?>" alt="" />
                                             </div>
@@ -77,13 +77,32 @@
                                                 <span aria-hidden="true">×</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body">
-                                            <p>Apakah Anda Yakin Ingin Mengkonfirmasi Pengajuan Ini?</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn btn-danger" type="button" data-dismiss="modal">Batal</button>
-                                            <a href="<?= base_url('DataPenghutang/konfirmasi/' . $hutang['no_ktp']) ?>" class="btn btn-primary">Simpan</a>
-                                        </div>
+                                        <form action="<?= base_url("DataPenghutang/konfirmasi"); ?>" method="post">
+                                            <div class="modal-body">
+                                                <!-- <p>Apakah Anda Yakin Ingin Mengkonfirmasi Pengajuan Ini?</p> -->
+                                                <div class="row">
+                                                    <input type="hidden" name="no_ktp" value="<?= $hutang['no_ktp']; ?>">
+                                                    <input type="hidden" name="id_otlet" value="<?= $hutang['id_otlet']; ?>">
+                                                    <input type="hidden" name="nama" value="<?= $hutang['nama_penghutang']; ?>">
+                                                    <input type="hidden" name="id_notif" value="<?= $notif['id_notif']; ?>">
+
+                                                    <label class="small mb-1 ml-3" for="tanggal">Pilih Limit Tanggal Kredit</label>
+                                                    <div class="form-group col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                        <input class="form-control" type="date" name="tanggal" required>
+                                                        <?= form_error('tanggal', '<small class="text-danger pl-2">', '</small>'); ?>
+                                                    </div>
+                                                    <label class="small mb-1 ml-3" for="limit">Pilih Limit Kredit</label>
+                                                    <div class="form-group col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                                        <input class="form-control" type="number" name="limit" required>
+                                                        <?= form_error('limit', '<small class="text-danger pl-2">', '</small>'); ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-danger" type="button" data-dismiss="modal">Batal</button>
+                                                <button class="btn btn-primary" type="submit">Simpan</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

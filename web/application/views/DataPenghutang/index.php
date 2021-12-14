@@ -16,16 +16,16 @@
                         <div class="page-header-content">
                             <h1 class="page-header-title">
                                 <div class="page-header-icon"><i data-feather="users"></i></div>
-                                <span>Data Penghutang</span>
+                                <span>Data Customer Kredit</span>
                             </h1>
-                            <div class="page-header-subtitle">Master Data Penghutang</div>
+                            <div class="page-header-subtitle">Master Data Customer Kredit</div>
                         </div>
                     </div>
                 </div>
                 <div class="container-fluid mt-n10">
                     <div class="card mb-4">
                         <!-- <div class="card-header">
-                            <a class="btn btn-primary btn-sm shadow-sm" href="<?= base_url('Karyawan/tambah')?>">
+                            <a class="btn btn-primary btn-sm shadow-sm" href="<?= base_url('Karyawan/tambah') ?>">
                                 Tambah Karyawan
                             </a>
                         </div> -->
@@ -35,11 +35,11 @@
                             </div>
                             <div class="datatable table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
+                                    <thead>
                                         <tr>
                                             <th style="width: 20px;">No</th>
                                             <th>NIK</th>
-                                            <th>Nama Penghutang</th>
+                                            <th>Nama Customer Kredit</th>
                                             <th>Total Hutang</th>
                                             <th>Otlet</th>
                                             <th>Status</th>
@@ -47,25 +47,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $i=1; foreach($penghutang as $data){?>
+                                        <?php $i = 1;
+                                        foreach ($penghutang as $data) { ?>
                                             <tr>
-                                                <td><?= $i;?></td>
-                                                <td><?= $data['no_ktp']?></td>
-                                                <td><?= $data['nama_penghutang']?></td>
-                                                <td><?= $data['total_hutang']?></td>
-                                                <td><?= $data['wilayah']?></td>
-                                                <td><?= $data['status'] == 1 ? 'Bisa Hutang' : 'Tidak Bisa Hutang'?></td>
+                                                <td><?= $i; ?></td>
+                                                <td><?= $data['no_ktp'] ?></td>
+                                                <td><?= $data['nama_penghutang'] ?></td>
+                                                <td><?= $data['total_hutang'] ?></td>
+                                                <td><?= $data['wilayah'] ?></td>
+                                                <td><?= $data['status'] == 1 ? 'Bisa Hutang' : 'Tidak Bisa Hutang' ?></td>
                                                 <td>
-                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="<?= base_url('DataPenghutang/detail/' . $data['no_ktp'])?>" >
+                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="<?= base_url('DataPenghutang/detail/' . $data['no_ktp']) ?>">
                                                         <i data-feather="eye"></i>
                                                     </a>
-                                                    
+
                                                     <!-- <a class="btn btn-datatable btn-icon btn-transparent-dark" href="" onclick="confirm_modal('<?php echo base_url('Karyawan/hapus/' . $data['id'])  ?>')" data-toggle="modal" data-target="#modalDelete">
                                                         <i data-feather="trash-2"></i>
                                                     </a> -->
                                                 </td>
                                             </tr>
-                                            <?php $i++; }?>
+                                        <?php $i++;
+                                        } ?>
                                     </tbody>
                                 </table>
                                 <div class="modal fade" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel" aria-hidden="true">
@@ -105,7 +107,7 @@
                                                 <div class="modal-body">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="kategori">Nama Kategori</label>
-                                                        <input class="form-control" id="kategori" name="kategori" type="text" placeholder="Masukkan Nama Kategori" value=""/>
+                                                        <input class="form-control" id="kategori" name="kategori" type="text" placeholder="Masukkan Nama Kategori" value="" />
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">

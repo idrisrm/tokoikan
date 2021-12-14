@@ -37,6 +37,15 @@
                                             <input class="form-control" id="keterangan" name="keterangan" type="text" placeholder="Masukkan keterangan" value="<?= $p['keterangan'] ?>" />
                                             <?= form_error('keterangan', '<small class="text-danger pl-2">', '</small>'); ?>
                                         </div>
+                                        <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                            <select class="form-control" id="otlet" name="otlet">
+                                                <option value="">Pilih Otlet</option>
+                                                <?php foreach ($otlet as $data) { ?>
+                                                    <option value="<?= $data['id_otlet'] ?>" <?= ($p['id_otlet'] == $data['id_otlet'] ? 'selected' : '') ?>><?= $data['wilayah'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                            <?= form_error('otlet', '<small class="text-danger pl-2">', '</small>'); ?>
+                                        </div>
                                     <?php endforeach; ?>
                                 </div>
                                 <button type="submit" href="" class="btn btn-success mr-2">

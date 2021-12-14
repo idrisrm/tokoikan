@@ -57,8 +57,9 @@ class Checkout extends RestController
             }
         } else {
             $hutang = $this->db->query("SELECT * FROM hutang WHERE no_ktp = '$no_ktp'")->row_array();
+            $limit_hutang = $hutang['limit_hutang'];
             $banyakhutang = $hutang['total_hutang'] + $subtotal;
-            if ($banyakhutang < 10000000) {
+            if ($banyakhutang < $limit_hutang) {
                 //ubah stok
                 $ubahstok = $this->db->query("SELECT * FROM detail_penjualan WHERE id_penjualan = '$id_penjualan'")->result_array();
                 foreach ($ubahstok as $us) {
@@ -101,7 +102,7 @@ class Checkout extends RestController
                         RestController::HTTP_FORBIDDEN
                     );
                 }
-            } else if ($banyakhutang > 10000000) {
+            } else if ($banyakhutang > $limit_hutang) {
                 $this->response(
                     [
                         'status' => false,
