@@ -17,7 +17,8 @@ class Detail_Penghutang extends RestController
         $no_ktp = $this->get('no_ktp');
         $data = $this->db->query("SELECT * FROM hutang WHERE no_ktp = '$no_ktp'")->row_array();
         if ($data) {
-            if ($now >= $data['limit_tanggal'] && $data['total_hutang'] >= 10000000) {
+            $limit_hutang = $data['limit_hutang'];
+            if ($now >= $data['limit_tanggal'] && $data['total_hutang'] >= $limit_hutang) {
                 $this->response(
                     [
                         'status' => true,
@@ -27,7 +28,7 @@ class Detail_Penghutang extends RestController
                     ],
                     RestController::HTTP_OK
                 );
-            } elseif ($now >= $data['limit_tanggal'] && $data['total_hutang'] < 10000000) {
+            } elseif ($now >= $data['limit_tanggal'] && $data['total_hutang'] < $limit_hutang) {
                 $this->response(
                     [
                         'status' => true,
@@ -37,7 +38,7 @@ class Detail_Penghutang extends RestController
                     ],
                     RestController::HTTP_OK
                 );
-            } elseif ($now < $data['limit_tanggal'] && $data['total_hutang'] >= 10000000) {
+            } elseif ($now < $data['limit_tanggal'] && $data['total_hutang'] >= $limit_hutang) {
                 $this->response(
                     [
                         'status' => true,

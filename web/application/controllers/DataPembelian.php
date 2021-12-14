@@ -53,6 +53,7 @@ class DataPembelian extends CI_Controller
 
     public function tambah()
     {
+        $this->form_validation->set_rules('invoice', 'No invoice', 'required');
         $this->form_validation->set_rules('barang', 'Barang', 'required');
         $this->form_validation->set_rules('qty', 'QTY', 'required|numeric');
         $this->form_validation->set_rules('hargasatuan', 'Harga Satuan', 'required');
@@ -73,7 +74,7 @@ class DataPembelian extends CI_Controller
             $id_otlet = $this->input->post('otlet');
             $id_supplier = $this->input->post('supplier');
             $totalharga = $this->input->post('totalharga');
-            $id_pembelian = $this->Models->randomkode(10);
+            $id_pembelian = $this->input->post('invoice');
             $now = date('Y-m-d H:i:s');
             $data['keranjang'] = $this->db->query("SELECT * FROM pembelian, detail_pembelian, supplier, barang WHERE pembelian.id_pembelian = detail_pembelian.id_pembelian AND pembelian.id_supplier = supplier.id_supplier AND detail_pembelian.id_barang = barang.id_barang AND pembelian.status = 0")->result_array();
             $adakeranjang = $this->db->query("SELECT * FROM pembelian, detail_pembelian WHERE pembelian.id_pembelian = detail_pembelian.id_pembelian AND pembelian.id_admin = '1' AND pembelian.status = 0")->result_array();

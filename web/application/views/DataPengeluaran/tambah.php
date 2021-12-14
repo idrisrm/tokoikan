@@ -28,13 +28,22 @@
                                 <div class="row">
                                     <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                         <label class="small mb-1" for="biaya">Biaya</label>
-                                        <input class="form-control" id="biaya" name="biaya" type="text" placeholder="Masukkan Biaya" value="<?= set_value('biaya') ?>" />
+                                        <input class="form-control" id="biaya" name="biaya" type="number" placeholder="Masukkan Biaya" value="<?= set_value('biaya') ?>" />
                                         <?= form_error('biaya', '<small class="text-danger pl-2">', '</small>'); ?>
                                     </div>
                                     <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                         <label class="small mb-1" for="keterangan">keterangan</label>
                                         <input class="form-control" id="keterangan" name="keterangan" type="text" placeholder="Masukkan keterangan" value="<?= set_value('keterangan') ?>" />
                                         <?= form_error('keterangan', '<small class="text-danger pl-2">', '</small>'); ?>
+                                    </div>
+                                    <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                        <select class="form-control" id="otlet" name="otlet">
+                                            <option value="">Pilih Otlet</option>
+                                            <?php foreach ($otlet as $data) { ?>
+                                                <option value="<?= $data['id_otlet'] ?>"><?= $data['wilayah'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                        <?= form_error('otlet', '<small class="text-danger pl-2">', '</small>'); ?>
                                     </div>
                                 </div>
                                 <button type="submit" href="" class="btn btn-success mr-2">

@@ -18,6 +18,7 @@ class Bayar_Hutang extends RestController
         $bayar = $this->input->post('bayar');
         $now = date('Y-m-d H:i:s');
         $hutangnya = $this->db->query("SELECT * FROM hutang WHERE no_ktp = '$no_ktp'")->row_array();
+        $limit_hutang = $hutangnya['limit_hutang'];
         $databayar = [
             'no_ktp' => $no_ktp,
             'bayar' => $bayar,
@@ -31,7 +32,7 @@ class Bayar_Hutang extends RestController
             'status' => 1,
         ];
         $total = $hutangnya['total_hutang'] - $bayar;
-        if ($total < 10000000) {
+        if ($total < $limit_hutang) {
             $querybayar = $this->ApiModel->insert('bayar_hutang', $databayar);
             $queryhutang = $this->ApiModel->ubah($datahutangstatus, $no_ktp, 'no_ktp', 'hutang');
             if ($querybayar && $queryhutang) {

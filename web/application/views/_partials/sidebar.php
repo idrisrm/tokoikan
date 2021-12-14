@@ -48,11 +48,11 @@
                             Arus kas
                             <!-- <span class="badge badge-primary-soft text-primary ml-auto">2</span> -->
                         </a>
-                        <a class="nav-link" href="<?= base_url('RevisiTransaksi') ?>">
+                        <!-- <a class="nav-link" href="<?= base_url('RevisiTransaksi') ?>">
                             <span class="badge badge-cyan mr-1">  </span>
                             Suplier Kredit
-                            <!-- <span class="badge badge-primary-soft text-primary ml-auto">2</span> -->
-                        </a>
+                            <span class="badge badge-primary-soft text-primary ml-auto">2</span>
+                        </a> -->
                         <a class="nav-link" href="<?= base_url('DataPenghutang/') ?>">
                             <span class="badge badge-warning mr-1">  </span>
                             Customer Kredit

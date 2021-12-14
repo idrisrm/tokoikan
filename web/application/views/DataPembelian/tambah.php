@@ -26,6 +26,20 @@
                             <div class="card-header">Tambah Data Pembelian</div>
                             <div class="card-body">
                                 <div class="row">
+                                    <div class="form-group col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                        <label class="small mb-1" for="invoice">No Invoice</label>
+                                        <?php $adasupplier = $this->db->query("SELECT * FROM pembelian, supplier, otlet WHERE pembelian.id_supplier = supplier.id_supplier AND pembelian.id_otlet = otlet.id_otlet AND pembelian.id_admin = '1' AND pembelian.status = 0")->result_array();
+                                        ?>
+                                        <?php if ($adasupplier) : ?>
+                                            <?php foreach ($adasupplier as $as) : ?>
+                                                <input class="form-control" id="invoice" name="invoice" type="text" placeholder="Masukkan no invoice" value="<?= $as['id_pembelian']; ?>" readonly />
+                                                <?= form_error('invoice', '<small class="text-danger pl-2">', '</small>'); ?>
+                                            <?php endforeach; ?>
+                                        <?php else : ?>
+                                            <input class="form-control" id="invoice" name="invoice" type="text" placeholder="Masukkan no invoice" value="" />
+                                            <?= form_error('invoice', '<small class="text-danger pl-2">', '</small>'); ?>
+                                        <?php endif; ?>
+                                    </div>
                                     <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                         <label class="small mb-1" for="supplier">Supplier</label>
                                         <?php $adasupplier = $this->db->query("SELECT * FROM pembelian, supplier, otlet WHERE pembelian.id_supplier = supplier.id_supplier AND pembelian.id_otlet = otlet.id_otlet AND pembelian.id_admin = '1' AND pembelian.status = 0")->result_array();
@@ -93,19 +107,19 @@
                                     </div>
                                     <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                         <label class="small mb-1" for="qty">Qty</label>
-                                        <input class="form-control" id="qty" name="qty" type="text" placeholder="Masukkan Qty" />
+                                        <input class="form-control" id="qty" name="qty" type="number" placeholder="Masukkan Qty" />
                                         <?= form_error('qty', '<small class="text-danger pl-2">', '</small>'); ?>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                         <label class="small mb-1" for="hargasatuan">Harga Satuan</label>
-                                        <input class="form-control" id="hargasatuan" name="hargasatuan" type="text" placeholder="Masukkan Harga Satuan" value="<?= set_value('hargasatuan') ?>" />
+                                        <input class="form-control" id="hargasatuan" name="hargasatuan" type="number" placeholder="Masukkan Harga Satuan" value="<?= set_value('hargasatuan') ?>" />
                                         <?= form_error('hargasatuan', '<small class="text-danger pl-2">', '</small>'); ?>
                                     </div>
                                     <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                         <label class="small mb-1" for="totalharga">Total Harga</label>
-                                        <input class="form-control" id="totalharga" name="totalharga" type="text" placeholder="Masukkan Total Harga" value="<?= set_value('totalharga') ?>" />
+                                        <input class="form-control" id="totalharga" name="totalharga" type="number" placeholder="Masukkan Total Harga" value="<?= set_value('totalharga') ?>" />
                                         <?= form_error('totalharga', '<small class="text-danger pl-2">', '</small>'); ?>
                                     </div>
                                 </div>

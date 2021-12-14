@@ -25,9 +25,9 @@
                 <div class="container-fluid mt-n10">
                     <div class="card mb-4">
                         <nav class="nav nav-borders">
-                            <a class="nav-link active" href="<?= base_url('Pengeluaran/index') ?>">Data Pengeluaran Wilayah Jember</a>
+                            <a class="nav-link " href="<?= base_url('Pengeluaran/index') ?>">Data Pengeluaran Wilayah Jember</a>
                             <a class="nav-link " href="<?= base_url('Pengeluaran/situbondo') ?>">Data Pengeluaran Wilayah Situbondo</a>
-                            <a class="nav-link " href="<?= base_url('Pengeluaran/bali') ?>">Data Pengeluaran Wilayah Bali</a>
+                            <a class="nav-link active" href="<?= base_url('Pengeluaran/bali') ?>">Data Pengeluaran Wilayah Bali</a>
                         </nav>
                         <div class="card-header">
                             <a class="btn btn-primary btn-sm shadow-sm" href="<?= base_url('Pengeluaran/tambah') ?>">
