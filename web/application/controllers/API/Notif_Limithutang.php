@@ -18,7 +18,7 @@ class Notif_Limithutang extends RestController
         $g = $this->ApiModel->bagian('admin');
         $token = $g['token'];
         $id_usernya = $g['id'];
-        $penghutang = $this->db->query("SELECT * FROM hutang WHERE limit_tanggal = '$now'")->result_array();
+        $penghutang = $this->db->query("SELECT * FROM hutang WHERE limit_tanggal = '$now' AND total_hutang > 0")->result_array();
         if ($penghutang) {
             foreach ($penghutang as $p) {
                 $otlet = $p['id_otlet'];
