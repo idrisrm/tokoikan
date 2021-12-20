@@ -19,6 +19,7 @@ class Checkout extends RestController
         $subtotal = $this->input->post('subtotal');
         $bayar = $this->input->post('bayar');
         $no_ktp = $this->input->post('no_ktp');
+        $nama = $this->input->post('nama_customer');
         if ($status == '1') {
             $ubahstok = $this->db->query("SELECT * FROM detail_penjualan WHERE id_penjualan = '$id_penjualan'")->result_array();
             foreach ($ubahstok as $us) {
@@ -35,7 +36,8 @@ class Checkout extends RestController
             $datapenjualan = [
                 'subtotal' => $subtotal,
                 'status' => $status,
-                'jumlah_pembayaran' => $bayar
+                'jumlah_pembayaran' => $bayar,
+                'nama_customer' => $nama,
             ];
             $querypenjualan = $this->ApiModel->ubah($datapenjualan, $id_penjualan, 'id_penjualan', 'penjualan');
             if ($querypenjualan) {
@@ -59,6 +61,7 @@ class Checkout extends RestController
             $hutang = $this->db->query("SELECT * FROM hutang WHERE no_ktp = '$no_ktp'")->row_array();
             $limit_hutang = $hutang['limit_hutang'];
             $banyakhutang = $hutang['total_hutang'] + $subtotal;
+            $namahutang = $hutang['nama_penghutang'];
             if ($banyakhutang < $limit_hutang) {
                 //ubah stok
                 $ubahstok = $this->db->query("SELECT * FROM detail_penjualan WHERE id_penjualan = '$id_penjualan'")->result_array();
@@ -77,7 +80,8 @@ class Checkout extends RestController
                     'subtotal' => $subtotal,
                     'status' => $status,
                     'ktp_penghutang' => $no_ktp,
-                    'jumlah_pembayaran' => 0
+                    'jumlah_pembayaran' => 0,
+                    'nama_customer' => $namahutang
                 ];
                 //ubah di hutang
                 $datahutang = [
@@ -128,7 +132,8 @@ class Checkout extends RestController
                     'subtotal' => $subtotal,
                     'status' => $status,
                     'ktp_penghutang' => $no_ktp,
-                    'jumlah_pembayaran' => 0
+                    'jumlah_pembayaran' => 0,
+                    'nama_customer' => $namahutang
                 ];
                 //ubah di hutang
                 $datahutang = [
