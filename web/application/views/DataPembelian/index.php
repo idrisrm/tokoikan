@@ -28,6 +28,20 @@
                     </div>
                 </header>
                 <div class="container mt-4">
+                    <div class="col-12 col-xl-auto">
+                        <div class="card bg-white text-black">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-3">
+                                        <div class="text-black-75 small">Total Kredit</div>
+                                        <div class="text-lg font-weight-bold">Rp. <?= number_format($totalhutang['total_hutang'], 0, ",", ".") ?></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container mt-4">
                     <div class="card card-header-actions mx-auto mb-4">
                         <div class="card-header">Data Pembelian
                             <div class="no-caret">

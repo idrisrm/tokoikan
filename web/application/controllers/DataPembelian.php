@@ -1,5 +1,4 @@
 <?php
-
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class DataPembelian extends CI_Controller
@@ -16,6 +15,9 @@ class DataPembelian extends CI_Controller
         // $data['pembelian'] = $this->db->query("SELECT pembelian.*, supplier.nama_supplier as namasupplier FROM pembelian, supplier WHERE pembelian.id_supplier = supplier.id_supplier AND pembelian.status != 0 ORDER BY pembelian.created_at ASC")->result_array();
         $data['pembelian'] = $this->db->query("SELECT DISTINCT(pembelian.id_supplier), supplier.nama_supplier, supplier.id_supplier FROM pembelian, supplier WHERE pembelian.id_supplier = supplier.id_supplier AND pembelian.status != 0 ORDER BY pembelian.created_at ASC")->result_array();
         $data['keranjang'] = $this->db->query("SELECT COUNT(detail_pembelian.id_pembelian) as total FROM detail_pembelian, pembelian WHERE pembelian.id_pembelian = detail_pembelian.id_pembelian AND pembelian.id_admin = 1 AND pembelian.status = 0")->result_array();
+
+        $data['totalhutang'] = $this->db->query("SELECT SUM(total_hutang) as total_hutang FROM hutang_admin")->row_array();
+        // var_dump($data['totalhutang']);die;
         $this->load->view('DataPembelian/index', $data);
     }
 
