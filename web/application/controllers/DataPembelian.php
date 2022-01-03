@@ -55,7 +55,7 @@ class DataPembelian extends CI_Controller
 
     public function tambah()
     {
-        $this->form_validation->set_rules('invoice', 'No invoice', 'required');
+        $this->form_validation->set_rules('invoice', 'No invoice', 'required|is_unique[pembelian.id_pembelian]');
         $this->form_validation->set_rules('barang', 'Barang', 'required');
         $this->form_validation->set_rules('qty', 'QTY', 'required|numeric');
         $this->form_validation->set_rules('hargasatuan', 'Harga Satuan', 'required');

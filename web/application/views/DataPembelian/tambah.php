@@ -107,7 +107,7 @@
                                     </div>
                                     <div class="form-group col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                         <label class="small mb-1" for="qty">Qty</label>
-                                        <input class="form-control" id="qty" name="qty" type="number" placeholder="Masukkan Qty" />
+                                        <input class="form-control" id="qty" name="qty" type="number" placeholder="Masukkan Qty" value="<?= set_value('qty') ?>" />
                                         <?= form_error('qty', '<small class="text-danger pl-2">', '</small>'); ?>
                                     </div>
                                 </div>
