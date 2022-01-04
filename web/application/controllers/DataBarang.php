@@ -15,16 +15,20 @@ class DataBarang extends CI_Controller
     public function bali()
     {
         $data['barang'] = $this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori')->get_where('barang', ['barang.status_barang' => 'on', 'id_otlet' => 3])->result_array();
+        $data['nominal'] = $this->db->query("SELECT SUM(stok * harga_beli) as total from barang where id_otlet = 3")->row_array();
         $this->load->view('DataBarang/bali', $data);
     }
     public function jember()
     {
         $data['barang'] = $this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori')->get_where('barang', ['barang.status_barang' => 'on', 'id_otlet' => 1])->result_array();
+        $data['nominal'] = $this->db->query("SELECT SUM(stok * harga_beli) as total from barang where id_otlet = 1")->row_array();
+
         $this->load->view('DataBarang/jember', $data);
     }
     public function situbondo()
     {
         $data['barang'] = $this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori')->get_where('barang', ['barang.status_barang' => 'on', 'id_otlet' => 2])->result_array();
+        $data['nominal'] = $this->db->query("SELECT SUM(stok * harga_beli) as total from barang where id_otlet = 2")->row_array();
         $this->load->view('DataBarang/situbondo', $data);
     }
 
