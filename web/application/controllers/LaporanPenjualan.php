@@ -40,6 +40,8 @@ class LaporanPenjualan extends CI_Controller
         $this->db->where('penjualan.created_at BETWEEN "' . date('Y-m-d', strtotime($daritanggal)) . '" and "' . date('Y-m-d', strtotime($sampaitanggal)) . '"');
         $data = $this->db->get('penjualan')->result_array();
 
+        var_dump($data);die;
+
         $this->db->join('detail_penjualan', 'detail_Penjualan.id_penjualan = penjualan.id_penjualan');
         $this->db->join('barang', 'barang.id_barang = detail_penjualan.id_barang');
         $this->db->join('user', 'user.id = penjualan.id_penjual');
