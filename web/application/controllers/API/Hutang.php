@@ -13,9 +13,10 @@ class Hutang extends RestController
     }
     public function index_get()
     {
-        $data = $this->db->query("SELECT * FROM hutang WHERE status != 3")->result_array();
+        $id = $this->get('id_otlet');
+        $data = $this->db->query("SELECT * FROM hutang WHERE status != 3 AND id_otlet = '$id'")->result_array();
         if ($data) {
-            $total = $this->db->query("SELECT SUM(total_hutang) as all_hutang, COUNT(no_ktp) as all_penghutang FROM hutang WHERE status != 3")->result_array();
+            $total = $this->db->query("SELECT SUM(total_hutang) as all_hutang, COUNT(no_ktp) as all_penghutang FROM hutang WHERE status != 3 AND id_otlet = '$id'")->result_array();
             foreach ($total as $t) {
                 $this->response(
                     [

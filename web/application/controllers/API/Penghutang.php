@@ -13,7 +13,8 @@ class Penghutang extends RestController
     }
     public function index_get()
     {
-        $data = $this->db->query("SELECT * FROM hutang")->result_array();
+        $id = $this->get('id_otlet');
+        $data = $this->db->query("SELECT * FROM hutang WHERE id_otlet = $id")->result_array();
         if ($data) {
             $this->response(
                 [
