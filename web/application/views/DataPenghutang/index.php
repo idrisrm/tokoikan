@@ -60,6 +60,12 @@
                                                     <a class="btn btn-datatable btn-icon btn-transparent-dark" href="<?= base_url('DataPenghutang/detail/' . $data['no_ktp']) ?>">
                                                         <i data-feather="eye"></i>
                                                     </a>
+                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="<?= base_url('DataPenghutang/edit/' . $data['no_ktp']) ?>">
+                                                        <i data-feather="edit"></i>
+                                                    </a>
+                                                    <a class="btn btn-datatable btn-icon btn-transparent-dark" href="<?= base_url('DataPenghutang/foto/' . $data['no_ktp']) ?>">
+                                                        <i data-feather="image"></i>
+                                                    </a>
 
                                                     <!-- <a class="btn btn-datatable btn-icon btn-transparent-dark" href="" onclick="confirm_modal('<?php echo base_url('Karyawan/hapus/' . $data['id'])  ?>')" data-toggle="modal" data-target="#modalDelete">
                                                         <i data-feather="trash-2"></i>

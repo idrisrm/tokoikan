@@ -9,6 +9,7 @@ class DataPenghutang extends CI_Controller
     {
         parent::__construct();
         belumlogin();
+        $this->load->model('API/Api_Model', 'ApiModel');
         $this->load->model('Models');
     }
     public function index()
@@ -21,6 +22,84 @@ class DataPenghutang extends CI_Controller
     {
         $data['hutang'] = $this->db->join('otlet', 'otlet.id_otlet = hutang.id_otlet')->get_where('hutang', ['no_ktp' => $id])->row_array();
         $this->load->view('DataPenghutang/detail', $data);
+    }
+
+    public function foto($id)
+    {
+        $data['id'] = $id;
+        $this->load->view('DataPenghutang/foto', $data);
+    }
+    
+    public function uploadfoto()
+    {
+
+        $id = $this->input->post('id');
+        $key = $this->ApiModel->randomkode(4);
+
+        $config['allowed_types'] = 'jpg|png|gif|jpeg';
+        $config['max_size'] = '5000';
+        $config['upload_path'] = FCPATH . 'uploads/ktp';
+        $newName = "uploads/ktp/" . $key . $_FILES['foto']['name'];
+        $config['file_name'] = $key . $_FILES['foto']['name'];
+        $this->load->library('upload');
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_upload('foto')) {
+            $data = [
+                'foto_ktp' => $newName
+            ];
+            $update = $this->Models->update($data, "no_ktp", "hutang", $id);
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+                Berhasil Merubah Foto KTP !
+                </div>');
+                redirect('DataPenghutang');
+        } else {
+            $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
+                Gagal Mengupload Foto, Silahkan Coba lagi !
+                </div>');
+                redirect('DataPenghutang');
+        }
+    }
+
+    public function edit($id)
+    {
+        $data = $this->db->get_where('hutang', ['no_ktp' => $id])->row_array();
+        $this->form_validation->set_rules('noktp', 'Nomer KTP', 'required|numeric');
+        $this->form_validation->set_rules('nama', 'Nama Kustomer Kredit', 'required');
+        $this->form_validation->set_rules('limit', 'Limit Kredit', 'required|numeric');
+        if ($this->form_validation->run() == false) {
+        $data['data'] = $this->db->get_where('hutang', ['no_ktp' => $id])->row_array();
+        $this->load->view('DataPenghutang/edit', $data);
+        }else{
+
+            $limit = $this->input->post('limit');
+            if($limit < $data['total_hutang']){
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
+                Limit Tidak Boleh Kurang Dari Jumlah Hutang Sekarang, Rp. ' . $data['total_hutang'] . '
+                </div>');
+                redirect('DataPenghutang/edit/' . $id);
+            }else{
+
+            $data = [
+                'no_ktp' => $this->input->post('noktp'),
+                'nama_penghutang' => $this->input->post('nama'),
+                'limit_hutang' => $this->input->post('limit'),
+            ];
+            $update = $this->Models->update($data, "no_ktp", "hutang", $id);
+            if ($update) {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+                Data Kustomer Kredit Berhasil Diupdate!
+                </div>');
+                redirect('DataPenghutang');
+            } else {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
+                Data Kustomer Kredit Gagal Diupdate!
+                </div>');
+                redirect('DataPenghutang');
+            }
+            }
+
+        }
     }
 
     public function konfirmasi()
