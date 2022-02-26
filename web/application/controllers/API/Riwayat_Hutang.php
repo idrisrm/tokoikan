@@ -14,7 +14,7 @@ class Riwayat_Hutang extends RestController
     public function index_get()
     {
         $no_ktp = $this->get('no_ktp');
-        $data = $this->db->query("SELECT * FROM penjualan WHERE ktp_penghutang = '$no_ktp' AND pengajuan = '' ORDER BY created_at ASC")->result_array();
+        $data = $this->db->query("SELECT * FROM penjualan WHERE ktp_penghutang = '$no_ktp' AND pengajuan != 'Revisi' ORDER BY created_at ASC")->result_array();
         if ($data) {
             $this->response(
                 [
